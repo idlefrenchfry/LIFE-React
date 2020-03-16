@@ -65,24 +65,25 @@ let coachesList = [
 ]
 
 function Coaches() {
-    // async function to fetch members
-    const fetchCoaches = () => {
-        const data = coachesList;
+        
+    // set coaches
+    const [coaches, setCoaches] = useState([]);
+
+    // async function to fetch coaches and set them
+    function fetchCoaches() {
+        let data = coachesList;
         setCoaches(data);
-    };
+    }
 
     // useEffect to call async function
     useEffect(() => {
         fetchCoaches();
-    }, []);
-
-    // set coaches
-    const [coaches, setCoaches] = useState([{}]);
+    }, [coaches]);
 
     return (
         <div className="card">
             <h1>Coaches.js</h1>
-            <Table list={coaches} headers={Object.keys(coaches[0])} />
+            {coaches.length != 0 ? <Table data={coaches} columns={Object.keys(coaches[0])} /> : <p>Loading...</p>}
         </div>
     );
 }

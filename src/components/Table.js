@@ -1,35 +1,96 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { useTable } from 'react-table';
 
-function Table(props) {
+function Table({ data, columns }) {
 
-    const [headers, setHeaders] = useState([]);
-    const [list, setList] = useState([{}]);
+    console.log("Logging Data");
+    console.log(data);
 
-    useEffect(() => {
-        setHeaders(props.headers);
-        setList(props.list);
-    });
+    //const [columns, setColumns] = useState([]);
+    //const [data, setData] = useState([{}]);
 
-    const mapData = (data, index) => {
-        return (
-            <tr key={index}>
-                {headers.map((headName, key) =>
-                    <td key={key}>{data[headName]}</td>
-                )}
-            </tr>
-        );
-    }
+    //useEffect(() => {
+    //    let prepColumns = [];
+    //    console.log(props.columns);
+    //    props.columns.forEach(element => {
+    //        prepColumns.push({
+    //            Header: element.toUpperCase(),
+    //            accessor: element
+    //        });
+    //    })
+    //    setColumns(useMemo(props.columns, []));
+    //    setData(useMemo(props.data, []));
+    //});
 
+    let prepColumns = [{ Header: "Fuck", columns: []}];
+    columns.forEach(element => {
+        prepColumns[0].columns.push({
+            Header: element,
+            accessor: element
+        });
+    })
+
+    const memoColumns = useMemo(() => prepColumns, [prepColumns]);
+    const memoData = useMemo(() => data, [data]);
+
+    console.log("FInished Memoizing!")
+
+    const {
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        rows,
+        prepareRow,
+    } = useTable({
+        memoColumns,
+        memoData,
+    })
+
+    //const mapData = (data, index) => {
+    //    return (
+    //        <tr key={index}>
+    //            {columns.map((headName, key) =>
+    //                <td key={key}>{data[headName]}</td>
+    //            )}
+    //        </tr>
+    //    );
+    //}
+
+    //return (
+    //    <table id="datatable">
+    //        <thead>
+    //            <tr>
+    //                {columns.map((headName, index) => <th key={index}>{headName}</th>)}
+    //            </tr>
+    //        </thead>
+
+    //        <tbody>
+    //            {data.map((data, index) => mapData(data, index) )}
+    //        </tbody>
+    //    </table>
+    //);
     return (
-        <table id="datatable">
+        <table {...getTableProps()}>
             <thead>
-                <tr>
-                    {headers.map((headName, index) => <th key={index}>{headName}</th>)}
-                </tr>
+                {headerGroups.map(headerGroup => (
+                    <tr {...headerGroup.getHeaderGroupProps()}>
+                        {headerGroup.headers.map(column => (
+                            <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                        ))}
+                    </tr>
+                ))}
             </thead>
-
-            <tbody>
-                {list.map((data, index) => mapData(data, index) )}
+            <tbody {...getTableBodyProps()}>
+                {rows.map((row, i) => {
+                    prepareRow(row)
+                    return (
+                        <tr {...row.getRowProps()}>
+                            {row.cells.map(cell => {
+                                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                            })}
+                        </tr>
+                    )
+                })}
             </tbody>
         </table>
     );

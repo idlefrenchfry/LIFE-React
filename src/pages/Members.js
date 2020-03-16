@@ -96,7 +96,7 @@ function Members() {
     return (
         <div className="card">
             <h1>Members.js</h1>
-            <Table list={members} headers={Object.keys(members[0])} />
+            <Table data={members} columns={Object.keys(members[0])} />
         </div>
     );
 }
