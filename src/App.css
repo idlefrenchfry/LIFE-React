@@ -1,38 +1,75 @@
+:root {
+    --main-color: rgb(41, 60, 120);
+    --main-color-dark: #0b1f64;
+}
+
+
 .App {
-  text-align: center;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1, h2, h3, h4, h5, h6 {
+    color: var(--main-color-dark);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* ------NAVIGATION------ */
+nav {
+    background-color: var(--main-color);
+    height: 100vh;
+    width: 20%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+nav a, nav a:hover {
+    display: block;
+    position: relative;
+    color: white;
+    text-decoration: none;
+    padding: 1em;
 }
 
-.App-link {
-  color: #61dafb;
+.navlinks a:hover {
+    background-color: var(--main-color-dark);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navlinks a:hover::after {
+    content: "";
+    position: absolute;
+    background-color: forestgreen;
+    width: 5px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+/*------MAIN SECTION------*/
+nav + div {
+    margin-left: 20%;
+}
+
+.card {
+    box-sizing: border-box;
+    margin: auto 1em auto calc(20% + 1em); /*take into account the navbar*/
+    padding: 1em;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+/*------TABLE------*/
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 80%;
+}
+
+th {
+    text-transform: capitalize;
+}
+
+td, th {
+    border-bottom: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
 }
