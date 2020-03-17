@@ -6,11 +6,27 @@
 
 .App {
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
 }
 
 h1, h2, h3, h4, h5, h6 {
     color: var(--main-color-dark);
 }
+
+button {
+    cursor: pointer;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Opera and Firefox */
+  }
 
 /* ------NAVIGATION------ */
 nav {
@@ -52,24 +68,68 @@ nav + div {
 
 .card {
     box-sizing: border-box;
-    margin: auto 1em auto calc(20% + 1em); /*take into account the navbar*/
+    margin: 3em 1em auto 25%; /*take into account the navbar*/
     padding: 1em;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width: 70%;
+}
+
+/* Title and buttons */
+.cardTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.buttonsSet button {
+    background-color: transparent;
+    color: var(--main-color);
+    font-weight: bold;
+    border: 1px var(--main-color-dark) solid;
+    border-radius: 26px;
+    text-transform: uppercase;
+    padding: 10px 15px;
+    margin: 0 1em;
+}
+
+.buttonsSet button:last-child {
+    background-color: var(--main-color-dark);
+    color: white;
 }
 
 /*------TABLE------*/
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 80%;
+    margin: auto;
+    width: 100%;
 }
 
 th {
     text-transform: capitalize;
+    padding: 8px;
 }
 
 td, th {
     border-bottom: 1px solid #dddddd;
     text-align: left;
-    padding: 8px;
+}
+
+td {
+    padding: 1.5em 1em;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination button {
+    margin: 5px;
+    border: none;
+    background-color: transparent;
+    font-size: 1em;
+    color: var(--main-color);
+    font-weight: bold;
 }
