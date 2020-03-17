@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Table from '../components/Table';
+import ButtonsSet from '../components/ButtonsSet';
 
 let coachesList = [
     {
@@ -82,8 +83,11 @@ function Coaches() {
 
     return (
         <div className="card">
-            <h1>Coaches.js</h1>
-            {coaches.length != 0 ? <Table data={coaches} columns={Object.keys(coaches[0])} /> : <p>Loading...</p>}
+            <div className="cardTop">
+                <h1>Coaches</h1>
+                <ButtonsSet module={"Coaches"} dataToExport={coaches} />
+            </div>
+            {coaches.length !== 0 ? <Table data={coaches} columns={Object.keys(coaches[0])} /> : <p>Loading...</p>}
         </div>
     );
 }

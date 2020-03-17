@@ -1,39 +1,22 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { useTable } from 'react-table';
+import React, { useMemo } from 'react';
+import { useTable, useSortBy, usePagination } from 'react-table';
+import up from '../up.jpg';
+import down from '../down.jpg';
+import nosort from '../nosort.jpg';
 
 function Table({ data, columns }) {
 
-    console.log("Logging Data");
-    console.log(data);
-
-    //const [columns, setColumns] = useState([]);
-    //const [data, setData] = useState([{}]);
-
-    //useEffect(() => {
-    //    let prepColumns = [];
-    //    console.log(props.columns);
-    //    props.columns.forEach(element => {
-    //        prepColumns.push({
-    //            Header: element.toUpperCase(),
-    //            accessor: element
-    //        });
-    //    })
-    //    setColumns(useMemo(props.columns, []));
-    //    setData(useMemo(props.data, []));
-    //});
-
-    let prepColumns = [{ Header: "Fuck", columns: []}];
+    let prepColumns = [];
     columns.forEach(element => {
-        prepColumns[0].columns.push({
+        prepColumns.push({
             Header: element,
-            accessor: element
+            accessor: element,
+            disableSortBy: (element === "contact" || element === "date" ? true : false)
         });
     })
 
-    const memoColumns = useMemo(() => prepColumns, [prepColumns]);
-    const memoData = useMemo(() => data, [data]);
-
-    console.log("FInished Memoizing!")
+    const memoColumns = useMemo(() => prepColumns, []);
+    const memoData = useMemo(() => data, []);
 
     const {
         getTableProps,
@@ -41,59 +24,89 @@ function Table({ data, columns }) {
         headerGroups,
         rows,
         prepareRow,
-    } = useTable({
-        memoColumns,
-        memoData,
-    })
+        page, 
+        canPreviousPage,
+        canNextPage,
+        pageOptions,
+        pageCount,
+        gotoPage,
+        nextPage,
+        previousPage,
+        setPageSize,
+        state: { pageIndex, pageSize },
+    } = useTable(
+        {
+            columns: memoColumns,
+            data: memoData,
+            initialState: { pageIndex: 0, pageSize: 7 }
+        },
+        useSortBy,
+        usePagination
+    )
 
-    //const mapData = (data, index) => {
-    //    return (
-    //        <tr key={index}>
-    //            {columns.map((headName, key) =>
-    //                <td key={key}>{data[headName]}</td>
-    //            )}
-    //        </tr>
-    //    );
-    //}
+    function pageList(length) {
+        let pages = [];
+        for(let i = 1; i < length + 1; i++)
+            pages.push(i);
 
-    //return (
-    //    <table id="datatable">
-    //        <thead>
-    //            <tr>
-    //                {columns.map((headName, index) => <th key={index}>{headName}</th>)}
-    //            </tr>
-    //        </thead>
+        return pages;
+    }
 
-    //        <tbody>
-    //            {data.map((data, index) => mapData(data, index) )}
-    //        </tbody>
-    //    </table>
-    //);
     return (
-        <table {...getTableProps()}>
-            <thead>
-                {headerGroups.map(headerGroup => (
-                    <tr {...headerGroup.getHeaderGroupProps()}>
-                        {headerGroup.headers.map(column => (
-                            <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-                        ))}
-                    </tr>
-                ))}
-            </thead>
-            <tbody {...getTableBodyProps()}>
-                {rows.map((row, i) => {
-                    prepareRow(row)
-                    return (
-                        <tr {...row.getRowProps()}>
-                            {row.cells.map(cell => {
-                                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                            })}
+        <div>
+            <table {...getTableProps()}>
+                <thead>
+                    {headerGroups.map(headerGroup => (
+                        <tr {...headerGroup.getHeaderGroupProps()}>
+                            {headerGroup.headers.map(column => (
+                                <th {...column.getHeaderProps(column.getSortByToggleProps())} className="noselect" >
+                                    {column.render('Header')}
+                                    {/* Add a sort direction indicator */}
+                                    <span style={(column.disableSortBy ? {display: "none"} : null)}>
+                                        {column.isSorted
+                                            ? column.isSortedDesc
+                                            ? <img style={{paddingLeft: "5px", height: "0.5em"}} src={down} alt="sort down" />
+                                            : <img style={{paddingLeft: "5px", height: "0.5em"}} src={up} alt="sort up" />
+                                            : <img style={{paddingLeft: "5px", height: "0.5em"}} src={nosort} alt="not sorted" />}
+                                    </span>
+                                </th>
+                            ))}
                         </tr>
-                    )
+                    ))}
+                </thead>
+                
+                <tbody {...getTableBodyProps()}>
+                    {page.map((row, i) => {
+                        prepareRow(row)
+                        return (
+                            <tr {...row.getRowProps()}>
+                                {row.cells.map(cell => {
+                                    return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                })}
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
+
+            {/* Switch pages of table */}
+            <div className="pagination">
+                <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+                {'<'}
+                </button>
+                {pageList(pageOptions.length).map((index) => {
+                    return <button onClick={() => gotoPage(index - 1)}>{index}</button>
                 })}
-            </tbody>
-        </table>
+                <button onClick={() => nextPage()} disabled={!canNextPage}>
+                {'>'}
+                </button>
+            </div>
+        </div>
     );
 }
+
+// TO DO:
+// - Search Bar
+// - Filters
 
 export default Table;

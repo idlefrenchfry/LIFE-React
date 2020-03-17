@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Table from '../components/Table';
+import ButtonsSet from '../components/ButtonsSet';
 
 //Dummy Data {Name, sports, contact number, status}
 let membersList = [
@@ -79,24 +80,27 @@ let membersList = [
 
 function Members() {
 
-    // async function to fetch members
-    const fetchMembers = () => {
-        const data = membersList;
-        setMembers(data);
-    };
+     // set memebrs
+     const [members, setMembers] = useState([]);
 
-    // useEffect to call async function
-    useEffect(() => {
-        fetchMembers();
-    });
-
-    // set use state
-    const [members, setMembers] = useState([{}]);
+     // async function to fetch coaches and set them
+     function fetchMembers() {
+         let data = membersList;
+         setMembers(data);
+     }
+ 
+     // useEffect to call async function
+     useEffect(() => {
+         fetchMembers();
+     }, [members]);
 
     return (
         <div className="card">
-            <h1>Members.js</h1>
-            <Table data={members} columns={Object.keys(members[0])} />
+            <div className="cardTop">
+                <h1>Members</h1>
+                <ButtonsSet module={"Members"} dataToExport={members} />
+            </div>
+            {members.length !== 0 ? <Table data={members} columns={Object.keys(members[0])} /> : <p>Loading...</p>}
         </div>
     );
 }
