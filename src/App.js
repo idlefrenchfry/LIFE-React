@@ -5,6 +5,8 @@ import Nav from './components/Nav';
 import Dashboard from './pages/Dashboard';
 import Coaches from './pages/Coaches';
 import Members from './pages/Members';
+import Events from './pages/Events';
+import Trainings from './pages/Trainings';
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
                   <Route path="/" exact component={Dashboard} />
                   <Route path="/Members" component={Members} />
                   <Route path="/Coaches" component={Coaches} />
+                  <Route path="/Events" component={Events} />
+                  <Route path="/Trainings" component={Trainings} />
               </Switch>
           </div>
       </Router>

@@ -11,7 +11,7 @@ function Nav() {
                 <Link to="/Members">Members</Link>
                 <Link to="/Coaches">Coaches</Link>
                 <Link to="/Events">Events</Link>
-                <Link to="/Training">Training</Link>
+                <Link to="/Trainings">Trainings</Link>
             </div>
         </nav>
     );
