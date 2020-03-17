@@ -80,7 +80,7 @@ let membersList = [
 
 function Members() {
 
-     // set memebrs
+     // set members
      const [members, setMembers] = useState([]);
 
      // async function to fetch coaches and set them
@@ -89,10 +89,10 @@ function Members() {
          setMembers(data);
      }
  
-     // useEffect to call async function
+     // useEffect to call async function, called once at the start
      useEffect(() => {
          fetchMembers();
-     }, [members]);
+     }, []);
 
     return (
         <div className="card">

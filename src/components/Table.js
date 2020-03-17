@@ -6,6 +6,7 @@ import nosort from '../nosort.jpg';
 
 function Table({ data, columns }) {
 
+    // Create new column object format to fit reactttable library
     let prepColumns = [];
     columns.forEach(element => {
         prepColumns.push({
@@ -15,8 +16,9 @@ function Table({ data, columns }) {
         });
     })
 
+    // Memoizing is required for reacttable use
     const memoColumns = useMemo(() => prepColumns, []);
-    const memoData = useMemo(() => data, []);
+    const memoData = useMemo(() => data, [data]);
 
     const {
         getTableProps,
@@ -44,6 +46,8 @@ function Table({ data, columns }) {
         usePagination
     )
 
+    // Creates array of page numbers (E.g. [1, 2, 3, 4, 5])
+    // To map for pagination
     function pageList(length) {
         let pages = [];
         for(let i = 1; i < length + 1; i++)
@@ -91,12 +95,17 @@ function Table({ data, columns }) {
 
             {/* Switch pages of table */}
             <div className="pagination">
+                {/* Previous page */}
                 <button onClick={() => previousPage()} disabled={!canPreviousPage}>
                 {'<'}
                 </button>
+
+                {/* Page numbers */}
                 {pageList(pageOptions.length).map((index) => {
                     return <button onClick={() => gotoPage(index - 1)}>{index}</button>
                 })}
+
+                {/* Next page */}
                 <button onClick={() => nextPage()} disabled={!canNextPage}>
                 {'>'}
                 </button>
