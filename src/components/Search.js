@@ -5,11 +5,16 @@ import { useState, useEffect } from 'react';
 // input: input of user
 // setData: replace data with newly filtered object
 function useSearchFilteredData(data, filteredProperty, input) {
-    const [data, setData] = useState(data);
+    const [aData, setData] = useState(data);
 
     useEffect(() => {
-        function inputChange() {
-            
+        function handleInputChange() {
+            let result = aData.filter(item => item[filteredProperty].includes(input));
+            setData(result);
         }
-    })
+    });
+
+    return data;
 }
+
+export default useSearchFilteredData;

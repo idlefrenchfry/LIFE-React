@@ -3,6 +3,7 @@ import { useTable, useSortBy, usePagination } from 'react-table';
 import up from '../up.jpg';
 import down from '../down.jpg';
 import nosort from '../nosort.jpg';
+import useFilteredSearchData from './Search';
 
 function Table({ data, columns }) {
 

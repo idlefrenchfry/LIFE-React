@@ -98,7 +98,7 @@ function Members() {
         <div className="card">
             <div className="cardTop">
                 <h1>Members</h1>
-                <ButtonsSet module={"Members"} dataToExport={members} />
+                <ButtonsSet module={"Members"} dataToExport={members} addPage="/Members/Add" />
             </div>
             {members.length !== 0 ? <Table data={members} columns={Object.keys(members[0])} /> : <p>Loading...</p>}
         </div>

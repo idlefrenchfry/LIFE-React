@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-function ButtonsSet({module, dataToExport}) {
+function ButtonsSet({module, dataToExport, addPage}) {
     return (
         <div className="buttonsSet">
             <button>Export List</button>
             <button>Import List</button>
-            <button>Add {module}</button>
+            <button><Link to={addPage}>Add {module}</Link></button>
         </div>
     );
 }

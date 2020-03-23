@@ -92,7 +92,8 @@ nav + div {
     margin: 0 1em;
 }
 
-.buttonsSet button:last-child {
+.buttonsSet button:last-child, .buttonsSet button:last-child a {
+    text-decoration: none;
     background-color: var(--main-color-dark);
     color: white;
 }
@@ -132,4 +133,13 @@ td {
     font-size: 1em;
     color: var(--main-color);
     font-weight: bold;
+}
+
+/* Form CSS */
+form > div {
+    display: flex;
+}
+
+form > div > h3 {
+    width: 30%;
 }
