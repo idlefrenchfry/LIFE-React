@@ -1,12 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 function ButtonsSet({module, dataToExport, addPage}) {
+
+    const redirect = () => window.location.href = addPage;
+
     return (
         <div className="buttonsSet">
             <button>Export List</button>
             <button>Import List</button>
-            <button><Link to={addPage}>Add {module}</Link></button>
+            <button onClick={redirect}>Add {module}</button>
         </div>
     );
 }
