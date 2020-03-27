@@ -29,7 +29,14 @@ function AddMembers() {
             return "";
     }
 
-    const submitForm = () => document.getElementById('form').submit();
+    // const submitForm = () => document.getElementById('form').submit();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(e);
+        console.log(e.target.elements);
+        // window.location.href = "/Members";
+    }
 
     const cancel = () => window.location.href = "/Members";
 
@@ -39,7 +46,7 @@ function AddMembers() {
                 <h1>Add Member</h1>
                 <div className="buttonsSet">
                     <button onClick={cancel} className="noselect">Cancel</button>
-                    <button onClick={submitForm} className="noselect" id="submit">Save</button>
+                    <button form="form" className="noselect" id="submit">Save</button>
                 </div>
             </div>
 
@@ -51,7 +58,7 @@ function AddMembers() {
                 <span onClick={changeSection} className={displayTab("5") + "noselect"} id="tab5">Sports Details</span>
             </div>
 
-            <form id="form">
+            <form id="form" onSubmit={handleSubmit}>
                 <div style={displaySection("1")}>
                     <div id="personalDetails">
                         <h3>Particulars</h3>
@@ -71,16 +78,14 @@ function AddMembers() {
                             {/* ---------- GENDER ---------- */}
                             <label htmlFor="gender">Gender</label>
                             <br />
-                            <select id="gender" name="gender">
+                            <select className="split" id="gender" name="gender">
                                 <option value="female">Female</option>
                                 <option value="male">Male</option>
                             </select>
-                            <br />
 
                             {/* ---------- USER BLOODTYPE ---------- */}
                             <label htmlFor="uBloodtype">Blood Type</label>
-                            <br />
-                            <select id="uBloodtype" name="uBloodtype">
+                            <select className="split" id="uBloodtype" name="uBloodtype">
                                 <option value="opos">O positive</option>
                                 <option value="oneg">O negative</option>
                                 <option value="apos">A positive</option>
@@ -90,11 +95,11 @@ function AddMembers() {
                                 <option value="abpoos">AB positive</option>
                                 <option value="abneg">AB negative</option>
                             </select>
+                            <br />
 
                             {/* ---------- DOB ---------- */}
                             <label htmlFor="dob">Date of Birth</label>
                             <input type="date" id="dob" name="dob"
-                                value="2018-07-22"
                                 max={today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate()}></input>
                             <br />
                             {/* PLACE OF BIRTH */}
@@ -285,7 +290,7 @@ function AddMembers() {
                             {/* ---------- BLOOD TYPE ---------- */}
                             <label htmlFor="kgBloodtype">Blood Type</label>
                             <br />
-                            <select id="kgBloodtype" name="kgBloodtype">
+                            <select className="split" id="kgBloodtype" name="kgBloodtype">
                                 <option value="opos">O positive</option>
                                 <option value="oneg">O negative</option>
                                 <option value="apos">A positive</option>
@@ -556,9 +561,9 @@ function AddMembers() {
                             <br />
 
                             {/* ---------- RESUME / CV? UPLOAD DOCUMENTS?? ---------- */}
-                            <label htmlFor="csp">Resume / CV? Upload Document?</label>
+                            <label htmlFor="cv">Resume / CV? Upload Document?</label>
                             <br />
-                            <input id="csp" name="csp" type="text"></input>
+                            <input id="cv" name="cv" type="text"></input>
                             <br />
 
                             {/* ---------- COACHING QUALIFICATIONS ---------- */}

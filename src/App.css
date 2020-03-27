@@ -69,7 +69,7 @@ nav + div {
 
 .card {
     box-sizing: border-box;
-    margin: 3em 1em auto 25%; /*take into account the navbar*/
+    margin: 3em 1em 3em 25%; /*take into account the navbar*/
     padding: 1em;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     width: 70%;
@@ -146,13 +146,21 @@ td {
 .sections span {
     cursor: pointer;
     padding: 0 0 0.5em 0;
-}
-
-.currentTab {
     position: relative;
 }
 
-.currentTab::after {
+.sections span::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 4px;
+    background-color: var(--highlight);
+    transition: width ease-in 0.3s;
+}
+
+.currentTab::after, .sections span:hover::before {
     content: "";
     position: absolute;
     bottom: 0;
@@ -162,10 +170,32 @@ td {
     background-color: var(--highlight);
 }
 
-form > div {
+form > div > div {
     display: flex;
+    justify-content: space-between;
 }
 
-form > div > h3 {
+form > div > div:not(:last-child) {
+    border-bottom: 1px solid #e6e6e6;
+    padding: 50px 0;
+}
+
+form .inputs {
+    width: 50%;
+}
+
+form input, form select {
+    box-sizing: content-box;
+    padding: 10px;
+    width: 90%;
+    border: #e6e6e6 2px solid;
+    border-radius: 10px;
+}
+
+.split {
+    width: 40%;
+}
+
+form div > h3 {
     width: 30%;
 }
