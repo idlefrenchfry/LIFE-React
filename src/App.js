@@ -5,6 +5,10 @@ import Nav from './components/Nav';
 import Dashboard from './pages/Dashboard';
 import Coaches from './pages/Coaches';
 import Members from './pages/Members';
+import Events from './pages/Events';
+import Trainings from './pages/Trainings';
+import AddMember from './pages/AddMember';
+import AddCoach from './pages/AddCoach';
 
 function App() {
   return (
@@ -13,8 +17,12 @@ function App() {
               <Nav />
               <Switch>
                   <Route path="/" exact component={Dashboard} />
-                  <Route path="/Members" component={Members} />
-                  <Route path="/Coaches" component={Coaches} />
+                  <Route path="/Members" exact component={Members} />
+                  <Route path="/Coaches" exact component={Coaches} />
+                  <Route path="/Events" component={Events} />
+                  <Route path="/Trainings" component={Trainings} />
+                  <Route path="/Members/Add" component={AddMember}/>
+                  <Route path="/Coaches/Add" component={AddCoach}/>
               </Switch>
           </div>
       </Router>

@@ -1,16 +1,33 @@
 :root {
     --main-color: rgb(41, 60, 120);
     --main-color-dark: #0b1f64;
+    --highlight: #8ac640
 }
 
 
 .App {
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
 }
 
 h1, h2, h3, h4, h5, h6 {
     color: var(--main-color-dark);
 }
+
+button {
+    cursor: pointer;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Opera and Firefox */
+  }
 
 /* ------NAVIGATION------ */
 nav {
@@ -38,7 +55,7 @@ nav a, nav a:hover {
 .navlinks a:hover::after {
     content: "";
     position: absolute;
-    background-color: forestgreen;
+    background-color: var(--highlight);
     width: 5px;
     left: 0;
     top: 0;
@@ -52,24 +69,182 @@ nav + div {
 
 .card {
     box-sizing: border-box;
-    margin: auto 1em auto calc(20% + 1em); /*take into account the navbar*/
+    margin: 3em 1em 3em 25%; /*take into account the navbar*/
     padding: 1em;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width: 70%;
+}
+
+/* Title and buttons */
+.cardTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.buttonsSet button {
+    background-color: transparent;
+    color: var(--main-color);
+    font-weight: bold;
+    border: 1px var(--main-color-dark) solid;
+    border-radius: 26px;
+    text-transform: uppercase;
+    padding: 10px 15px;
+    margin: 0 1em;
+}
+
+.buttonsSet button:last-child, .buttonsSet button:last-child a {
+    text-decoration: none;
+    background-color: var(--main-color-dark);
+    color: white;
+}
+
+/*------FILTERS------*/
+.filters {
+    border-top: 1px solid rgba(0,0,0,0.2);
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    padding: 2em 1em;
+    margin: 0 -1em;
+}
+
+.filters h4 {
+    display: inline;
+}
+
+.filters > * {
+    margin: 0 5% 0 0;
+}
+
+.filters select {
+    border-color: var(--main-color);
+    border-radius: 5px;
+    color: var(--main-color);
+    padding: 5px;
+}
+
+.filters input {
+    border: 2px solid #e6e6e6;
+    border-radius: 5px;
+    padding: 1em 0.5em;
+    width: 35%;
 }
 
 /*------TABLE------*/
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 80%;
+    margin: 20px auto;
+    width: 100%;
 }
 
 th {
     text-transform: capitalize;
+    padding: 8px;
+    color: var(--main-color);
 }
 
 td, th {
     border-bottom: 1px solid #dddddd;
     text-align: left;
-    padding: 8px;
+}
+
+td {
+    padding: 1.5em 1em 1.5em 8px;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination button {
+    margin: 5px;
+    border: none;
+    background-color: transparent;
+    font-size: 1em;
+    color: var(--main-color);
+    font-weight: bold;
+}
+
+/* Form CSS */
+.sections {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 20px;
+    text-align: center;
+}
+
+.sections span {
+    cursor: pointer;
+    padding: 0 0 0.5em 0;
+    position: relative;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #53575c;
+    margin: 15px 0;
+}
+
+.sections span::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--highlight);
+    transition: width ease-in 0.3s;
+}
+
+.currentTab::after, .sections span:hover::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--highlight);
+}
+
+form > div > div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+form > div > div:not(:last-child) {
+    border-bottom: 1px solid #e6e6e6;
+    padding: 50px 0;
+}
+
+form .inputs {
+    width: 50%;
+}
+
+form input, form select, form textarea {
+    box-sizing: content-box;
+    padding: 10px;
+    width: 90%;
+    border: #e6e6e6 2px solid;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    resize: none;
+    font-family: arial, sans-serif;
+}
+
+form input[type=checkbox] {
+    width: initial;
+}
+
+form input[type=file] {
+    height: 150px;
+    border-style: dashed;
+}
+
+.split {
+    width: 40%;
+}
+
+form div > h3 {
+    width: 30%;
 }
