@@ -99,17 +99,48 @@ nav + div {
     color: white;
 }
 
+/*------FILTERS------*/
+.filters {
+    border-top: 1px solid rgba(0,0,0,0.2);
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    padding: 2em 1em;
+    margin: 0 -1em;
+}
+
+.filters h4 {
+    display: inline;
+}
+
+.filters > * {
+    margin: 0 5% 0 0;
+}
+
+.filters select {
+    border-color: var(--main-color);
+    border-radius: 5px;
+    color: var(--main-color);
+    padding: 5px;
+}
+
+.filters input {
+    border: 2px solid #e6e6e6;
+    border-radius: 5px;
+    padding: 1em 0.5em;
+    width: 35%;
+}
+
 /*------TABLE------*/
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    margin: auto;
+    margin: 20px auto;
     width: 100%;
 }
 
 th {
     text-transform: capitalize;
     padding: 8px;
+    color: var(--main-color);
 }
 
 td, th {
@@ -118,7 +149,7 @@ td, th {
 }
 
 td {
-    padding: 1.5em 1em;
+    padding: 1.5em 1em 1.5em 8px;
 }
 
 /* Pagination */
@@ -141,12 +172,17 @@ td {
     display: flex;
     justify-content: space-between;
     margin-right: 20px;
+    text-align: center;
 }
 
 .sections span {
     cursor: pointer;
     padding: 0 0 0.5em 0;
     position: relative;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #53575c;
+    margin: 15px 0;
 }
 
 .sections span::before {
@@ -155,7 +191,7 @@ td {
     bottom: 0;
     left: 0;
     width: 0;
-    height: 4px;
+    height: 3px;
     background-color: var(--highlight);
     transition: width ease-in 0.3s;
 }
@@ -166,13 +202,14 @@ td {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 4px;
+    height: 3px;
     background-color: var(--highlight);
 }
 
 form > div > div {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 form > div > div:not(:last-child) {
@@ -184,12 +221,24 @@ form .inputs {
     width: 50%;
 }
 
-form input, form select {
+form input, form select, form textarea {
     box-sizing: content-box;
     padding: 10px;
     width: 90%;
     border: #e6e6e6 2px solid;
     border-radius: 10px;
+    margin-bottom: 20px;
+    resize: none;
+    font-family: arial, sans-serif;
+}
+
+form input[type=checkbox] {
+    width: initial;
+}
+
+form input[type=file] {
+    height: 150px;
+    border-style: dashed;
 }
 
 .split {

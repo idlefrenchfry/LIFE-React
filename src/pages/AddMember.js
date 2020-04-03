@@ -24,12 +24,10 @@ function AddMembers() {
     // Change style of tab depending on current section
     const displayTab = (id) => {
         if (currentSection.slice(-1) === id)
-            return "currentTab ";
+            return "currentTab noselect";
         else
-            return "";
+            return "noselect";
     }
-
-    // const submitForm = () => document.getElementById('form').submit();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -51,11 +49,11 @@ function AddMembers() {
             </div>
 
             <div className="sections">
-                <span onClick={changeSection} className={displayTab("1") + "noselect"} id="tab1">Personal Details</span>
-                <span onClick={changeSection} className={displayTab("2") + "noselect"} id="tab2">Medical Information</span>
-                <span onClick={changeSection} className={displayTab("3") + "noselect"} id="tab3">Next of Kin</span>
-                <span onClick={changeSection} className={displayTab("4") + "noselect"} id="tab4">Career Details</span>
-                <span onClick={changeSection} className={displayTab("5") + "noselect"} id="tab5">Sports Details</span>
+                <span onClick={changeSection} className={displayTab("1")} id="tab1">Personal Details</span>
+                <span onClick={changeSection} className={displayTab("2")} id="tab2">Medical Information</span>
+                <span onClick={changeSection} className={displayTab("3")} id="tab3">Next of Kin</span>
+                <span onClick={changeSection} className={displayTab("4")} id="tab4">Career Details</span>
+                <span onClick={changeSection} className={displayTab("5")} id="tab5">Sports Details</span>
             </div>
 
             <form id="form" onSubmit={handleSubmit}>
@@ -180,7 +178,7 @@ function AddMembers() {
                 </div>
 
                 <div style={displaySection("2")}>
-                    <div className="condition">
+                    <div id="condition">
                         <h3>Condition</h3>
                         <div className="inputs">
                             {/* ---------- DISABILITY/MEDICAL CONDITION ---------- */}
@@ -211,7 +209,7 @@ function AddMembers() {
                         </div>
                     </div>
 
-                    <div className="dailyaid">
+                    <div id="dailyaid">
                         <h3>Daily Aid Details</h3>
                         <div className="inputs">
                             {/* DALIY AID DETALIS */}
@@ -260,7 +258,7 @@ function AddMembers() {
                 </div>
 
                 <div style={displaySection("3")}>
-                    <div className="condition">
+                    <div id="condition">
                         <h3>Next of Kin Details</h3>
                         <div className="inputs">
                             {/* ---------- KIN/GUARDIAN NAME ---------- */}
@@ -304,7 +302,7 @@ function AddMembers() {
                         </div>
                     </div>
 
-                    <div className="kgContactInfo">
+                    <div id="kgContactInfo">
                         <h3>Contact Information</h3>
                         <div className="inputs">
                             {/* POSTAL CODE */}
@@ -335,7 +333,7 @@ function AddMembers() {
                 </div>
 
                 <div style={displaySection("4")}>
-                    <div className="career">
+                    <div id="career">
                         <h3>Career Details</h3>
                         <div className="inputs">
                             {/* ---------- CURRENT OCCUPATION ---------- */}
@@ -370,7 +368,7 @@ function AddMembers() {
                         </div>
                     </div>
 
-                    <div className="kgContactInfo">
+                    <div id="kgContactInfo">
                         <h3>Contact Information</h3>
                         <div className="inputs">
                             {/* POSTAL CODE */}
@@ -473,7 +471,7 @@ function AddMembers() {
                             <input id="licsNo" name="licsNo" type="text"></input>
                             <br />
 
-                            {/* ---------- ATHLETE LICENSE NUMBER ---------- */}
+                            {/* ---------- SPORTS CLASSIFICATION UPLOAD ---------- */}
                             <label htmlFor="sportsDocs">Upload Documents</label>
                             <br />
                             <input id="sportsDocs" name="sportsDocs" type="file" multiple></input>
@@ -578,7 +576,7 @@ function AddMembers() {
                             <input id="contractCsp" name="contractCsp" type="text" multiple></input>
                             <br />
 
-                            {/* ---------- COACHING SERVICE PROVIDER ---------- */}
+                            {/* ---------- TRAINING INFORMATION UPLOAD ---------- */}
                             <label htmlFor="trainingDocs">Upload Documents</label>
                             <br />
                             <input id="trainingDocs" name="trainingDocs" type="file" multiple></input>
