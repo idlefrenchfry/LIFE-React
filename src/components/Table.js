@@ -3,7 +3,6 @@ import { useTable, useSortBy, usePagination } from 'react-table';
 import up from '../up.jpg';
 import down from '../down.jpg';
 import nosort from '../nosort.jpg';
-import useFilteredSearchData from './Search';
 
 function Table({ data, columns }) {
 
@@ -25,18 +24,14 @@ function Table({ data, columns }) {
         getTableProps,
         getTableBodyProps,
         headerGroups,
-        rows,
         prepareRow,
         page, 
         canPreviousPage,
         canNextPage,
         pageOptions,
-        pageCount,
         gotoPage,
         nextPage,
         previousPage,
-        setPageSize,
-        state: { pageIndex, pageSize },
     } = useTable(
         {
             columns: memoColumns,
