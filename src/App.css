@@ -48,19 +48,19 @@ nav a, nav a:hover {
     padding: 1em;
 }
 
-.navlinks a:hover {
+.navlinks a:hover, .navlinks a:focus {
     background-color: var(--main-color-dark);
 }
 
-.navlinks a:hover::after {
-    content: "";
-    position: absolute;
-    background-color: var(--highlight);
-    width: 5px;
-    left: 0;
-    top: 0;
-    bottom: 0;
-}
+    .navlinks a:hover::after, .navlinks a:focus::after {
+        content: "";
+        position: absolute;
+        background-color: var(--highlight);
+        width: 5px;
+        left: 0;
+        top: 0;
+        bottom: 0;
+    }
 
 /*------MAIN SECTION------*/
 nav + div {
@@ -247,4 +247,192 @@ form input[type=file] {
 
 form div > h3 {
     width: 30%;
+}
+
+/*------ERROR PAGE------*/
+.error {
+    text-align: center;
+}
+
+.error h1 {
+    font-size: 60px;
+}
+
+/*------ANIMATIONS------*/
+@font-face {
+    font-family: Clip;
+    src: url("https://acupoftee.github.io/fonts/Clip.ttf");
+}
+
+.sign {
+    letter-spacing: 5px;
+    font-family: "Clip";
+    text-transform: uppercase;
+    font-size: 6em;
+    color: #B0C3FF;
+    text-shadow: 0 0 0.6rem #B0C3FF, 0 0 1.5rem #293C78, -0.2rem 0.1rem 1rem #293C78, 0.2rem 0.1rem 1rem #293C78, 0 -0.5rem 2rem #0B1F64, 0 0.5rem 3rem #0B1F64;
+    animation: shine 2s forwards, flicker 3s infinite;
+}
+
+@keyframes blink {
+    0%, 22%, 36%, 75% {
+        color: #B0C3FF;
+        text-shadow: 0 0 0.6rem #B0C3FF, 0 0 1.5rem #293C78, -0.2rem 0.1rem 1rem #293C78, 0.2rem 0.1rem 1rem #293C78, 0 -0.5rem 2rem #0B1F64, 0 0.5rem 3rem #0B1F64;
+    }
+
+    28%, 33% {
+        color: #293C78;
+        text-shadow: none;
+    }
+
+    82%, 97% {
+        color: #0B1F64;
+        text-shadow: none;
+    }
+}
+
+.flicker {
+    animation: shine 2s forwards, blink 3s 2s infinite;
+}
+
+.fast-flicker {
+    animation: shine 2s forwards, blink 10s 1s infinite;
+}
+
+@keyframes shine {
+    0% {
+        color: #6b1839;
+        text-shadow: none;
+    }
+
+    100% {
+        color: #B0C3FF;
+        text-shadow: 0 0 0.6rem #B0C3FF, 0 0 1.5rem #293C78, -0.2rem 0.1rem 1rem #293C78, 0.2rem 0.1rem 1rem #293C78, 0 -0.5rem 2rem #0B1F64, 0 0.5rem 3rem #0B1F64;
+    }
+}
+
+@keyframes flicker {
+    from {
+        opacity: 1;
+    }
+
+    4% {
+        opacity: 0.9;
+    }
+
+    6% {
+        opacity: 0.85;
+    }
+
+    8% {
+        opacity: 0.95;
+    }
+
+    10% {
+        opacity: 0.9;
+    }
+
+    11% {
+        opacity: 0.922;
+    }
+
+    12% {
+        opacity: 0.9;
+    }
+
+    14% {
+        opacity: 0.95;
+    }
+
+    16% {
+        opacity: 0.98;
+    }
+
+    17% {
+        opacity: 0.9;
+    }
+
+    19% {
+        opacity: 0.93;
+    }
+
+    20% {
+        opacity: 0.99;
+    }
+
+    24% {
+        opacity: 1;
+    }
+
+    26% {
+        opacity: 0.94;
+    }
+
+    28% {
+        opacity: 0.98;
+    }
+
+    37% {
+        opacity: 0.93;
+    }
+
+    38% {
+        opacity: 0.5;
+    }
+
+    39% {
+        opacity: 0.96;
+    }
+
+    42% {
+        opacity: 1;
+    }
+
+    44% {
+        opacity: 0.97;
+    }
+
+    46% {
+        opacity: 0.94;
+    }
+
+    56% {
+        opacity: 0.9;
+    }
+
+    58% {
+        opacity: 0.9;
+    }
+
+    60% {
+        opacity: 0.99;
+    }
+
+    68% {
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 0.9;
+    }
+
+    72% {
+        opacity: 0.95;
+    }
+
+    93% {
+        opacity: 0.93;
+    }
+
+    95% {
+        opacity: 0.95;
+    }
+
+    97% {
+        opacity: 0.93;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
