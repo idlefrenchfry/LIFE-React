@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Table from '../components/Table';
 import ButtonsSet from '../components/ButtonsSet';
 import { cloneDeep } from 'lodash'; // To deep clone arrays with objects
-import { formatAMPM } from '../CommonFunctions.js';
 
 let trainingsList = [
     {
