@@ -151,7 +151,7 @@ function Members() {
                     <option value="table tennis">Table Tennis</option>
                 </select>
 
-                <input onChange={handleSearchInput} placeholder="Search" type="text" />
+                <span><input onChange={handleSearchInput} placeholder="Search" type="text" /></span>
             </div>
             {members.length !== 0 ? <Table data={members} columns={Object.keys(members[0])} /> : <p>Loading...</p>}
         </div>

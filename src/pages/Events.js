@@ -223,7 +223,7 @@ function Events() {
                     <option value="table tennis">Table Tennis</option>
                 </select>
 
-                <input onChange={handleSearchInput} placeholder="Search" type="text" />
+                <span><input onChange={handleSearchInput} placeholder="Search" type="text" /></span>
             </div>
 
             <div className="sections">

@@ -138,7 +138,7 @@ function Coaches() {
                     <option value="table tennis">Table Tennis</option>
                 </select>
 
-                <input onChange={handleSearchInput} placeholder="Search" type="text" />
+                <span><input onChange={handleSearchInput} placeholder="Search" type="text" /></span>
             </div>
             {coaches.length !== 0 ? <Table data={coaches} columns={Object.keys(coaches[0])} /> : <p>Loading...</p>}
         </div>
