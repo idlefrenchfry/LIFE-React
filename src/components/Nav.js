@@ -5,7 +5,7 @@ import logo from '../logo.png';
 function Nav() {
     return (
         <nav>
-            <a href=""><img src={logo} alt="Life" /></a>
+            <Link to="/"><img src={logo} alt="Life" /></Link>
             <div className="navlinks">
                 <Link to="/">Dashboard</Link>
                 <Link to="/Members">Members</Link>
