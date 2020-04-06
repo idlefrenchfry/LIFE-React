@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 function AddMembers() {
 
@@ -487,37 +487,37 @@ function AddMembers() {
                             {/* ---------- YEAR ? MONTH ---------- */}
                             <label htmlFor="achYM">Year / Month</label>
                             <br />
-                            <input id="currentOcc" name="currentOcc" type="text"></input>
+                            <input id="currentOcc" name="currentOcc" type="text" />
                             <br />
 
                             {/* ---------- LOCATIOn ---------- */}
                             <label htmlFor="achLocation">Location</label>
                             <br />
-                            <input id="achLocation" name="achLocation" type="text"></input>
+                            <input id="achLocation" name="achLocation" type="text" />
                             <br />
 
                             {/* ---------- NAME OF TOUNRAMENT ---------- */}
                             <label htmlFor="tournName">Name of Tournament</label>
                             <br />
-                            <input id="tournName" name="tournName" type="text"></input>
+                            <input id="tournName" name="tournName" type="text" />
                             <br />
 
                             {/* ---------- PARTICIPATION TYPE ---------- */}
                             <label htmlFor="parType">Participation Type</label>
                             <br />
-                            <input id="parType" name="parType" type="text"></input>
+                            <input id="parType" name="parType" type="text" />
                             <br />
 
                             {/* ---------- RESULTS ---------- */}
                             <label htmlFor="results">Results</label>
                             <br />
-                            <input id="results" name="results" type="text"></input>
+                            <input id="results" name="results" type="text" />
                             <br />
 
                             {/* ---------- NO OF COMPETITORS ---------- */}
                             <label htmlFor="compNo">No. Of Competitors</label>
                             <br />
-                            <input id="compNo" name="compNo" type="text"></input>
+                            <input id="compNo" name="compNo" type="text" />
                             <br />
                         </div>
                     </div>
@@ -531,55 +531,55 @@ function AddMembers() {
                             {/* ---------- SPORTS TIER ---------- */}
                             <label htmlFor="sportsTier">Sports Tier</label>
                             <br />
-                            <input id="sportsTier" name="sportsTier" type="text"></input>
+                            <input id="sportsTier" name="sportsTier" type="text" />
                             <br />
 
                             {/* ---------- FREQUENCY ---------- */}
                             <label htmlFor="freq">Frequency</label>
                             <br />
-                            <input id="freq" name="freq" type="text"></input>
+                            <input id="freq" name="freq" type="text" />
                             <br />
 
                             {/* ---------- DURATION ---------- */}
                             <label htmlFor="duration">Duration</label>
                             <br />
-                            <input id="duration" name="duration" type="text"></input>
+                            <input id="duration" name="duration" type="text" />
                             <br />
 
                             {/* ---------- LOCATION ---------- */}
                             <label htmlFor="licsNo">Athlete License Number</label>
                             <br />
-                            <input id="licsNo" name="licsNo" type="text"></input>
+                            <input id="licsNo" name="licsNo" type="text" />
                             <br />
 
                             {/* ---------- COACHING SERVICE PROVIDER ---------- */}
                             <label htmlFor="csp">Coaching Service Provider</label>
                             <br />
-                            <input id="csp" name="csp" type="text" ></input>
+                            <input id="csp" name="csp" type="text" />
                             <br />
 
                             {/* ---------- RESUME / CV? UPLOAD DOCUMENTS?? ---------- */}
                             <label htmlFor="cv">Resume / CV? Upload Document?</label>
                             <br />
-                            <input id="cv" name="cv" type="text"></input>
+                            <input id="cv" name="cv" type="text" />
                             <br />
 
                             {/* ---------- COACHING QUALIFICATIONS ---------- */}
                             <label htmlFor="coachingQual">Coaching Qualifications</label>
                             <br />
-                            <input id="coachingQual" name="coachingQual" type="text"></input>
+                            <input id="coachingQual" name="coachingQual" type="text" />
                             <br />
 
                             {/* ---------- CONTRACT FOR COACHING SERVICE PROVIDERS ---------- */}
                             <label htmlFor="contractCsp">Contract for Coaching Service Providers</label>
                             <br />
-                            <input id="contractCsp" name="contractCsp" type="text" multiple></input>
+                            <input id="contractCsp" name="contractCsp" type="text" multiple/>
                             <br />
 
                             {/* ---------- TRAINING INFORMATION UPLOAD ---------- */}
                             <label htmlFor="trainingDocs">Upload Documents</label>
                             <br />
-                            <input id="trainingDocs" name="trainingDocs" type="file" multiple></input>
+                            <input id="trainingDocs" name="trainingDocs" type="file" multiple />
                             <br />
                         </div>
                     </div>
