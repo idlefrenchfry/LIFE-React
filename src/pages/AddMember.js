@@ -73,74 +73,109 @@ function AddMembers() {
                             <input id="cName" name="cName" type="text"></input>
                             <br />
 
-                            {/* ---------- GENDER ---------- */}
-                            <label htmlFor="gender">Gender</label>
-                            <br />
-                            <select className="split" id="gender" name="gender">
-                                <option value="female">Female</option>
-                                <option value="male">Male</option>
-                            </select>
+                            {/* Splitting */}
+                            <div className="split">
+                                {/* ---------- GENDER ---------- */}
+                                <div>
+                                    <label htmlFor="gender">Gender</label>
+                                    <br />
+                                    <select id="gender" name="gender">
+                                        <option value="female">Female</option>
+                                        <option value="male">Male</option>
+                                    </select>
+                                </div>
 
-                            {/* ---------- USER BLOODTYPE ---------- */}
-                            <label htmlFor="uBloodtype">Blood Type</label>
-                            <select className="split" id="uBloodtype" name="uBloodtype">
-                                <option value="opos">O positive</option>
-                                <option value="oneg">O negative</option>
-                                <option value="apos">A positive</option>
-                                <option value="aneg">A negative</option>
-                                <option value="bpos">B positive</option>
-                                <option value="bneg">B negative</option>
-                                <option value="abpoos">AB positive</option>
-                                <option value="abneg">AB negative</option>
-                            </select>
-                            <br />
-
-                            {/* ---------- DOB ---------- */}
-                            <label htmlFor="dob">Date of Birth</label>
-                            <input type="date" id="dob" name="dob"
-                                max={today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate()}></input>
-                            <br />
-                            {/* PLACE OF BIRTH */}
-                            <label htmlFor="birthplace">Place of Birth</label>
-                            <br />
-                            <input id="birthplace" name="birthplace" type="text"></input>
+                                {/* ---------- USER BLOODTYPE ---------- */}
+                                <div>
+                                    <label htmlFor="uBloodtype">Blood Type</label>
+                                    <br />
+                                    <select id="uBloodtype" name="uBloodtype" style={{ width: "40%" }}>
+                                        <option value="opos">O+</option>
+                                        <option value="oneg">O-</option>
+                                        <option value="apos">A+</option>
+                                        <option value="aneg">A-</option>
+                                        <option value="bpos">B+</option>
+                                        <option value="bneg">B-</option>
+                                        <option value="abpoos">AB+</option>
+                                        <option value="abneg">AB-</option>
+                                    </select>
+                                </div>
+                            </div>
                             <br />
 
-                            {/* NATIONALITY */}
+                            {/* Splitting */}
+                            <div className="split">
+                                {/* ---------- DOB ---------- */}
+                                <div>
+                                    <label htmlFor="dob">Date of Birth</label>
+                                    <input type="date" id="dob" name="dob"
+                                        max={today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate()}></input>
+                                    <br />
+                                </div>
+
+                                {/* ---------- PLACE OF BIRTH ---------- */}
+                                <div>
+                                    <label htmlFor="birthplace">Place of Birth</label>
+                                    <br />
+                                    <input id="birthplace" name="birthplace" type="text"></input>
+                                    <br />
+                                </div>
+                            </div>
+
+                            {/* ---------- NATIONALITY ---------- */}
                             <label htmlFor="nationality">Nationality</label>
                             <br />
                             <input id="nationality" name="nationality" type="text"></input>
                             <br />
 
-                            {/* RACE */}
-                            <label htmlFor="race">Race</label>
-                            <br />
-                            <input id="race" name="race" type="text"></input>
-                            <br />
+                            <div className="split">
+                                {/* ---------- RACE ---------- */}
+                                <div>
+                                    <label htmlFor="race">Race</label>
+                                    <br />
+                                    <input id="race" name="race" type="text"></input>
+                                    <br />
+                                </div>
 
-                            {/* RELIGION */}
-                            <label htmlFor="religion">Religion</label>
-                            <br />
-                            <input id="religion" name="religion" type="text"></input>
-                            <br />
+                                {/* ---------- RELIGION ---------- */}
+                                <div>
+                                    <label htmlFor="religion">Religion</label>
+                                    <br />
+                                    <input id="religion" name="religion" type="text"></input>
+                                    <br />
+                                </div>
+                            </div>
 
-                            {/* MARITAL STATUS */}
+                            {/* ---------- MARITAL STATUS ---------- */}
                             <label htmlFor="marital">Marital Status</label>
                             <br />
                             <input id="marital" name="marital" type="text"></input>
                             <br />
 
-                            {/* SPORTS */}
-                            <label htmlFor="sports">Sports</label>
-                            <br />
-                            <input id="sports" name="sports" type="text"></input>
-                            <br />
+                            <div className="split">
+                                {/* ---------- SPORTS ---------- */}
+                                <div>
+                                    <label htmlFor="sports">Sports</label>
+                                    <br />
+                                    <select id="sports" name="sports">
+                                        <option value="">Sports</option>
+                                        <option value="archery">Archery</option>
+                                        <option value="badminton">Badminton</option>
+                                        <option value="basketball">Basketball</option>
+                                        <option value="football">Football</option>
+                                        <option value="table tennis">Table Tennis</option>
+                                    </select>
+                                    <br />
+                                </div>
 
-                            {/* ROLE */}
-                            <label htmlFor="role">Role</label>
-                            <br />
-                            <input id="role" name="role" type="text"></input>
-                            <br />
+                                {/* ---------- ROLE ---------- */}
+                                <div>
+                                    <label htmlFor="role">Role</label>
+                                    <br />
+                                    <input id="role" name="role" type="text"></input>
+                                    <br />
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -178,7 +213,7 @@ function AddMembers() {
                 </div>
 
                 <div style={displaySection("2")}>
-                    <div id="condition">
+                    <div id="medCondition">
                         <h3>Condition</h3>
                         <div className="inputs">
                             {/* ---------- DISABILITY/MEDICAL CONDITION ---------- */}
@@ -189,11 +224,12 @@ function AddMembers() {
 
                             {/* ---------- NATURE OF DISABILITY ---------- */}
                             <label htmlFor="natureOfDis">Nature of Disability</label>
-                                <br />
-                                <select id="natureOfDis" name="natureOfDis">
-                                    <option value="congenital">Congenital</option>
-                                    <option value="others">Others</option>
-                                </select>
+                            <br />
+                            <select id="natureOfDis" name="natureOfDis">
+                                <option value="congenital">Congenital</option>
+                                <option value="others">Others</option>
+                            </select>
+                            <br />
 
                             {/* DALIY AID DETALIS */}
                             <label htmlFor="dailyAids">Daily Aids (If Applicable)</label>
@@ -209,7 +245,7 @@ function AddMembers() {
                         </div>
                     </div>
 
-                    <div id="dailyaid">
+                    <div id="dailyAidDetails">
                         <h3>Daily Aid Details</h3>
                         <div className="inputs">
                             {/* DALIY AID DETALIS */}
@@ -258,7 +294,7 @@ function AddMembers() {
                 </div>
 
                 <div style={displaySection("3")}>
-                    <div id="condition">
+                    <div id="kin">
                         <h3>Next of Kin Details</h3>
                         <div className="inputs">
                             {/* ---------- KIN/GUARDIAN NAME ---------- */}
@@ -286,19 +322,23 @@ function AddMembers() {
                             <br />
 
                             {/* ---------- BLOOD TYPE ---------- */}
-                            <label htmlFor="kgBloodtype">Blood Type</label>
-                            <br />
-                            <select className="split" id="kgBloodtype" name="kgBloodtype">
-                                <option value="opos">O positive</option>
-                                <option value="oneg">O negative</option>
-                                <option value="apos">A positive</option>
-                                <option value="aneg">A negative</option>
-                                <option value="bpos">B positive</option>
-                                <option value="bneg">B negative</option>
-                                <option value="abpoos">AB positive</option>
-                                <option value="abneg">AB negative</option>
-                            </select>
-                            <br />
+                            <div className="split">
+                                <div>
+                                    <label htmlFor="kgBloodtype">Blood Type</label>
+                                    <br />
+                                    <select id="kgBloodtype" name="kgBloodtype" style={{width: "40%"}}>
+                                        <option value="opos">O+</option>
+                                        <option value="oneg">O-</option>
+                                        <option value="apos">A+</option>
+                                        <option value="aneg">A-</option>
+                                        <option value="bpos">B+</option>
+                                        <option value="bneg">B-</option>
+                                        <option value="abpoos">AB+</option>
+                                        <option value="abneg">AB-</option>
+                                    </select>
+                                    <br />
+                                </div>
+                            </div>
                         </div>
                     </div>
 

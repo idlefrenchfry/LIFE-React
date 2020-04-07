@@ -124,6 +124,7 @@ function AddCoach() {
                             {/* ---------- DOCUMENTS ---------- */}
                             <label htmlFor="resumeCv">Resume / CV</label>
                             <input id="resumeCv" name="resumeCv" type="file"></input>
+
                             {/* ---------- COACHING QUALIFICATIONS ---------- */}
                             <label htmlFor="coachQual">Coaching Qualifications</label>
                             <input id="coachQual" name="coachQual" type="file"></input>
