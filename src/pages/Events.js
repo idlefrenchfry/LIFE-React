@@ -209,7 +209,7 @@ function Events() {
         <div className="card">
             <div className="cardTop">
                 <h1>Events</h1>
-                <ButtonsSet module={"Events"} dataToExport={events} />
+                <ButtonsSet module={"Events"} dataToExport={events} addPage="/Events/Add" />
             </div>
 
             <div className="filters">
