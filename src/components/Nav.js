@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '../logo.png';
 
 function Nav() {
-    const [currentLoc, setCurrentLoc] = useState("");
-    useEffect(() => {
-        setCurrentLoc(window.location.href);
-    }, [window.location.href])
-
     return (
         <nav>
             <NavLink to="/"><img src={logo} alt="Life" /></NavLink>
