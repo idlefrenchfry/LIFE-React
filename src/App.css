@@ -48,11 +48,11 @@ nav a, nav a:hover {
     padding: 1em;
 }
 
-.navlinks a:hover, .navlinks a:focus {
+.navlinks a:hover, .navlinks a:focus, .activelink {
     background-color: var(--main-color-dark);
 }
 
-.navlinks a:hover::after, .navlinks a:focus::after {
+.navlinks a:hover::after, .navlinks a:focus::after, .activelink::after {
     content: "";
     position: absolute;
     background-color: var(--highlight);
@@ -201,8 +201,12 @@ td {
     position: relative;
     text-transform: uppercase;
     font-weight: bold;
-    color: #53575c;
+    color: #b3b3b3;
     margin: 15px 0;
+}
+
+span.currentTab {
+    color: #53575c;
 }
 
 .sections span::before {
