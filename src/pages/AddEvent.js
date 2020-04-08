@@ -36,7 +36,7 @@ function AddEvents() {
         // window.location.href = "/Members";
     }
 
-    const cancel = () => window.location.href = "/Members";
+    const cancel = () => window.location.href = "/Events";
 
     return (
         <div className="card">
