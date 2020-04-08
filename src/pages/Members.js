@@ -84,6 +84,9 @@ function Members() {
     // Keep track of current sports filter
     const [sportsFilter, setSportsFilter] = useState("");
 
+    // Keep track of current status filter
+    const [statusFilter, setStatusFilter] = useState("");
+
     // Keep track of current search input
     const [searchInput, setSearchInput] = useState("");
     /*========================================================*/
@@ -123,13 +126,19 @@ function Members() {
 
             if (sportsFilter)
                 data = data.filter(member => member.sports.toUpperCase() === sportsFilter.toUpperCase());
+
+            if (statusFilter)
+                data = data.filter(member => member.status.toUpperCase() === statusFilter.toUpperCase());
         }
 
         setMembers(data);
-    }, [originalMembers, sportsFilter, searchInput]);
+    }, [originalMembers, sportsFilter, statusFilter, searchInput]);
 
     // Handle change for sports filter
     const handleSportsFilter = (e) => setSportsFilter(e.target.value);
+
+    // Handle change for status filter
+    const handleStatusFilter = (e) => setStatusFilter(e.target.value);
 
     // Handle change for search input
     const handleSearchInput = (e) => setSearchInput(e.target.value);
@@ -149,6 +158,11 @@ function Members() {
                     <option value="basketball">Basketball</option>
                     <option value="football">Football</option>
                     <option value="table tennis">Table Tennis</option>
+                </select>
+                <select onChange={handleStatusFilter}>
+                    <option value="">Status</option>
+                    <option value="athlete">Athlete</option>
+                    <option value="casual">Casual</option>
                 </select>
 
                 <span><input onChange={handleSearchInput} placeholder="Search" type="text" /></span>
