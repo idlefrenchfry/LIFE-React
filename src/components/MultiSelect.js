@@ -4,6 +4,8 @@ import { cloneDeep } from 'lodash'; // To deep clone arrays with objects
 // To Do:
 // Adding and removing affect parent state
 // SYNC THE MULTI SELECT
+// Clicking outside of dropdown should close it
+
 function MultiSelect(props) {
     // props = Options, index of section, add/remove function from parent
     // props = [ options:Array[obj], index:int, add:func, remove :func]
@@ -90,10 +92,10 @@ function MultiSelect(props) {
                 <div className="dropdownButton" onClick={handleDropDown}><i className="downArrow"></i></div>
             </div>
             <div className="dropdown" style={hasDropdown ? {} : { display: "none" }}>
-                <input ref={searchInputRef} className="selectSearch" onChange={handleSearchInput} />
-                <ul>
+                <input ref={searchInputRef} placeholder="Search" className="selectSearch" onChange={handleSearchInput} />
+                <ul style={currentlyNotSelected.length === 0 ? { textAlign: "center", padding: "10px" } : {}}>
                     {
-                        currentlyNotSelected.map((option, index) => {
+                        (currentlyNotSelected.length !== 0 && hasDropdown ? currentlyNotSelected.map((option, index) => {
                             if (searchInput === "" || option.label.toUpperCase().includes(searchInput.toUpperCase())) {
                                 return (
                                     <li data-id={index}
@@ -105,7 +107,7 @@ function MultiSelect(props) {
                                     </li>
                                 );
                             }
-                        })
+                        }) : <span>List is empty!</span>)
                     }
                 </ul>
             </div>
