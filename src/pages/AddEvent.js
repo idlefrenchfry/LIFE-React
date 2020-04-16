@@ -1,17 +1,47 @@
 import React, { useState } from 'react';
+import { cloneDeep } from 'lodash'; // To deep clone arrays with objects
+import MultiSelect from '../components/MultiSelect';
+
+const sectionInputs = [
+    {
+        label: "Age",
+        value: "age"
+    },
+    {
+        label: "Address",
+        value: "address"
+    },
+    {
+        label: "Contact Number",
+        value: "contactNo"
+    },
+    {
+        label: "Diagnosis",
+        value: "diagnosis"
+    },
+    {
+        label: "Input",
+        value: "input"
+    }
+]
 
 function AddEvents() {
-
-    const today = new Date();
-
     // Keep track of which section to display
     const [currentSection, setCurrentSection] = useState("tab1");
+
+    // Dynamic event info inputs
+    const [eventInfoSections, setEventInfoSections] = useState([{
+        title: "",
+        inputs: []
+    }])
+
+    const [eventInfoInputs, setEventInfoInputs] = useState(sectionInputs);
 
     // onClick function to execute when changing section
     const changeSection = (e) => {
         if (e.target.id !== currentSection)
             setCurrentSection(e.target.id);
-    }
+    };
 
     // Return different styles depending on current section
     const displaySection = (id) => {
@@ -19,7 +49,7 @@ function AddEvents() {
             return { display: "none" };
         else
             return { display: "block" };
-    }
+    };
 
     // Change style of tab depending on current section
     const displayTab = (id) => {
@@ -27,6 +57,39 @@ function AddEvents() {
             return "currentTab noselect";
         else
             return "noselect";
+    };
+
+    // only needed if can remove sections
+    const handleEventInfoChange = (e) => {
+        let inputType = e.target.id;
+        if (inputType.substr("sectionTitle") !== -1) {
+            let index = parseInt(e.target.id.replace("sectionTitle", "")) - 1;
+            let replace = cloneDeep(eventInfoSections);
+            replace[index].title = e.target.value;
+            setEventInfoSections(replace);
+        }
+    }
+
+    const handleEventInputChange = (e) => {
+        // To Do
+        // Somehow sync multiple select options
+        // 1) Make select option an entirely separate component?
+        // 2) Find a decent project
+    }
+
+    const handleAddSections = () => {
+        let replace = cloneDeep(eventInfoSections);
+        replace.push({
+            title: "",
+            inputs: []
+        });
+
+        setEventInfoSections(replace);
+    }
+
+    const handleRemoveSection = () => {
+        // To Do
+        // Remove Sections.
     }
 
     const handleSubmit = (e) => {
@@ -34,7 +97,7 @@ function AddEvents() {
         console.log(e);
         console.log(e.target.elements);
         // window.location.href = "/Members";
-    }
+    };
 
     const cancel = () => window.location.href = "/Events";
 
@@ -90,7 +153,7 @@ function AddEvents() {
                                     {/* ---------- STARTS ---------- */}
                                     <label htmlFor="startDate">Starts</label>
                                     <br />
-                                    <input type="date" id="dob" name="dob"></input>
+                                    <input type="date" id="startDate" name="startDate"></input>
                                     <br />
                                 </div>
 
@@ -106,20 +169,20 @@ function AddEvents() {
                             <div className="split">
                                 {/* ---------- TIME ---------- */}
                                 <div>
-                                    <label htmlFor="nationality">Time</label>
+                                    <label htmlFor="startTime">Time</label>
                                     <br />
                                     <input type="time" id="startTime" name="startTime" />
                                 </div>
                                 <div>
-                                    <label style={{visibility: "none"}}>End Time</label>
+                                    <label htmlFor="endTime" style={{ visibility: "hidden" }}>End Time</label>
                                     <input type="time" id="endTime" name="endTime" />
                                 </div>
                             </div>
                             <br />
 
                             {/* ---------- RECURRING ---------- */}
-                            <label for="recurring">Is this a recurring event?</label>
-                            <input type="checkbox" id="recurring" name="recurring" value="isRecurring" required />
+                            <label htmlFor="recurring">Is this a recurring event?</label>
+                            <input type="checkbox" id="recurring" name="recurring" value="isRecurring" />
                             <br />
 
                             {/* ---------- EVENT DESCRIPTION ---------- */}
@@ -167,21 +230,46 @@ function AddEvents() {
                             <br />
 
                             {/* ---------- MESSAGE DESCRIPTION ---------- */}
-                            <label htmlFor="eventDesc">Message Description</label>
+                            <label htmlFor="messageDesc">Message Description</label>
                             <br />
                             <span className="formHelper">Participants will see this message when they first arrive to the form</span>
                             <br />
-                            <textarea id="eventDesc" name="eventDesc" rows="5" placeholder="Type in description"></textarea>
+                            <textarea id="messageDesc" name="messageDesc" rows="5" placeholder="Type in description"></textarea>
                             <br />
                         </div>
                     </div>
 
-                    <div>
-                        <h3>Section 1</h3>
-                        <div className="inputs">
-                            To be implemented....
-                        </div>
-                    </div>
+                    {
+                        eventInfoSections.map((sec, index) => {
+                            return (
+                                <div key={index}>
+                                    <h3>Section {index + 1}</h3>
+                                    <div className="inputs">
+                                        {/* ---------- SECTION TITLE ---------- */}
+                                        <label htmlFor={"sectionTitle" + (index + 1)}>Section Title</label>
+                                        <br />
+                                        {/*onChange={handleEventInfoChange}*/}
+                                        <input
+                                            id={"sectionTitle" + (index + 1)}
+                                            name={"sectionTitle" + (index + 1)}
+                                            type="text"
+                                        />
+                                        <br />
+
+                                        {/* ---------- SECTION INPUTS ---------- */}
+                                        <label htmlFor={"sectionInput" + (index + 1)}>Inputs</label>
+                                        {index !== 0 ? <span className="formHelper"><br/>Select fields you would like participants to input (max. 4)</span> : ""}
+                                        <br />
+                                        <MultiSelect
+                                            options={eventInfoInputs}
+                                        />
+                                    </div>
+                                </div>
+                            );
+                        })
+                    }
+
+                    <button onClick={handleAddSections}>Add Section</button>
                 </div>
 
                 <div style={displaySection("3")}>
@@ -201,6 +289,9 @@ function AddEvents() {
                             <br />
                             <textarea id="feedbackFormDesc" name="feedbackFormDesc" rows="5" placeholder="Type in description"></textarea>
                             <br />
+
+                            {/* ---------- SELECT OPTIONS ---------- */}
+                            <span className="example"></span>
                         </div>
                     </div>
 
