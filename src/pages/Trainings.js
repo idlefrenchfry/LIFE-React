@@ -236,7 +236,7 @@ function Trainings() {
         <div className="card">
             <div className="cardTop">
                 <h1>Trainings</h1>
-                <ButtonsSet module={"Trainings"} dataToExport={Trainings} />
+                <ButtonsSet module={"Trainings"} dataToExport={Trainings} addPage="/Training/Add" />
             </div>
             <div className="filters">
                 <h4>Filters</h4>
