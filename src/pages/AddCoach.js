@@ -85,7 +85,7 @@ function AddCoach() {
                             <br />
 
                             {/* ---------- NROC MEMBERSHIP ---------- */}
-                            <input type="checkbox" id="nroc" name="nroc" value="hasNROC" required />
+                            <input type="checkbox" id="nroc" name="nroc" value="hasNROC" />
                             <label for="nroc">Coach has NROC Membership</label><br />
                         </div>
                     </div>
