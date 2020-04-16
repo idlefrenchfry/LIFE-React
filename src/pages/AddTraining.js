@@ -34,7 +34,7 @@ function AddTraining() {
         // window.location.href = "/Members";
     };
 
-    const cancel = () => window.location.href = "/Events";
+    const cancel = () => window.location.href = "/Trainings";
 
     return (
         <div className="card">
