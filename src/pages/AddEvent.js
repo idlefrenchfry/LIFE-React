@@ -37,6 +37,13 @@ function AddEvents() {
 
     const [eventInfoInputs, setEventInfoInputs] = useState(sectionInputs);
 
+    // Dynamic feedback info inputs
+    const [feedbackInfoSections, setFeedbackInfoSections] = useState([{
+        question: "",
+        qnType: ""
+    }])
+
+
     // onClick function to execute when changing section
     const changeSection = (e) => {
         if (e.target.id !== currentSection)
@@ -85,11 +92,22 @@ function AddEvents() {
         });
 
         setEventInfoSections(replace);
-    }
 
     const handleRemoveSection = () => {
         // To Do
         // Remove Sections.
+        }
+
+    }
+
+    const handleAddQnSections = () => {
+        let replace = cloneDeep(feedbackInfoSections);
+        replace.push({
+            question: "",
+            qnType: ""
+        });
+
+        setFeedbackInfoSections(replace);
     }
 
     const handleSubmit = (e) => {
@@ -269,7 +287,7 @@ function AddEvents() {
                         })
                     }
 
-                    <button onClick={handleAddSections}>Add Section</button>
+                    <input className="dynamicButton" type="button" value="+ Add Section" onClick={handleAddSections} />
                 </div>
 
                 <div style={displaySection("3")}>
@@ -295,12 +313,43 @@ function AddEvents() {
                         </div>
                     </div>
 
-                    <div>
-                        <h3>Question 1</h3>
-                        <div className="inputs">
-                            To be implemented....
-                        </div>
-                    </div>
+                    {
+                        feedbackInfoSections.map((qnSec, index) => {
+                            return (
+                                <div key={index}>
+                                    <h3>Question {index + 1}</h3>
+                                    <div className="inputs">
+                                        {/* ---------- QUESTION ---------- */}
+                                        <label htmlFor={"question" + (index + 1)}>Question</label>
+                                        <br />
+                                        {/*onChange={handleEventInfoChange}*/}
+                                        <textarea
+                                            id={"question" + (index + 1)}
+                                            name={"question" + (index + 1)}
+                                            type="text"
+                                            rows="5"
+                                            placeholder="Type in description"
+                                        />
+                                        <br />
+
+                                        {/* ---------- QUESTION TYPES ---------- */}
+                                        <label style={{ "display": "none" }} htmlFor={"qnType" + (index + 1)}>Inputs</label>
+                                        <select id={"qnType" + (index + 1)} name="gender">
+                                            <option value="">Question Type</option>
+                                            <option value="single">Single line text</option>
+                                            <option value="paragraph">Paragraph</option>
+                                            <option value="multiChoice">Multiple choice</option>
+                                            <option value="checkbox">Checkbox select</option>
+                                            <option value="dropdown">Dropdown select</option>
+                                            <option value="likert">Likert scale</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            );
+                        })
+                    }
+
+                    <input className="dynamicButton" onClick={handleAddQnSections} value="+ Add Section" type="button" />
                 </div>
             </form>
         </div>
