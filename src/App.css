@@ -29,6 +29,15 @@ button {
                                     supported by Chrome, Opera and Firefox */
 }
 
+i.downArrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
 /* ------NAVIGATION------ */
 nav {
     background-color: var(--main-color);
@@ -267,6 +276,89 @@ form input[type=checkbox] {
 form input[type=file] {
     height: 150px;
     border-style: dashed;
+}
+
+form .multiSelect {
+    width: 90%;
+    box-sizing: border-box;
+    position: relative;
+}
+
+form .multiSelect .multiSelectTop {
+    border: #e6e6e6 solid 1px;
+    border-bottom: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch
+}
+
+.selectedBox {
+    padding: 10px;
+    width: calc(100% - 20px);
+}
+
+.dropdownButton {
+    width: 20px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    align-self: center;
+}
+
+form .multiSelect .selected {
+    background-color: var(--highlight);
+    color: white;
+    padding: 3px 5px;
+    border-radius: 2px;
+    margin: 0 5px 5px 0;
+    white-space: nowrap;
+}
+
+form .multiSelect .selected input[type=button] {
+    border: none;
+    padding: 0;
+    color: white;
+    display: inline-block;
+    background-color: transparent;
+    width: initial;
+    cursor: pointer;
+    padding: 3px 3px 3px 7px;
+}
+
+form .multiSelect input {
+    margin: 10px 0 0 0;
+}
+
+form .multiSelect .dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: #e6e6e6 solid 1px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-color: white;
+    z-index: 1;
+}
+
+form .multiSelect ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+    width: 100%;
+    background-color: white;
+    box-sizing: border-box;
+    border-top: #e6e6e6 solid 1px;
+}
+
+form .multiSelect ul li {
+    padding: 10px 0 10px 5%;
+}
+
+form .multiSelect ul li:hover {
+    background-color: var(--highlight);
+    color: white;
+    cursor: pointer;
 }
 
 .split {
