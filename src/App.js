@@ -10,6 +10,7 @@ import Trainings from './pages/Trainings';
 import AddMember from './pages/AddMember';
 import AddCoach from './pages/AddCoach';
 import AddEvent from './pages/AddEvent';
+import AddTraining from './pages/AddTraining';
 import Error404 from './pages/Error404';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
                   <Route path="/Members/Add" component={AddMember}/>
                   <Route path="/Coaches/Add" component={AddCoach}/>
                   <Route path="/Events/Add" component={AddEvent}/>
+                  <Route path="/Training/Add" component={AddTraining}/>
                   <Route component={Error404}/>
               </Switch>
           </div>
