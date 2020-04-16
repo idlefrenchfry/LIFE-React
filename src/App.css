@@ -245,7 +245,7 @@ form > div > div {
     margin-bottom: 20px;
 }
 
-form > div > div:not(:last-child) {
+form > div > div:not(:nth-last-of-type(1)) {
     border-bottom: 1px solid #e6e6e6;
     padding: 30px 0;
 }
@@ -263,7 +263,7 @@ form input, form select, form textarea {
     padding: 10px;
     width: 90%;
     border: #e6e6e6 2px solid;
-    border-radius: 10px;
+    border-radius: 5px;
     margin-bottom: 20px;
     resize: none;
     font-family: arial, sans-serif;
@@ -339,6 +339,7 @@ form .multiSelect .dropdown {
     right: 0;
     background-color: white;
     z-index: 1;
+    margin-bottom: 20px;
 }
 
 form .multiSelect ul {
@@ -358,6 +359,18 @@ form .multiSelect ul li {
 form .multiSelect ul li:hover {
     background-color: var(--highlight);
     color: white;
+    cursor: pointer;
+}
+
+form .dynamicButton {
+    text-transform: uppercase;
+    display: block;
+    margin-left: auto;
+    border: none;
+    background-color: transparent;
+    font-weight: bold;
+    color: var(--main-color-dark);
+    width: initial;
     cursor: pointer;
 }
 
