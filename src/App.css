@@ -38,6 +38,10 @@ i.downArrow {
     -webkit-transform: rotate(45deg);
 }
 
+.error {
+    color: red;
+}
+
 /* ------NAVIGATION------ */
 nav {
     background-color: var(--main-color);
@@ -250,7 +254,7 @@ form > div > div:not(:nth-last-of-type(1)) {
     padding: 30px 0;
 }
 
-form > div > div:only-child {
+form > div > div:only-of-type {
     padding: 30px 0 0 0;
 }
 
@@ -374,6 +378,15 @@ form .dynamicButton {
     cursor: pointer;
 }
 
+form .sessionDate, form .sessionTime {
+    color: var(--main-color-dark);
+    font-weight: 800;
+}
+
+form .sessionLocation {
+    font-size: 1.2rem;
+}
+
 .split {
     display: inline-flex;
     justify-content: space-between;
@@ -405,11 +418,11 @@ form div > h3 {
 }
 
 /*------ERROR PAGE------*/
-.error {
+.errorPage {
     text-align: center;
 }
 
-.error h1 {
+.errorPage h1 {
     font-size: 60px;
 }
 
