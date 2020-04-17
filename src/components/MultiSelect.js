@@ -21,10 +21,12 @@ function MultiSelect(props) {
     //     => check if dropdown is true
     //     => true: close dropdown (display: none)
     //     => false: dropdown (display: block)
-    const handleDropDown = () => {
-        searchInputRef.current.value = "";
-        setSearchInput("");
-        setHasDropdown(!hasDropdown);
+    const handleDropDown = (e) => {
+        if (e.key === "Enter" || e.key === undefined) {
+            searchInputRef.current.value = "";
+            setSearchInput("");
+            setHasDropdown(!hasDropdown);
+        }
     };
 
     const handleSearchInput = (e) => setSearchInput(e.target.value);
@@ -34,15 +36,17 @@ function MultiSelect(props) {
     //     => call add function (prop)
     //     => remove from currentlyNotSelected
     const handleSelectOption = (e) => {
-        let optionIndex = e.target.getAttribute("data-id");
+        if (e.key === "Enter" || e.key === undefined) {
+            let optionIndex = e.target.getAttribute("data-id");
 
-        let replaceSelected = cloneDeep(currentlySelected);
-        let replaceNotSelected = cloneDeep(currentlyNotSelected);
-        let transfer = replaceNotSelected.splice(optionIndex, 1);
-        replaceSelected.push(...transfer);
+            let replaceSelected = cloneDeep(currentlySelected);
+            let replaceNotSelected = cloneDeep(currentlyNotSelected);
+            let transfer = replaceNotSelected.splice(optionIndex, 1);
+            replaceSelected.push(...transfer);
 
-        setCurrentlySelected(replaceSelected);
-        setCurrentlyNotSelected(replaceNotSelected);
+            setCurrentlySelected(replaceSelected);
+            setCurrentlyNotSelected(replaceNotSelected);
+        }
     }
 
     // handleRemoveOption:func(e)
@@ -89,7 +93,7 @@ function MultiSelect(props) {
                     }
                 </div>
 
-                <div className="dropdownButton" onClick={handleDropDown}><i className="downArrow"></i></div>
+                <div className="dropdownButton" tabIndex="0" onKeyPress={handleDropDown} onClick={handleDropDown}><i className="downArrow"></i></div>
             </div>
             <div className="dropdown" style={hasDropdown ? {} : { display: "none" }}>
                 <input ref={searchInputRef} placeholder="Search" className="selectSearch" onChange={handleSearchInput} />
@@ -100,6 +104,8 @@ function MultiSelect(props) {
                                 return (
                                     <li data-id={index}
                                         key={index}
+                                        tabIndex="0"
+                                        onKeyPress={handleSelectOption}
                                         onClick={handleSelectOption}
                                         className="noselect"
                                     >
