@@ -349,7 +349,7 @@ function AddEvents() {
                         })
                     }
 
-                    <input className="dynamicButton" onClick={handleAddQnSections} value="+ Add Section" type="button" />
+                    <input className="dynamicButton" onClick={handleAddQnSections} value="+ Add Question" type="button" />
                 </div>
             </form>
         </div>
