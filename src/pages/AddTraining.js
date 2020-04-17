@@ -1,9 +1,71 @@
 import React, { useState } from 'react';
 import MultiSelect from '../components/MultiSelect';
+import { cloneDeep } from 'lodash'; // To deep clone arrays with objects
+
+let membersList = [
+    {
+        label: "Kim Yerim",
+        value: "Kim Yerim"
+    },
+    {
+        label: "Kai Wong",
+        value: "Kai Wong"
+    },
+    {
+        label: "Hit Monlee",
+        value: "Hit Monlee"
+    },
+    {
+        label: "Yi Tien",
+        value: "Yi Tien"
+    },
+    {
+        label: "Prianka Letchmanan",
+        value: "Prianka Letchmanan"
+    },
+    {
+        label: "Michael Henderson",
+        value: "Michael Henderson"
+    },
+    {
+        label: "Hae Chan",
+        value: "Hae Chan"
+    },
+    {
+        label: "Joshua Pei",
+        value: "Joshua Pei"
+    },
+    {
+        label: "Clefairy Lee",
+        value: "Clefairy Lee"
+    },
+    {
+        label: "Xue Ting",
+        value: "Xue Ting"
+    },
+    {
+        label: "Amane Ichigo",
+        value: "Amane Ichigo"
+    },
+    {
+        label: "Seung Wan",
+        value: "Seung Wan"
+    },
+]
 
 function AddTraining() {
     // Keep track of which section to display
     const [currentSection, setCurrentSection] = useState("tab1");
+    // Keep track of training sessions
+    const [sessionList, setSessionList] = useState([{
+        location: "",
+        startDate: "",
+        endDate: "",
+        startTime: "",
+        endTime: "",
+        coach: "",
+        athletes: []
+    }]);
 
     // onClick function to execute when changing section
     const changeSection = (e) => {
@@ -26,6 +88,54 @@ function AddTraining() {
         else
             return "noselect";
     };
+
+    const handleSessionInputChange = (e) => {
+        let value = e.target.value;
+        let id = e.target.getAttribute("data-id");
+        let replace = cloneDeep(sessionList);
+        let inputName = e.target.getAttribute("name");
+
+        let attr;
+
+        // TO DO
+        // Replace these lines by adding attribute: inputName to inputs
+        if (inputName.includes("location"))
+            attr = "location";
+
+        else if (inputName.includes("startDate"))
+            attr = "startDate";
+
+        else if (inputName.includes("endDate"))
+            attr = "endDate";
+
+        else if (inputName.includes("startTime"))
+            attr = "startTime";
+
+        else if (inputName.includes("endTime"))
+            attr = "endTime";
+
+        else if (inputName.includes("recurring"))
+            attr = "recurring";
+
+        replace[id][attr] = value;
+        setSessionList(replace);
+    }
+
+    const handleAddSession = () => {
+        let newSession = {
+            location: "",
+            startDate: "",
+            endDate: "",
+            startTime: "",
+            endTime: "",
+            isRecurring: ""
+        };
+
+        let newSessionList = cloneDeep(sessionList);
+        newSessionList.push(newSession);
+
+        setSessionList(newSessionList);
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -99,62 +209,165 @@ function AddTraining() {
                 </div>
 
                 <div style={displaySection("2")}>
-                    <div id="session1">
-                        <h3>Session 1</h3>
-                        <div className="inputs">
-                            {/* ---------- LOCATION ---------- */}
-                            <label htmlFor="location">Location</label>
-                            <br />
-                            <input id="trainingTitle" name="trainingTitle" type="text"></input>
-                            <br />
+                    {
+                        sessionList.map((session, index) => {
+                            return (
+                                <div key={index} id={"session" + index}>
+                                    <h3>Session {index + 1}</h3>
+                                    <div className="inputs">
+                                        {/* ---------- LOCATION ---------- */}
+                                        <label htmlFor={"location" + index}>Location</label>
+                                        <br />
+                                        <input
+                                            id={"location" + index}
+                                            name={"location" + index}
+                                            type="text"
+                                            data-id={index}
+                                            onChange={handleSessionInputChange}
+                                        />
+                                        <br />
 
-                            {/* Splitting */}
-                            <div className="split">
-                                {/* ---------- STARTS ---------- */}
-                                <div>
-                                    <label htmlFor="startTraining">Start Training</label>
-                                    <input type="date" id="startTraining" name="startTraining" />
-                                    <br />
-                                </div>
+                                        {/* Splitting */}
+                                        <div className="split">
+                                            {/* ---------- STARTS ---------- */}
+                                            <div>
+                                                <label htmlFor={"startDate" + index}>Start Training</label>
+                                                <input
+                                                    type="date"
+                                                    id={"startDate" + index}
+                                                    name={"startDate" + index}
+                                                    data-id={index}
+                                                    onChange={handleSessionInputChange}
+                                                />
+                                                <br />
+                                            </div>
 
-                                {/* ---------- ENDS ---------- */}
-                                <div>
-                                    <label htmlFor="endTraining">End Training</label>
-                                    <input type="date" id="endTraining" name="endTraining" />
-                                    <br />
-                                </div>
-                            </div>
-                            <br />
+                                            {/* ---------- ENDS ---------- */}
+                                            <div>
+                                                <label htmlFor={"endDate" + index}>End Training</label>
+                                                <input
+                                                    type="date"
+                                                    id={"endDate" + index}
+                                                    name={"endDate" + index}
+                                                    data-id={index}
+                                                    onChange={handleSessionInputChange}
+                                                />
+                                                <br />
+                                            </div>
+                                        </div>
+                                        <br />
 
-                            <div className="split">
-                                {/* ---------- TIME ---------- */}
-                                <div>
-                                    <label htmlFor="startTime">Time</label>
-                                    <br />
-                                    <input type="time" id="startTime" name="startTime" />
+                                        <div className="split">
+                                            {/* ---------- TIME ---------- */}
+                                            <div>
+                                                <label htmlFor={"startTime" + index}>Time</label>
+                                                <br />
+                                                <input
+                                                    type="time"
+                                                    id={"startTime" + index}
+                                                    name={"startTime" + index}
+                                                    data-id={index}
+                                                    onChange={handleSessionInputChange}
+                                                />
+                                            </div>
+                                            <div>
+                                                <label htmlFor={"endTime" + index} style={{ visibility: "hidden" }}>End Time</label>
+                                                <input
+                                                    type="time"
+                                                    id={"endTime" + index}
+                                                    name={"endTime" + index}
+                                                    data-id={index}
+                                                    onChange={handleSessionInputChange}
+                                                />
+                                            </div>
+                                        </div>
+                                        <br />
+
+                                        {/* ---------- RECURRING ---------- */}
+                                        <label htmlFor={"recurring" + index}>Is this a recurring event?</label>
+                                        <input
+                                            type="checkbox"
+                                            id={"recurring" + index}
+                                            name={"recurring" + index}
+                                            value="isRecurring"
+                                            data-id={index}
+                                            onChange={handleSessionInputChange}
+                                        />
+                                        <br />
+                                    </div>
                                 </div>
-                                <div>
-                                    <label htmlFor="endTime" style={{ visibility: "hidden" }}>End Time</label>
-                                    <input type="time" id="endTime" name="endTime" />
-                                </div>
-                            </div>
-                            <br />
-                        </div>
-                    </div>
-                    <input type="button" value="+ Add Training (Doesn't work yet)" className="dynamicButton" />
+                            );
+                        })
+                    }
+                    <input type="button" value="+ Add Training" onClick={handleAddSession} className="dynamicButton" />
                 </div>
 
                 <div style={displaySection("3")}>
-                    <div id="athlete1">
-                        <h3>Session 1</h3>
-                        <div className="inputs">
-                            To be implemented....
-                        </div>
-                    </div>
+                    {
+                        sessionList.map((session, index) => {
+                            let venueDateTimeError = "";
+                            if (!session.startDate)
+                                venueDateTimeError += "Date";
+                            if (!session.startTime || !session.endTime)
+                                venueDateTimeError += (venueDateTimeError ? ", time" : "Time");
+                            if (!session.location)
+                                venueDateTimeError += (venueDateTimeError ? " and location" : "Location");
+
+                            return (
+                                <div key={index} id={"session" + index}>
+                                    <h3>Session {index + 1}</h3>
+                                    <div className="inputs">
+                                        {
+                                            (venueDateTimeError ? 
+                                                <div className="error">{venueDateTimeError} not entered!</div> :
+                                                <div>
+                                                    <span className="sessionDate">{session.startDate ? formatDateInput(session.startDate) : "No date entered yet"}, </span>
+                                                    <span className="sessionTime">
+                                                        {session.startTime && session.endTime ?
+                                                            session.startTime + " - " + session.endTime :
+                                                            "Time not entered yet"
+                                                        }
+                                                    </span>
+                                                    <br />
+                                                    <span className="sessionLocation">{session.location ? session.location : "Location not entered yet"}</span>
+                                                </div>
+                                            )
+                                        }
+                                        <br />
+
+                                        {/* ---------- COACH FOR SESSION ---------- */}
+                                        <label htmlFor={"coach" + (index + 1)}>Coach</label>
+                                        <br />
+                                        <select id={"coach" + (index + 1)} name={"coach" + (index + 1)}>
+                                            <option value="">Select a coach</option>
+                                            <option value="Lynsey Atherton">Lynsey Atherton</option>
+                                            <option value="Sullivan Guy">Sullivan Guy</option>
+                                            <option value="Augustus Rhodes">Augustus Rhodes</option>
+                                            <option value="Raees Chapman">Raees Chapman</option>
+                                            <option value="Varun Wagstaff">Varun Wagstaff</option>
+                                            <option value="Jagoda Martins">Jagoda Martins</option>
+                                        </select>
+
+                                        {/* ---------- ATHLETES FOR SESSION ---------- */}
+                                        <label>Athletes</label>
+                                        <br />
+                                        <MultiSelect
+                                            options={membersList}
+                                        />
+                                    </div>
+                                </div>
+                            );
+                        })
+                    }
                 </div>
             </form>
         </div>
     );
+}
+
+function formatDateInput(dateInput) {
+    let dateObject = new Date(dateInput);
+    return dateObject.toDateString();
 }
 
 export default AddTraining;
