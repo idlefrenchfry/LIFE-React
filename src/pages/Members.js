@@ -6,72 +6,84 @@ import { cloneDeep } from 'lodash';
 //Dummy Data {Name, sports, contact number, status}
 let membersList = [
     {
+        id: 20,
         name: "Kim Yerim",
         sports: "Archery",
         contact: "+65 9016 2738",
         status: "Casual"
     },
     {
+        id: 21,
         name: "Kai Wong",
         sports: "Basketball",
         contact: "+65 8720 5116",
         status: "Casual"
     },
     {
+        id: 22,
         name: "Hit Monlee",
         sports: "Football",
         contact: "+65 8732 2716",
         status: "Casual"
     },
     {
+        id: 22,
         name: "Yi Tien",
         sports: "Archery",
         contact: "+65 9345 8491",
         status: "Casual"
     },
     {
+        id: 23,
         name: "Prianka Letchmanan",
         sports: "Badminton",
         contact: "+65 8382 3490",
         status: "Athlete"
     },
     {
+        id: 24,
         name: "Michael Henderson",
         sports: "Badminton",
         contact: "+65 9103 8204",
         status: "Athlete"
     },
     {
+        id: 25,
         name: "Hae Chan",
         sports: "Basketball",
         contact: "+65 9384 0038",
         status: "Casual"
     },
     {
+        id: 26,
         name: "Joshua Pei",
         sports: "Table Tennis",
         contact: "+65 9322 7028",
         status: "Casual"
     },
     {
+        id: 27,
         name: "Clefairy Lee",
         sports: "Football",
         contact: "+65 8032 2010",
         status: "Ahtlete"
     },
     {
+        id: 28,
         name: "Xue Ting",
         sports: "Badminton",
         contact: "+65 9284 2880",
         status: "Athlete"
     },
     {
+        id: 29,
         name: "Amane Ichigo",
         sports: "Football",
         contact: "+65 9384 1031",
         status: "Casual"
     },
     {
+        id: 30,
         name: "Seung Wan",
         sports: "Badminton",
         contact: "+65 8278 9283",
