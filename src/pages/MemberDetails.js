@@ -36,7 +36,7 @@ function MemberDetails(props) {
     return (
         <div className="card">
             <div className="cardTop">
-                <h1>Add Member</h1>
+                <h1>View Member</h1>
                 <div className="buttonsSet">
                     <button onClick={editDetails} className="noselect">Edit Details</button>
                 </div>

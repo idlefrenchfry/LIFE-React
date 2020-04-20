@@ -257,7 +257,7 @@ function Trainings() {
                 <span onClick={changeTab} style={{ width: "30%" }} className={displayTab("past")} id="past">Past</span>
                 <span onClick={changeTab} style={{ width: "30%" }} className={displayTab("unpublished")} id="unpublished">Unpublished</span>
             </div>
-            {trainings.length !== 0 ? <Table data={trainings} columns={Object.keys(trainings[0])} /> : <p>Loading...</p>}
+            {trainings.length !== 0 ? <Table data={trainings} columns={Object.keys(trainings[0])} detailsPage={"Trainings/"} /> : <p>Loading...</p>}
         </div>
     );
 }

@@ -4,10 +4,12 @@ import up from '../up.jpg';
 import down from '../down.jpg';
 import nosort from '../nosort.jpg';
 
-function Table({ data, columns }) {
+function Table({ data, columns, detailsPage }) {
 
+    // TO DO:
+    // Go to details page based on module
     function goDetails(e) {
-        window.location.href = "/Members/" + e.target.getAttribute("data-id");
+        window.location.href = detailsPage + e.target.getAttribute("data-id");
     }
 
     // Create new column object format to fit reactttable library

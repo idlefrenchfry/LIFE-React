@@ -140,7 +140,7 @@ function Coaches() {
 
                 <span><input onChange={handleSearchInput} placeholder="Search" type="text" /></span>
             </div>
-            {coaches.length !== 0 ? <Table data={coaches} columns={Object.keys(coaches[0])} /> : <p>Loading...</p>}
+            {coaches.length !== 0 ? <Table data={coaches} columns={Object.keys(coaches[0])} detailsPage={"Coaches/"} /> : <p>Loading...</p>}
         </div>
     );
 }
