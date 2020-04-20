@@ -6,6 +6,10 @@ import nosort from '../nosort.jpg';
 
 function Table({ data, columns }) {
 
+    function goDetails(e) {
+        window.location.href = "/Members/" + e.target.getAttribute("data-id");
+    }
+
     // Create new column object format to fit reactttable library
     let prepColumns = [];
     columns.forEach(element => {
@@ -36,7 +40,7 @@ function Table({ data, columns }) {
         {
             columns: memoColumns,
             data: memoData,
-            initialState: { pageIndex: 0, pageSize: 7 }
+            initialState: { pageIndex: 0, pageSize: 7, hiddenColumns: ["id"] }
         },
         useSortBy,
         usePagination
@@ -76,12 +80,12 @@ function Table({ data, columns }) {
                 </thead>
                 
                 <tbody {...getTableBodyProps()}>
-                    {page.map((row, i) => {
+                    {page.map(row => {
                         prepareRow(row)
                         return (
-                            <tr {...row.getRowProps()}>
-                                {row.cells.map(cell => {
-                                    return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                            <tr key={row.id} data-id={row.original.id} {...row.getRowProps()} onClick={goDetails}>
+                                {row.cells.map((cell, i) => {
+                                    return <td key={i} data-id={row.original.id} {...cell.getCellProps()}>{cell.render('Cell')}</td>
                                 })}
                             </tr>
                         )
