@@ -77,11 +77,60 @@ function AddEvents() {
         }
     }
 
-    const handleEventInputChange = (e) => {
+    const handleAddRegistrationInput = (option, id="") => {
         // To Do
         // Somehow sync multiple select options
-        // 1) Make select option an entirely separate component?
-        // 2) Find a decent project
+        id = parseInt(id);
+
+        if (id === NaN)
+            console.error("id cannot be empty!")
+        else {
+            // Find option in eventInfoInputs and remove
+            let replaceInputs = cloneDeep(eventInfoInputs)
+            for (let i = 0; i < replaceInputs.length; i++) {
+                if (replaceInputs[i].value == option.value) {
+                    replaceInputs.splice(i, 1);
+                    console.log("Option popped!")
+                    break;
+                }
+            }
+
+            // Add option to eventInfoSections
+            let replaceSections = cloneDeep(eventInfoSections);
+            replaceSections[id].inputs.push(option);
+
+            // set states
+            setEventInfoInputs(replaceInputs);
+            setEventInfoSections(replaceSections);
+        }
+    }
+
+    const handleRmRegistrationInput = (option, id = "") => {
+        // To Do
+        // Somehow sync multiple select options
+        id = parseInt(id);
+
+        if (id === NaN)
+            console.error("id cannot be empty!")
+        else {
+            // Add input back to eventInfoInputs
+            let replaceInputs = cloneDeep(eventInfoInputs)
+            replaceInputs.push(option);
+
+            // Remove option from eventInfoSections
+            let replaceSections = cloneDeep(eventInfoSections);
+            for (let i = 0; i < replaceSections[id].inputs.length; i++) {
+                if (replaceSections[id].inputs[i].value == option.value) {
+                    replaceSections[id].inputs.splice(i, 1);
+                    console.log("Option popped!")
+                    break;
+                }
+            }
+
+            // set states
+            setEventInfoInputs(replaceInputs);
+            setEventInfoSections(replaceSections);
+        }
     }
 
     const handleAddSections = () => {
@@ -92,13 +141,13 @@ function AddEvents() {
         });
 
         setEventInfoSections(replace);
+    }
 
     const handleRemoveSection = () => {
         // To Do
         // Remove Sections.
-        }
-
     }
+
 
     const handleAddQnSections = () => {
         let replace = cloneDeep(feedbackInfoSections);
@@ -279,7 +328,11 @@ function AddEvents() {
                                         {index !== 0 ? <span className="formHelper"><br/>Select fields you would like participants to input (max. 4)</span> : ""}
                                         <br />
                                         <MultiSelect
+                                            key={index}
                                             options={eventInfoInputs}
+                                            dataId={index}
+                                            add={handleAddRegistrationInput}
+                                            rm={handleRmRegistrationInput}
                                         />
                                     </div>
                                 </div>

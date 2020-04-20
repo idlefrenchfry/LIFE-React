@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { cloneDeep } from 'lodash'; // To deep clone arrays with objects
 
 // To Do:
@@ -11,7 +11,14 @@ function MultiSelect(props) {
     // props = [ options:Array[obj], index:int, add:func, remove :func]
 
     const [currentlySelected, setCurrentlySelected] = useState([]);
-    const [currentlyNotSelected, setCurrentlyNotSelected] = useState(cloneDeep(props.options));
+    const [currentlyNotSelected, setCurrentlyNotSelected] = useState([]);
+
+    useEffect(() => {
+        let replace = cloneDeep(props.options);
+        replace.sort(sortByLabel);
+        setCurrentlyNotSelected(replace);
+    }, [props.options])
+
     const [hasDropdown, setHasDropdown] = useState(false);
     const [searchInput, setSearchInput] = useState("");
 
@@ -44,6 +51,9 @@ function MultiSelect(props) {
             let transfer = replaceNotSelected.splice(optionIndex, 1);
             replaceSelected.push(...transfer);
 
+            if (props.add !== undefined)
+                props.add(...transfer, props.dataId);
+
             setCurrentlySelected(replaceSelected);
             setCurrentlyNotSelected(replaceNotSelected);
         }
@@ -63,14 +73,11 @@ function MultiSelect(props) {
         let transfer = replaceSelected.splice(optionIndex, 1);
         replaceNotSelected.push(...transfer);
 
-        // sort so inputs order will always be the same
-        replaceNotSelected = replaceNotSelected.sort((a, b) => {
-            if (a.label > b.label)
-                return 1;
-            else if (a.label < b.label)
-                return -1;
-            return 0;
-        });
+        if (props.rm !== undefined)
+            if (props.dataId === undefined)
+                console.error("Unable to call remove function, dataId is empty!")
+            else
+                props.rm(...transfer, props.dataId);
 
         setCurrentlySelected(replaceSelected);
         setCurrentlyNotSelected(replaceNotSelected);
@@ -119,6 +126,13 @@ function MultiSelect(props) {
             </div>
         </div>
     );
+}
+const sortByLabel = (a, b) => {
+    if (a.label > b.label)
+        return 1;
+    else if (a.label < b.label)
+        return -1;
+    return 0;
 }
 
 export default MultiSelect;
