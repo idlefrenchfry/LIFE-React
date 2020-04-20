@@ -230,25 +230,13 @@ function AddMembers() {
                                 <option value="others">Others</option>
                             </select>
                             <br />
-
-                            {/* DALIY AID DETALIS */}
-                            <label htmlFor="dailyAids">Daily Aids (If Applicable)</label>
-                            <br />
-                            <input id="dailyAids" name="dailyAids" type="text"></input>
-                            <br />
-
-                            {/* ESIMATED */}
-                            <label htmlFor="condition">Disability/Medical Condition</label>
-                            <br />
-                            <input id="condition" name="condition" type="text"></input>
-                            <br />
                         </div>
                     </div>
 
                     <div id="dailyAidDetails">
                         <h3>Daily Aid Details</h3>
                         <div className="inputs">
-                            {/* DALIY AID DETALIS */}
+                            {/* DALIY AID DETAILS */}
                             <label htmlFor="dailyAids">Daily Aids (If Applicable)</label>
                             <br />
                             <input id="dailyAids" name="dailyAids" type="text"></input>
@@ -407,35 +395,6 @@ function AddMembers() {
                             <br />
                         </div>
                     </div>
-
-                    <div id="kgContactInfo">
-                        <h3>Contact Information</h3>
-                        <div className="inputs">
-                            {/* POSTAL CODE */}
-                            <label htmlFor="kgPostal">Postal Code</label>
-                            <br />
-                            <input id="kgPostal" name="kgPostal" type="text"></input>
-                            <br />
-
-                            {/* ADDRESS */}
-                            <label htmlFor="kgAddress">Address</label>
-                            <br />
-                            <input id="kgAddress" name="kgAddress" type="text"></input>
-                            <br />
-
-                            {/* MOBILE NUMBER */}
-                            <label htmlFor="kgContactNumber">Contact Number</label>
-                            <br />
-                            <input id="kgContactNumber" name="kgContactNumber" type="text"></input>
-                            <br />
-
-                            {/* EMAIL ADDRESS */}
-                            <label htmlFor="kgEmailAddr">Email Address</label>
-                            <br />
-                            <input id="kgEmailAddr" name="kgEmailAddr" type="text"></input>
-                            <br />
-                        </div>
-                    </div>
                 </div>
 
                 <div style={displaySection("5")}>
@@ -584,12 +543,6 @@ function AddMembers() {
                             <label htmlFor="duration">Duration</label>
                             <br />
                             <input id="duration" name="duration" type="text" />
-                            <br />
-
-                            {/* ---------- LOCATION ---------- */}
-                            <label htmlFor="licsNo">Athlete License Number</label>
-                            <br />
-                            <input id="licsNo" name="licsNo" type="text" />
                             <br />
 
                             {/* ---------- COACHING SERVICE PROVIDER ---------- */}
