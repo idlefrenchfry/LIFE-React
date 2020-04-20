@@ -176,6 +176,10 @@ th {
     color: var(--main-color);
 }
 
+tr {
+    cursor: pointer;
+}
+
 td, th {
     border-bottom: 1px solid #dddddd;
     text-align: left;
@@ -415,6 +419,29 @@ form div > h3 {
 .formHelper {
     font-size: 0.8em;
     font-style: italic;
+}
+
+/*------Details------*/
+.detailsInfo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+}
+
+.detailsInfo span:first-child {
+    color: var(--main-color);
+    font-weight: 500;
+}
+
+.detailsSection {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.detailsSection > div {
+    margin-right: 40px;
+    max-width: 35%;
+    min-width: 25%;
 }
 
 /*------ERROR PAGE------*/
