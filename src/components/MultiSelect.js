@@ -66,8 +66,6 @@ function MultiSelect(props) {
     const handleRemoveOption = (e) => {
         let optionIndex = e.target.getAttribute("data-id");
 
-        console.log("Selected option: ", optionIndex)
-
         let replaceSelected = cloneDeep(currentlySelected);
         let replaceNotSelected = cloneDeep(currentlyNotSelected);
         let transfer = replaceSelected.splice(optionIndex, 1);
@@ -120,6 +118,8 @@ function MultiSelect(props) {
                                     </li>
                                 );
                             }
+
+                            return null;
                         }) : <span>List is empty!</span>)
                     }
                 </ul>
