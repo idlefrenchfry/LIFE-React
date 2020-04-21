@@ -2,8 +2,6 @@
 
 function MemberDetails(props) {
 
-    const today = new Date();
-
     // Keep track of which section to display
     const [currentSection, setCurrentSection] = useState("tab1");
 
