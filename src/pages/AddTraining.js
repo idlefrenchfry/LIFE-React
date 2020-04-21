@@ -321,15 +321,10 @@ function AddTraining() {
                                             (venueDateTimeError ? 
                                                 <div className="error">{venueDateTimeError} not entered!</div> :
                                                 <div>
-                                                    <span className="sessionDate">{session.startDate ? formatDateInput(session.startDate) : "No date entered yet"}, </span>
-                                                    <span className="sessionTime">
-                                                        {session.startTime && session.endTime ?
-                                                            session.startTime + " - " + session.endTime :
-                                                            "Time not entered yet"
-                                                        }
-                                                    </span>
+                                                    <span className="sessionDate">{formatDateInput(session.startDate)}, </span>
+                                                    <span className="sessionTime">{session.startTime + " - " + session.endTime}</span>
                                                     <br />
-                                                    <span className="sessionLocation">{session.location ? session.location : "Location not entered yet"}</span>
+                                                    <span className="sessionLocation">{session.location}</span>
                                                 </div>
                                             )
                                         }
