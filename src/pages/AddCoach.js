@@ -52,7 +52,7 @@ function AddCoach() {
 
             <div className="sections">
                 <span onClick={changeSection} style={{ width: "40%" }} className={displayTab("1")} id="tab1">Personal Details</span>
-                <span onClick={changeSection} style={{ width: "40%"}} className={displayTab("2")} id="tab2">Coaching Qualifications</span>
+                <span onClick={changeSection} style={{ width: "40%" }} className={displayTab("2")} id="tab2">Coaching Qualifications</span>
             </div>
 
             <form id="form" onSubmit={handleSubmit}>
