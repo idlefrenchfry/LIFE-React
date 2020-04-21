@@ -5,61 +5,73 @@ import { cloneDeep } from 'lodash';
 
 let coachesList = [
     {
+        id: 40,
         name: "Lynsey Atherton",
         sports: "Basketball",
         contact: "+65 9284 2718"
     },
     {
+        id: 41,
         name: "Sullivan Guy",
         sports: "Badminton",
         contact: "+65 8247 0284"
     },
     {
+        id: 42,
         name: "Raees Chapman",
         sports: "Football",
         contact: "+65 9399 8473"
     },
     {
+        id: 43,
         name: "Varun Wagstaff",
         sports: "Archery",
         contact: "+65 8174 2023"
     },
     {
+        id: 44,
         name: "Jagoda Martins",
         sports: "Badminton",
         contact: "+65 9385 1932"
     },
     {
+        id: 45,
         name: "Augustus Rhodes",
         sports: "Badminton",
         contact: "+65 9596 3393"
     },
     {
+        id: 46,
         name: "Bae Joohyun",
         sports: "Football",
         contact: "+65 9381 3590"
     },
     {
+        id: 47,
         name: "Layan Ferrell",
         sports: "Table Tennis",
         contact: "+65 8182 2948"
     },
     {
+        id: 48,
         name: "Farrell Deleon",
         sports: "Table Tennis",
         contact: "+65 8949 3929"
     },
     {
+        id: 49,
         name: "Kang Seulgi",
         sports: "Badminton",
         contact: "+65 8293 9424"
     },
     {
+        id: 50,
         name: "Park Sooyoung",
         sports: "Basketball",
         contact: "+65 9295 7377"
     },
     {
+        id: 51,
         name: "Shaurya Lucero",
         sports: "Badminton",
         contact: "+65 9173 7739"
