@@ -53,6 +53,14 @@ nav {
     left: 0;
 }
 
+nav > a:first-child {
+    background-color: var(--main-color-dark);
+}
+
+nav > a:first-child img {
+    height: 40px;
+}
+
 nav a, nav a:hover {
     display: block;
     position: relative;
@@ -374,7 +382,7 @@ form .multiSelect ul li:hover {
     cursor: pointer;
 }
 
-form .dynamicButton {
+input.upperButton {
     text-transform: uppercase;
     display: block;
     margin-left: auto;
@@ -478,6 +486,46 @@ form div > h3 {
     font-size: 0.8em;
     display: inline-block;
     margin-top: 10px;
+    border-radius: 3px;
+}
+
+.midEvents {
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    margin-left: -1em;
+    margin-right: -1em;
+    padding: 30px 1em 0 1em;
+}
+
+.midEvents span {
+    margin-bottom: 0;
+}
+
+.midEvents span:last-child {
+    margin-left: auto;
+    color: var(--main-color);
+}
+
+.midEvents span:last-child:hover::after, .midEvents span:last-child:hover::before {
+    margin-left: auto;
+    width: 0;
+}
+
+.midEvents span[filter-value] {
+    width: 20%;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.midEvents span[filter-value]:hover::after, 
+.midEvents span[filter-value]:hover::before,
+.midEvents span[filter-value]::after,
+.midEvents span[filter-value]::before {
+    background-color: var(--main-color)
+}
+
+.midEvents .upperButton {
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 /*------ERROR PAGE------*/
