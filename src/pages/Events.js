@@ -231,7 +231,15 @@ function Events() {
                 <span onClick={changeTab} style={{ width: "30%" }} className={displayTab("past")} id="past">Past</span>
                 <span onClick={changeTab} style={{ width: "30%" }} className={displayTab("unpublished")} id="unpublished">Unpublished</span>
             </div>
-            {events.length !== 0 ? <Table data={events} columns={Object.keys(events[0])} detailsPage={"Events/"} /> : <p>Loading...</p>}
+            {
+                events.length !== 0 ?
+                    <Table
+                        data={events}
+                        columns={Object.keys(events[0])}
+                        detailsPage={"Events/"}
+                        thBool={true} /> :
+                    <p>Loading...</p>
+            }
         </div>
     );
 }

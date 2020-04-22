@@ -179,7 +179,15 @@ function Members() {
 
                 <span><input onChange={handleSearchInput} placeholder="Search" type="text" /></span>
             </div>
-            {members.length !== 0 ? <Table data={members} columns={Object.keys(members[0])} detailsPage={"Members/"} /> : <p>Loading...</p>}
+            {
+                members.length !== 0 ?
+                    <Table
+                        data={members}
+                        columns={Object.keys(members[0])}
+                        detailsPage={"Members/"}
+                        thBool={true} /> :
+                    <p>Loading...</p>
+            }
         </div>
     );
 }
