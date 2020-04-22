@@ -340,7 +340,7 @@ function AddEvents() {
                         })
                     }
 
-                    <input className="dynamicButton" type="button" value="+ Add Section" onClick={handleAddSections} />
+                    <input className="upperButton" type="button" value="+ Add Section" onClick={handleAddSections} />
                 </div>
 
                 <div style={displaySection("3")}>
@@ -402,7 +402,7 @@ function AddEvents() {
                         })
                     }
 
-                    <input className="dynamicButton" onClick={handleAddQnSections} value="+ Add Question" type="button" />
+                    <input className="upperButton" onClick={handleAddQnSections} value="+ Add Question" type="button" />
                 </div>
             </form>
         </div>

@@ -299,7 +299,7 @@ function AddTraining() {
                             );
                         })
                     }
-                    <input type="button" value="+ Add Training" onClick={handleAddSession} className="dynamicButton" />
+                    <input type="button" value="+ Add Training" onClick={handleAddSession} className="upperButton" />
                 </div>
 
                 <div style={displaySection("3")}>
