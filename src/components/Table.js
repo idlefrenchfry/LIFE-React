@@ -4,12 +4,12 @@ import up from '../up.jpg';
 import down from '../down.jpg';
 import nosort from '../nosort.jpg';
 
-function Table({ data, columns, detailsPage }) {
+function Table({ data, columns, detailsPage, thBool }) {
 
     // TO DO:
     // Go to details page based on module
     function goDetails(e) {
-        window.location.href = detailsPage + e.target.getAttribute("data-id");
+        window.location.href = window.location.origin + "/" + detailsPage + e.target.getAttribute("data-id");
     }
 
     // Create new column object format to fit reactttable library
@@ -61,25 +61,29 @@ function Table({ data, columns, detailsPage }) {
     return (
         <div>
             <table {...getTableProps()}>
-                <thead>
-                    {headerGroups.map(headerGroup => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map(column => (
-                                <th {...column.getHeaderProps(column.getSortByToggleProps())} className="noselect" >
-                                    {column.render('Header')}
-                                    {/* Add a sort direction indicator */}
-                                    <span style={(column.disableSortBy ? {display: "none"} : null)}>
-                                        {column.isSorted
-                                            ? column.isSortedDesc
-                                            ? <img style={{paddingLeft: "5px", height: "0.5em"}} src={down} alt="sort down" />
-                                            : <img style={{paddingLeft: "5px", height: "0.5em"}} src={up} alt="sort up" />
-                                            : <img style={{paddingLeft: "5px", height: "0.5em"}} src={nosort} alt="not sorted" />}
-                                    </span>
-                                </th>
+                {
+                    (thBool ?
+                        <thead>
+                            {headerGroups.map(headerGroup => (
+                                <tr {...headerGroup.getHeaderGroupProps()}>
+                                    {headerGroup.headers.map(column => (
+                                        <th {...column.getHeaderProps(column.getSortByToggleProps())} className="noselect" >
+                                            {column.render('Header')}
+                                            {/* Add a sort direction indicator */}
+                                            <span style={(column.disableSortBy ? { display: "none" } : null)}>
+                                                {column.isSorted
+                                                    ? column.isSortedDesc
+                                                        ? <img style={{ paddingLeft: "5px", height: "0.5em" }} src={down} alt="sort down" />
+                                                        : <img style={{ paddingLeft: "5px", height: "0.5em" }} src={up} alt="sort up" />
+                                                    : <img style={{ paddingLeft: "5px", height: "0.5em" }} src={nosort} alt="not sorted" />}
+                                            </span>
+                                        </th>
+                                    ))}
+                                </tr>
                             ))}
-                        </tr>
-                    ))}
-                </thead>
+                        </thead> :
+                        null)
+                }
                 
                 <tbody {...getTableBodyProps()}>
                     {page.map(row => {
