@@ -78,8 +78,6 @@ function AddEvents() {
     }
 
     const handleAddRegistrationInput = (option, id="") => {
-        // To Do
-        // Somehow sync multiple select options
         id = parseInt(id);
 
         if (id === NaN)
@@ -106,8 +104,6 @@ function AddEvents() {
     }
 
     const handleRmRegistrationInput = (option, id = "") => {
-        // To Do
-        // Somehow sync multiple select options
         id = parseInt(id);
 
         if (id === NaN)
