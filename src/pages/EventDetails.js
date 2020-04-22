@@ -1,9 +1,104 @@
 import React, { useState } from 'react';
+import Table from '../components/Table';
+
+const going = [
+    {
+        id: 20,
+        name: "Kim Yerim",
+        sports: "Archery",
+        contact: "+65 9016 2738",
+        status: "Casual"
+    },
+    {
+        id: 21,
+        name: "Kai Wong",
+        sports: "Basketball",
+        contact: "+65 8720 5116",
+        status: "Casual"
+    },
+    {
+        id: 22,
+        name: "Hit Monlee",
+        sports: "Football",
+        contact: "+65 8732 2716",
+        status: "Casual"
+    },
+    {
+        id: 22,
+        name: "Yi Tien",
+        sports: "Archery",
+        contact: "+65 9345 8491",
+        status: "Casual"
+    },
+    {
+        id: 23,
+        name: "Prianka Letchmanan",
+        sports: "Badminton",
+        contact: "+65 8382 3490",
+        status: "Athlete"
+    },
+    {
+        id: 24,
+        name: "Michael Henderson",
+        sports: "Badminton",
+        contact: "+65 9103 8204",
+        status: "Athlete"
+    }
+]
+
+const cancelled = [
+    {
+        id: 25,
+        name: "Hae Chan",
+        sports: "Basketball",
+        contact: "+65 9384 0038",
+        status: "Casual"
+    },
+    {
+        id: 26,
+        name: "Joshua Pei",
+        sports: "Table Tennis",
+        contact: "+65 9322 7028",
+        status: "Casual"
+    },
+    {
+        id: 27,
+        name: "Clefairy Lee",
+        sports: "Football",
+        contact: "+65 8032 2010",
+        status: "Ahtlete"
+    },
+    {
+        id: 28,
+        name: "Xue Ting",
+        sports: "Badminton",
+        contact: "+65 9284 2880",
+        status: "Athlete"
+    },
+    {
+        id: 29,
+        name: "Amane Ichigo",
+        sports: "Football",
+        contact: "+65 9384 1031",
+        status: "Casual"
+    },
+    {
+        id: 30,
+        name: "Seung Wan",
+        sports: "Badminton",
+        contact: "+65 8278 9283",
+        status: "Athlete"
+    }
+]
 
 function EventDetails(props) {
 
     // Keep track of which section to display
     const [currentFilter, setCurrentFilter] = useState("going");
+    // Going Members
+    const [goingMem, setGoingMem] = useState(going);
+    // Cancelled Members
+    const [cancelMem, setCancelMem] = useState(cancelled);
 
     // onClick function to execute when changing section
     const changeFilter = (e) => {
@@ -13,11 +108,15 @@ function EventDetails(props) {
 
     // Change style of tab depending on current section
     const displayTab = (id) => {
-        if (currentFilter == "going")
-            return "currentEventFilter noselect";
+        if (id == currentFilter)
+            return "currentTab noselect upperButton";
         else
-            return "noselect";
+            return "noselect upperButton";
     }
+
+    const exportList = () => {
+        console.log("Export list of members.")
+    };
 
     const editDetails = () => window.location.href = "/Events";
 
@@ -47,12 +146,18 @@ function EventDetails(props) {
                 </div>
             </div>
 
-            <div className="filterEvents">
-                <span onClick={changeFilter} className={displayTab("1")} filter-value="going">Going</span>
-                <span onClick={changeFilter} className={displayTab("2")} filter-value="cancelled">Cancelled</span>
+            <div className="sections midEvents">
+                <span onClick={changeFilter} className={displayTab("going")} filter-value="going">Going</span>
+                <span onClick={changeFilter} className={displayTab("cancelled")} filter-value="cancelled">Cancelled</span>
+                <span onClick={exportList} className="upperButton">Export List</span>
             </div>
 
             <div>
+                <Table
+                    data={currentFilter == "going" ? goingMem : cancelMem}
+                    columns={Object.keys(goingMem[0])}
+                    detailsPage={"Members/"}
+                    thBool={false} />
             </div>
         </div>
     );
