@@ -169,7 +169,7 @@ function Trainings() {
     useEffect(() => {
         let copyData = cloneDeep(originalTrainings);
 
-        // if no data in array, don't run remainined lines in effect
+        // if no data in array, don't run remaining lines in effect
         if (copyData.length) {
             // Filter the data based on current tab
             // if tab is published or unpublished
