@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import MultiSelect from '../components/MultiSelect';
+import Recurring from '../components/Recurring';
 import { cloneDeep } from 'lodash'; // To deep clone arrays with objects
 
 let membersList = [
@@ -64,6 +65,7 @@ function AddTraining() {
         startTime: "",
         endTime: "",
         coach: "",
+        isRecurring: false,
         athletes: []
     }]);
 
@@ -114,8 +116,11 @@ function AddTraining() {
         else if (inputName.includes("endTime"))
             attr = "endTime";
 
-        else if (inputName.includes("recurring"))
-            attr = "recurring";
+        else if (inputName.includes("recurring")) {
+            replace[id]["isRecurring"] = e.target.checked;
+            setSessionList(replace);
+            return;
+        }
 
         replace[id][attr] = value;
         setSessionList(replace);
@@ -128,13 +133,50 @@ function AddTraining() {
             endDate: "",
             startTime: "",
             endTime: "",
-            isRecurring: ""
+            athletes: [],
+            isRecurring: false
         };
 
         let newSessionList = cloneDeep(sessionList);
         newSessionList.push(newSession);
 
         setSessionList(newSessionList);
+    }
+
+    const handleAddAthlete = (option, id = "") => {
+        id = parseInt(id);
+
+        if (id === NaN)
+            console.error("id cannot be empty!")
+        else {
+            // Add option to eventInfoSections
+            let replaceSessions = cloneDeep(sessionList);
+            replaceSessions[id].athletes.push(option);
+
+            // set state
+            setSessionList(replaceSessions);
+        }
+    }
+
+    const handleRmAthlete = (option, id = "") => {
+        id = parseInt(id);
+
+        if (id === NaN)
+            console.error("id cannot be empty!")
+        else {
+            // Remove option from eventInfoSections
+            let replaceSessions = cloneDeep(sessionList);
+            for (let i = 0; i < replaceSessions[id].athletes.length; i++) {
+                if (replaceSessions[id].athletes[i].value == option.value) {
+                    replaceSessions[id].athletes.splice(i, 1);
+                    console.log("Option popped!")
+                    break;
+                }
+            }
+
+            // set state
+            setSessionList(replaceSessions);
+        }
     }
 
     const handleSubmit = (e) => {
@@ -294,6 +336,7 @@ function AddTraining() {
                                             onChange={handleSessionInputChange}
                                         />
                                         <br />
+                                        {session.isRecurring ? <Recurring id={index} /> : null}
                                     </div>
                                 </div>
                             );
@@ -348,6 +391,9 @@ function AddTraining() {
                                         <br />
                                         <MultiSelect
                                             options={membersList}
+                                            dataId={index}
+                                            add={handleAddAthlete}
+                                            rm={handleRmAthlete}
                                         />
                                     </div>
                                 </div>
