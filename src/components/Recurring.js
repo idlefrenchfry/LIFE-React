@@ -25,7 +25,7 @@ function Recurring({ id }) {
                                 <input style={{ width: "60px", margin: "0 10px" }} name={"noOccurence" + id} />
                             </div>
                             <div>
-                                <select style={{ margin: "0" }} id={"occurenceType" + id}>
+                                <select style={{ margin: "0" }} name={"occurenceType" + id}>
                                     <option value="day">day</option>
                                     <option value="week">week</option>
                                     <option value="monthly">month</option>
@@ -33,6 +33,16 @@ function Recurring({ id }) {
                             </div>
                         </div>
                         <br />
+                        <label htmlFor={"endsType" + id}>Ends</label>
+                        <br />
+                        <input style={{ width: "initial" }} type="radio" name={"endsType" + id} id={"never" + id} value="never" />
+                        <label htmlFor={"never" + id}>Never</label>
+                        <br />
+                        <input style={{ width: "initial" }} type="radio" name={"endsType" + id} id={"on" + id} value="on" />
+                        <label htmlFor={"on" + id}>On</label>
+                        <br />
+                        <input style={{ width: "initial" }} type="radio" name={"endsType" + id} id={"after" + id} value="after" />
+                        <label htmlFor={"after" + id}>After</label>
                     </div> :
                     null)
             }
