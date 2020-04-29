@@ -31,3 +31,4 @@ yarn-error.log*
 .vs/life/v15/.suo
 .vs/slnx.sqlite
 .vs/VSWorkspaceState.json
+.vscode/settings.json
