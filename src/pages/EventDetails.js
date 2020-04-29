@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Table from '../components/Table';
+import { formatAMPM, ISOStringToDate} from '../CommonFunctions';
 
 const going = [
     {
@@ -91,6 +92,13 @@ const cancelled = [
     }
 ]
 
+const eventD = {
+    startDate: "2020-08-06T04:00:00.000Z",
+    endDate: "2020-08-06T08:00:00.000Z",
+    name: "Sports Festival",
+    publishStatus: true
+}
+
 function EventDetails(props) {
 
     // Keep track of which section to display
@@ -99,6 +107,8 @@ function EventDetails(props) {
     const [goingMem, setGoingMem] = useState(going);
     // Cancelled Members
     const [cancelMem, setCancelMem] = useState(cancelled);
+    // Cancelled Members
+    const [eventDetails, setEventDetails] = useState(eventD);
 
     // onClick function to execute when changing section
     const changeFilter = (e) => {
@@ -120,6 +130,9 @@ function EventDetails(props) {
 
     const editDetails = () => window.location.href = "/Events";
 
+    let startDate = ISOStringToDate(eventD.startDate);
+    let endDate = ISOStringToDate(eventD.endDate);
+
     console.log("id:", props.match.params.id);
 
     return (
@@ -135,14 +148,14 @@ function EventDetails(props) {
             <div className="eventDetails">
                 <img src="https://i.ytimg.com/vi/XplrxSSrja0/maxresdefault.jpg" />
                 <div>
-                    <span className="eventDate">MON, 6 Mar 2020, </span>
-                    <span className="eventTime">12:00m - 4:00pm</span>
+                    <span className="eventDate">{getDayName(startDate.getDay())}, {startDate.getDate()} {getMonthName(startDate.getMonth())} {startDate.getFullYear()} </span> {/* MON, 6 Mar 2020 */}
+                    <span className="eventTime">{formatAMPM(startDate)} - {formatAMPM(endDate)}</span>
                     <br />
-                    <span className="eventLocation">Sports Festival</span>
+                    <span className="eventLocation">{eventD.name}</span>
                     <br />
-                    <span className="eventMemb">10 Members Going</span>
+                    <span className="eventMemb">{goingMem.length} Members Going</span>
                     <br />
-                    <span className="eventStatus">Published</span>
+                    <span className="eventStatus">{eventD.publishStatus ? "Published" : "Unpublished"}</span>
                 </div>
             </div>
 
@@ -163,13 +176,37 @@ function EventDetails(props) {
     );
 }
 
-function Details(props) {
-    return (
-        <div className="detailsInfo">
-            <span>{props.label}</span>
-            <span>{props.value}</span>
-        </div>
-    );
+function getDayName(day) {
+    let weekdays = [
+        "MON",
+        "TUE",
+        "WED",
+        "THU",
+        "FRI",
+        "SAT",
+        "SUN"
+    ]
+
+    return weekdays[day];
+}
+
+function getMonthName(day) {
+    let weekdays = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+    ]
+
+    return weekdays[day];
 }
 
 export default EventDetails;

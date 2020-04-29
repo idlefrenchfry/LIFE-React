@@ -1,9 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { ISOStringToDate } from '../CommonFunctions';
+import { Details, DetailsFile } from '../components/ViewDetails';
+import { cloneDeep } from 'lodash';
+
+const user = {
+    name: "Park Soo Young",
+    nationality: "Korean",
+    dob: "1996-10-23T07:35:13.451Z",
+    sports: "Archery",
+    address: "13-09 ngee ann city tower b 391b orchard road, 238874, Singapore",
+    mobileNo: "+65 8273 0192",
+    emailAddr: "parksooyoung@email.com",
+    cspName: "Aspire Badminton Centre"
+}
+
+const isoRegExp = new RegExp("^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(.[0-9]+)?(Z)?$");
 
 function CoachDetails(props) {
 
     // Keep track of which section to display
     const [currentSection, setCurrentSection] = useState("tab1");
+    const [coach, setCoach] = useState(user);
+
+    useEffect(() => {
+        let keys = Object.keys(coach);
+        let cloneCoach = cloneDeep(coach);
+        let changed = false;
+
+        for (let i = 0; i < keys.length; i++) {
+            const property = keys[i];
+            if (!cloneCoach[property]) {
+                cloneCoach[property] = "-";
+                changed = true;
+            } else if (cloneCoach[property].constructor.name === "String") {
+                // If ISO String, convert to dd/mm/yyyy
+                let match = cloneCoach[property].match(isoRegExp);
+                if (match) {
+                    let dateObj = ISOStringToDate(match[0]);
+                    console.log("dateObj: ", dateObj);
+                    cloneCoach[property] = dateObj.getDate() + "/" + 
+                                            dateObj.getMonth() + "/" + 
+                                            dateObj.getFullYear();
+                    changed = true;
+                }
+            }
+        }
+
+        if (changed)
+            setCoach(cloneCoach);
+    }, [coach])
 
     // onClick function to execute when changing section
     const changeSection = (e) => {
@@ -49,16 +94,16 @@ function CoachDetails(props) {
                 <div className="detailsSection" style={displaySection("1")}>
                     <div>
                         <h3>Particulars</h3>
-                        <Details label="Name" value="Park Soo Young" />
-                        <Details label="Nationality" value="Korean" />
-                        <Details label="Date of Birth" value="23/09/1996" />
-                        <Details label="Sports" value="Archery" />
+                        <Details label="Name" value={coach.name} />
+                        <Details label="Nationality" value={coach.nationality} />
+                        <Details label="Date of Birth" value={coach.dob} />
+                        <Details label="Sports" value={coach.sports} />
                     </div>
                     <div>
                         <h3>Contact Information</h3>
-                        <Details label="Address" value="13-09 ngee ann city tower b 391b orchard road, 238874, Singapore" />
-                        <Details label="Mobile Number" value="+65 8273 0192" />
-                        <Details label="Email Address" value="parksooyoung@email.com" />
+                        <Details label="Address" value={coach.address} />
+                        <Details label="Mobile Number" value={coach.mobileNo} />
+                        <Details label="Email Address" value={coach.emailAddr} />
                     </div>
                 </div>
 
@@ -75,28 +120,6 @@ function CoachDetails(props) {
                     </div>
                 </div>
             </div>
-        </div>
-    );
-}
-
-function Details(props) {
-    return (
-        <div className="detailsInfo">
-            <span>{props.label}</span>
-            <span>{props.value}</span>
-        </div>
-    );
-}
-
-function DetailsFile(props) {
-    return (
-        <div className="detailsInfo fileDownload">
-            <span>{props.label}</span>
-            {
-                props.value.map((value, index) => {
-                    return <a key={index} href={props.path[index]} download="">{value}</a>
-                })
-            }
         </div>
     );
 }
