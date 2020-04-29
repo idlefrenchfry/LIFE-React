@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Table from '../components/Table';
 import ButtonsSet from '../components/ButtonsSet';
+import { ISOStringToDate } from '../CommonFunctions';
 import { cloneDeep } from 'lodash'; // To deep clone arrays with objects
 import { formatAMPM } from '../CommonFunctions.js';
 
@@ -157,9 +158,7 @@ function Events() {
 
             // Loop through to get date and time properties through ISO string
             for (let i = 0; i < copyData.length; i++) {
-                let dateInMili = Date.parse(copyData[i].date); // Parse ISO string to get miliseconds since Jan 1st 1970 00:00:00 GMT
-                let date = new Date(0);
-                date.setMilliseconds(dateInMili);
+                let date = ISOStringToDate(copyData[i].date);
                 copyData[i].date = date.toDateString();
                 copyData[i].time = formatAMPM(date);
 
