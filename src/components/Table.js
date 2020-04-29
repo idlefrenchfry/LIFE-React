@@ -1,13 +1,7 @@
 import React, { useMemo } from 'react';
 import { useTable, useSortBy, usePagination } from 'react-table';
-import up from '../up.jpg';
-import down from '../down.jpg';
-import nosort from '../nosort.jpg';
 
 function Table({ data, columns, detailsPage, thBool }) {
-
-    // TO DO:
-    // Go to details page based on module
     function goDetails(e) {
         window.location.href = window.location.origin + "/" + detailsPage + e.target.getAttribute("data-id");
     }
@@ -73,9 +67,9 @@ function Table({ data, columns, detailsPage, thBool }) {
                                             <span style={(column.disableSortBy ? { display: "none" } : null)}>
                                                 {column.isSorted
                                                     ? column.isSortedDesc
-                                                        ? <img style={{ paddingLeft: "5px", height: "0.5em" }} src={down} alt="sort down" />
-                                                        : <img style={{ paddingLeft: "5px", height: "0.5em" }} src={up} alt="sort up" />
-                                                    : <img style={{ paddingLeft: "5px", height: "0.5em" }} src={nosort} alt="not sorted" />}
+                                                        ? <img style={{ paddingLeft: "5px", height: "0.5em" }} src="/down.jpg" alt="sort down" />
+                                                        : <img style={{ paddingLeft: "5px", height: "0.5em" }} src="/up.jpg" alt="sort up" />
+                                                    : <img style={{ paddingLeft: "5px", height: "0.5em" }} src="/nosort.jpg" alt="not sorted" />}
                                             </span>
                                         </th>
                                     ))}
@@ -119,9 +113,5 @@ function Table({ data, columns, detailsPage, thBool }) {
         </div>
     );
 }
-
-// TO DO:
-// - Search Bar
-// - Filters
 
 export default Table;

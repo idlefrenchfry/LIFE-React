@@ -1,11 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import logo from '../logo.png';
 
 function Nav() {
     return (
         <nav>
-            <NavLink to="/"><img src={logo} alt="Life" /></NavLink>
+            <NavLink to="/"><img src="/logo.png" alt="Life" /></NavLink>
             <div className="navlinks">
                 <NavLink exact={true} activeClassName='activelink' to="/">Dashboard</NavLink>
                 <NavLink activeClassName='activelink' to="/Members">Members</NavLink>
