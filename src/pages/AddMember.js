@@ -58,7 +58,7 @@ function AddMembers() {
 
             <form id="form" onSubmit={handleSubmit}>
                 <div style={displaySection("1")}>
-                    <div id="personalDetails">
+                    <div>
                         <h3>Particulars</h3>
                         <div className="inputs">
                             {/* ---------- NAME ---------- */}
@@ -181,7 +181,7 @@ function AddMembers() {
 
                     <br />
 
-                    <div id="contactInfo">
+                    <div>
                         <h3>Contact Information</h3>
 
                         <div className="inputs">
@@ -213,7 +213,7 @@ function AddMembers() {
                 </div>
 
                 <div style={displaySection("2")}>
-                    <div id="medCondition">
+                    <div>
                         <h3>Condition</h3>
                         <div className="inputs">
                             {/* ---------- DISABILITY/MEDICAL CONDITION ---------- */}
@@ -233,7 +233,7 @@ function AddMembers() {
                         </div>
                     </div>
 
-                    <div id="dailyAidDetails">
+                    <div>
                         <h3>Daily Aid Details</h3>
                         <div className="inputs">
                             {/* DALIY AID DETAILS */}
@@ -265,7 +265,12 @@ function AddMembers() {
                             <br />
                             <input id="wheelDiam" name="wheelDiam" type="text"></input>
                             <br />
+                        </div>
+                    </div>
 
+                    <div>
+                        <h3>Dietary Requirements</h3>
+                        <div className="inputs">
                             {/* DIETARY REQUIREMENTS */}
                             <label htmlFor="allergy">Food/Drug Allergy</label>
                             <br />
@@ -282,7 +287,7 @@ function AddMembers() {
                 </div>
 
                 <div style={displaySection("3")}>
-                    <div id="kin">
+                    <div>
                         <h3>Next of Kin Details</h3>
                         <div className="inputs">
                             {/* ---------- KIN/GUARDIAN NAME ---------- */}
@@ -292,7 +297,7 @@ function AddMembers() {
                             <br />
 
                             {/* ---------- RELATIONSHIP ---------- */}
-                            <label htmlFor="reltaionship">Relationship</label>
+                            <label htmlFor="relationship">Relationship</label>
                             <br />
                             <select id="relationship" name="relationship">
                                 <option value="spouse">Spouse</option>
@@ -330,7 +335,7 @@ function AddMembers() {
                         </div>
                     </div>
 
-                    <div id="kgContactInfo">
+                    <div>
                         <h3>Contact Information</h3>
                         <div className="inputs">
                             {/* POSTAL CODE */}
@@ -361,7 +366,7 @@ function AddMembers() {
                 </div>
 
                 <div style={displaySection("4")}>
-                    <div id="career">
+                    <div>
                         <h3>Career Details</h3>
                         <div className="inputs">
                             {/* ---------- CURRENT OCCUPATION ---------- */}
@@ -398,7 +403,7 @@ function AddMembers() {
                 </div>
 
                 <div style={displaySection("5")}>
-                    <div id="measurements">
+                    <div>
                         <h3>Measurements</h3>
                         <div className="inputs">
                             {/* ---------- HEIGHT ---------- */}
@@ -417,7 +422,7 @@ function AddMembers() {
 
                     <br />
 
-                    <div id="sizes">
+                    <div>
                         <h3>Sizes</h3>
                         <div className="inputs">
                             {/* ---------- TOP SIZE ---------- */}
@@ -433,7 +438,7 @@ function AddMembers() {
                             <br />
 
                             {/* ---------- SHOE SIZE ---------- */}
-                            <label htmlFor="shoeSize">Shoe Size</label>
+                            <label htmlFor="shoeSize">Shoe Size (UK/US/Europe)</label>
                             <br />
                             <input id="shoeSize" name="shoeSize" type="text"></input>
                             <br />
@@ -442,7 +447,7 @@ function AddMembers() {
 
                     <br />
 
-                    <div id="sportsClassification">
+                    <div>
                         <h3>Sports Classification</h3>
 
                         <div className="inputs">
@@ -452,10 +457,10 @@ function AddMembers() {
                             <input id="classStatus" name="classStatus" type="text"></input>
                             <br />
 
-                            {/* ---------- DATE OF CLASSIFICATION come back ---------- */}
-                            <label htmlFor="uHomeNo">Home Telephone Number</label>
+                            {/* ---------- DATE OF CLASSIFICATION ---------- */}
+                            <label htmlFor="dateClassification">Date of Classification</label>
                             <br />
-                            <input id="uHomeNo" name="uHomeNo" type="text"></input>
+                            <input id="dateClassification" name="dateClassification" type="date"></input>
                             <br />
 
                             {/* ---------- LEVEL OF CLASSIFICATION ---------- */}
@@ -480,13 +485,13 @@ function AddMembers() {
 
                     <br />
 
-                    <div id="sportAchievements">
+                    <div>
                         <h3>Sporting Achievements</h3>
                         <div className="inputs">
                             {/* ---------- YEAR ? MONTH ---------- */}
                             <label htmlFor="achYM">Year / Month</label>
                             <br />
-                            <input id="currentOcc" name="currentOcc" type="text" />
+                            <input id="achYM" name="achYM" type="text" />
                             <br />
 
                             {/* ---------- LOCATIOn ---------- */}
@@ -499,6 +504,12 @@ function AddMembers() {
                             <label htmlFor="tournName">Name of Tournament</label>
                             <br />
                             <input id="tournName" name="tournName" type="text" />
+                            <br />
+
+                            {/* ---------- EVENT (?) ---------- */}
+                            <label htmlFor="eventType">Event</label>
+                            <br />
+                            <input id="eventType" name="eventType" type="text" />
                             <br />
 
                             {/* ---------- PARTICIPATION TYPE ---------- */}
@@ -523,7 +534,7 @@ function AddMembers() {
 
                     <br />
 
-                    <div id="trainingInfo">
+                    <div>
                         <h3>Training Information</h3>
 
                         <div className="inputs">
@@ -543,6 +554,12 @@ function AddMembers() {
                             <label htmlFor="duration">Duration</label>
                             <br />
                             <input id="duration" name="duration" type="text" />
+                            <br />
+
+                            {/* ---------- TRAINING LOCATION ---------- */}
+                            <label htmlFor="trainingLocation">Location</label>
+                            <br />
+                            <input id="trainingLocation" name="trainingLocation" type="text" />
                             <br />
 
                             {/* ---------- COACHING SERVICE PROVIDER ---------- */}
