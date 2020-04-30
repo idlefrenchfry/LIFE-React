@@ -1,12 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-function Nav() {
+function NavBar() {
     return (
         <nav>
-            <NavLink to="/"><img src="/logo.png" alt="Life" /></NavLink>
+            <NavLink to="/Dashboard"><img src="/logo.png" alt="Life" /></NavLink>
             <div className="navlinks">
-                <NavLink exact={true} activeClassName='activelink' to="/">Dashboard</NavLink>
+                <NavLink exact={true} activeClassName='activelink' to="/Dashboard">Dashboard</NavLink>
                 <NavLink activeClassName='activelink' to="/Members">Members</NavLink>
                 <NavLink activeClassName='activelink' to="/Coaches">Coaches</NavLink>
                 <NavLink activeClassName='activelink' to="/Events">Events</NavLink>
@@ -14,6 +14,13 @@ function Nav() {
             </div>
         </nav>
     );
+}
+
+function Nav(props) {
+    if (props.location.pathname === "/")
+        return null;
+    else
+        return <NavBar />
 }
 
 export default Nav;
