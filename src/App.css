@@ -83,6 +83,70 @@ nav a, nav a:hover {
     bottom: 0;
 }
 
+/*---------LOGIN----------*/
+.loginPage {
+    display: flex;
+}
+
+.sideimage {
+    width: 50%;
+}
+
+.sideimage img {
+    display: block;
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+    object-fit: cover;
+    object-position: 70% 0;
+}
+
+.sideimage div {
+    position: relative;
+}
+
+.sideimage div::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(4, 19, 39, 0.4);
+}
+
+.loginForm {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    align-items: center;
+}
+
+.loginForm div {
+    display: inline-flex;
+    width: 50%;
+    flex-direction: column;
+}
+
+.loginForm input {
+    padding: 10px;
+    border-radius: 3px;
+    border: #e6e6e6 solid 1px;
+}
+
+.loginForm input:focus {
+    outline: none;
+    border: var(--main-color-dark) solid 1px;
+}
+
+.loginForm input, .loginForm button {
+    margin-bottom: 15px;
+}
+
+.forgotPassword {
+    align-self: flex-end;
+}
+
 /*------MAIN SECTION------*/
 nav + div {
     margin-left: 20%;
@@ -382,7 +446,7 @@ form .multiSelect ul li:hover {
     cursor: pointer;
 }
 
-input.upperButton {
+.upperButton {
     text-transform: uppercase;
     display: block;
     margin-left: auto;
@@ -521,11 +585,6 @@ form div > h3 {
 .midEvents span[filter-value]::after,
 .midEvents span[filter-value]::before {
     background-color: var(--main-color)
-}
-
-.midEvents .upperButton {
-    text-transform: uppercase;
-    font-weight: bold;
 }
 
 /*------ERROR PAGE------*/
@@ -715,3 +774,27 @@ form div > h3 {
         opacity: 1;
     }
 }
+
+@media only screen and (max-width: 1000px) {
+    .loginPage .sideimage {
+        content: "";
+        position: absolute;
+        width: 100vw;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+
+    .sideimage div::after {
+        background-color: rgba(355,355,355,0.7);
+    }
+
+    .loginPage .loginForm {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .loginForm div {
+        width: 80%;
+    }
+  }
