@@ -7,6 +7,7 @@ function Login() {
     const login = () => {
         console.log("Email:", email)
         console.log("Password:", password)
+        window.location.href = "/Dashboard"
     }
 
     const forgotPassword = () => {
