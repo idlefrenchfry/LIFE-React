@@ -124,15 +124,9 @@ function MemberDetails(props) {
             return "noselect";
     }
 
-    const editDetails = () => window.location.href = "/Members";
+    const editDetails = () => window.location.href = "/Members/Edit/" + props.match.params.id;
 
     console.log("id:", props.match.params.id);
-    // let dob = ISOStringToDate(member.dob);
-    // let dobStr = dob.getUTCDate() + "/" + dob.getMonth() + "/" + dob.getFullYear();
-
-    // To do:
-    // Next of kin tab onwards
-    // Change empty properties with "-"
 
     return (
         <div className="card">
