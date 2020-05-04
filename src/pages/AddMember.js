@@ -1,8 +1,179 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import {ISOStringToDate} from '../CommonFunctions';
 
-function AddMembers() {
+let user = {
+    name: "Xiu Ying",
+    cName: "秀英",
+    bloodType: "AB-",
+    gender: "Female",
+    dob: "1988-12-12T00:00:00.000Z",
+    birthPlace: "Singapore",
+    nationality: "Singapore",
+    race: "Chinese",
+    religion: "Atheist",
+    maritalStatus: "Single",
+    sports: "Archery",
+    role: "Athlete",
+    postalCode: "728383",
+    homeNo: "+65 6273 9172",
+    mobileNo: "+65 9817 7712",
+    email: "xiuying@email.com",
+    disability: "Paraplegia",
+    natureOfDisability: "Others",
+    dailyAids: "Wheelchair",
+    estimatedWeight: 7,
+    wheelchairDimension: "1.1m by 0.6m by 1.1m",
+    wheelchairType: "All-Terrain Wheelchair",
+    wheelDiameter: 45.7,
+    foodDrugAllergy: "",
+    specialDietaryReq: "Lactose Intolerant",
+    kinName: "Tu Shen",
+    kinRelationship: "Sister",
+    kinNric: "T0182792C",
+    kinBloodType: "B-",
+    kinPostalCode: "628364",
+    kinAddress: "290 Orchard Road #08-03 Paragon Medical Suites, 238859, Singapore",
+    kinContactNumber: "87203323",
+    kinEmail: "tushen@email.com",
+    currentOcc: "Accountant",
+    currentOrg: "DBS",
+    currentOrgAddress: "2 Bayfront Ave, #01-30 The Shoppes at, Marina Bay Sands, Singapore 018972",
+    personInChargeAndDes: "",
+    prevEduInstitution: "Nanyang Technological University",
+    height: 168,
+    weight: 65,
+    topSize: "",
+    bottomSize: "",
+    shoeSize: "US 9",
+    classificationStatus: "",
+    dateOfClassification: "2012-12-12T00:00:00.000Z",
+    lvlOfClassification: "",
+    licenseNo: "A9AODUAK",
+    sptAchYM: "2018 / Feb",
+    sptAchLoc: "Tokyo",
+    sptAchTourName: "Paralympics",
+    sptAchParticipationType: "",
+    sptAchResult: "Silver",
+    sptAchCompetitorNo: 23,
+    trainingFrequency: "3 days / week",
+    trainingSportsTier: "",
+    trainingDuration: "2h",
+    trainingLoc: "Yishun Stadium",
+    trainingCsp: "",
+    trainingCoachingQual: "",
+    trainingCspContract: "",
+}
+
+let emptyUser = {
+    name: "",
+    cName: "",
+    bloodType: "",
+    gender: "",
+    dob: "",
+    birthPlace: "",
+    nationality: "",
+    race: "",
+    religion: "",
+    maritalStatus: "",
+    sports: "",
+    role: "",
+    postalCode: "",
+    homeNo: "",
+    mobileNo: "",
+    email: "",
+    disability: "",
+    natureOfDisability: "",
+    dailyAids: "",
+    estimatedWeight: "",
+    wheelchairDimension: "",
+    wheelchairType: "",
+    wheelDiameter: "",
+    foodDrugAllergy: "",
+    specialDietaryReq: "",
+    kinName: "",
+    kinRelationship: "",
+    kinNric: "",
+    kinBloodType: "",
+    kinPostalCode: "",
+    kinAddress: "",
+    kinContactNumber: "",
+    kinEmail: "",
+    currentOcc: "",
+    currentOrg: "",
+    currentOrgAddress: "",
+    personInChargeAndDes: "",
+    prevEduInstitution: "",
+    height: "",
+    weight: "",
+    topSize: "",
+    bottomSize: "",
+    shoeSize: "",
+    classificationStatus: "",
+    dateOfClassification: "",
+    lvlOfClassification: "",
+    licenseNo: "",
+    sptAchYM: "",
+    sptAchLoc: "",
+    sptAchTourName: "",
+    sptAchParticipationType: "",
+    sptAchResult: "",
+    sptAchCompetitorNo: "",
+    trainingFrequency: "",
+    trainingSportsTier: "",
+    trainingDuration: "",
+    trainingCsp: "",
+    trainingCoachingQual: "",
+    trainingCspContract: "",
+}
+
+const isoRegExp = new RegExp("^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(.[0-9]+)?(Z)?$");
+
+function AddMembers(props) {
 
     const today = new Date();
+
+    const [formHeader, setFormHeader] = useState("Add Member");
+
+    const [member, setMember] = useState(emptyUser);
+
+    useEffect(() => {
+        if (props.location.pathname.includes("/Members/Edit/")) {
+
+            // fetch member
+            let objKeys = Object.keys(user);
+            objKeys.forEach(key => {
+                if(typeof(user[key]) === "string" && user[key].match(isoRegExp)) {
+                    let dateObj = ISOStringToDate(user[key]);
+                    let defaultVal = dateObj.getFullYear() + 
+                                     "-" + dateObj.getMonth() + 
+                                     "-" + dateObj.getDate();
+
+                    user[key] = defaultVal
+                }
+            });
+
+            // Since default value doesn't work for select options
+            let selectInputs = document.getElementsByTagName("select");
+            for (let i = 0; i < selectInputs.length; i++) {
+                let select = selectInputs[i];
+                let selectId = select.id;
+                
+                if (user[selectId]) {
+                    let options = select.childNodes;
+                    for (let index = 0; index < options.length; index++) {
+                        const option = options[index];
+                        if (option.value === user[selectId]) {
+                            option.setAttribute("selected", "");
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            setMember(user);
+            setFormHeader("Edit Member");
+        }
+    }, [props.location.pathname])
 
     // Keep track of which section to display
     const [currentSection, setCurrentSection] = useState("tab1");
@@ -38,10 +209,13 @@ function AddMembers() {
 
     const cancel = () => window.location.href = "/Members";
 
+    // To Do:
+    // Fix defaultValue for select options
+
     return (
         <div className="card">
             <div className="cardTop">
-                <h1>Add Member</h1>
+                <h1>{formHeader}</h1>
                 <div className="buttonsSet">
                     <button onClick={cancel} className="noselect">Cancel</button>
                     <button form="form" className="noselect" id="submit">Save</button>
@@ -64,13 +238,13 @@ function AddMembers() {
                             {/* ---------- NAME ---------- */}
                             <label htmlFor="eName">Name</label>
                             <br />
-                            <input id="eName" name="eName" type="text"></input>
+                            <input id="eName" name="eName" type="text" defaultValue={member.name} />
                             <br />
 
                             {/* ---------- CHINESE NAME ---------- */}
                             <label htmlFor="cName">Chinese Name</label>
                             <br />
-                            <input id="cName" name="cName" type="text"></input>
+                            <input id="cName" name="cName" type="text" defaultValue={member.cName} />
                             <br />
 
                             {/* Splitting */}
@@ -79,25 +253,27 @@ function AddMembers() {
                                 <div>
                                     <label htmlFor="gender">Gender</label>
                                     <br />
-                                    <select id="gender" name="gender">
-                                        <option value="female">Female</option>
-                                        <option value="male">Male</option>
+                                    <select id="gender" name="gender" defaultValue={member.gender}>
+                                        <option value="">Select Gender</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Male">Male</option>
                                     </select>
                                 </div>
 
                                 {/* ---------- USER BLOODTYPE ---------- */}
                                 <div>
-                                    <label htmlFor="uBloodtype">Blood Type</label>
+                                    <label htmlFor="bloodType">Blood Type</label>
                                     <br />
-                                    <select id="uBloodtype" name="uBloodtype" style={{ width: "40%" }}>
-                                        <option value="opos">O+</option>
-                                        <option value="oneg">O-</option>
-                                        <option value="apos">A+</option>
-                                        <option value="aneg">A-</option>
-                                        <option value="bpos">B+</option>
-                                        <option value="bneg">B-</option>
-                                        <option value="abpoos">AB+</option>
-                                        <option value="abneg">AB-</option>
+                                    <select id="bloodType" name="bloodType" style={{ width: "40%" }}>
+                                        <option value="">-</option>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
                                     </select>
                                 </div>
                             </div>
@@ -108,8 +284,12 @@ function AddMembers() {
                                 {/* ---------- DOB ---------- */}
                                 <div>
                                     <label htmlFor="dob">Date of Birth</label>
-                                    <input type="date" id="dob" name="dob"
-                                        max={today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate()}></input>
+                                    <input 
+                                        type="date" 
+                                        id="dob" 
+                                        name="dob"
+                                        max={today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate()} 
+                                        defaultValue={member.dob} />
                                     <br />
                                 </div>
 
@@ -117,7 +297,7 @@ function AddMembers() {
                                 <div>
                                     <label htmlFor="birthplace">Place of Birth</label>
                                     <br />
-                                    <input id="birthplace" name="birthplace" type="text"></input>
+                                    <input id="birthplace" name="birthplace" type="text" defaultValue={member.birthPlace} />
                                     <br />
                                 </div>
                             </div>
@@ -125,7 +305,7 @@ function AddMembers() {
                             {/* ---------- NATIONALITY ---------- */}
                             <label htmlFor="nationality">Nationality</label>
                             <br />
-                            <input id="nationality" name="nationality" type="text"></input>
+                            <input id="nationality" name="nationality" type="text" defaultValue={member.nationality} />
                             <br />
 
                             <div className="split">
@@ -133,7 +313,7 @@ function AddMembers() {
                                 <div>
                                     <label htmlFor="race">Race</label>
                                     <br />
-                                    <input id="race" name="race" type="text"></input>
+                                    <input id="race" name="race" type="text" defaultValue={member.race} />
                                     <br />
                                 </div>
 
@@ -141,7 +321,7 @@ function AddMembers() {
                                 <div>
                                     <label htmlFor="religion">Religion</label>
                                     <br />
-                                    <input id="religion" name="religion" type="text"></input>
+                                    <input id="religion" name="religion" type="text" defaultValue={member.religion} />
                                     <br />
                                 </div>
                             </div>
@@ -149,7 +329,7 @@ function AddMembers() {
                             {/* ---------- MARITAL STATUS ---------- */}
                             <label htmlFor="marital">Marital Status</label>
                             <br />
-                            <input id="marital" name="marital" type="text"></input>
+                            <input id="marital" name="marital" type="text" defaultValue={member.maritalStatus} />
                             <br />
 
                             <div className="split">
@@ -157,13 +337,13 @@ function AddMembers() {
                                 <div>
                                     <label htmlFor="sports">Sports</label>
                                     <br />
-                                    <select id="sports" name="sports">
+                                    <select id="sports" name="sports" defaultValue={member.sports}>
                                         <option value="">Sports</option>
-                                        <option value="archery">Archery</option>
-                                        <option value="badminton">Badminton</option>
-                                        <option value="basketball">Basketball</option>
-                                        <option value="football">Football</option>
-                                        <option value="table tennis">Table Tennis</option>
+                                        <option value="Archery">Archery</option>
+                                        <option value="Badminton">Badminton</option>
+                                        <option value="Basketball">Basketball</option>
+                                        <option value="Football">Football</option>
+                                        <option value="Table Tennis">Table Tennis</option>
                                     </select>
                                     <br />
                                 </div>
@@ -172,7 +352,7 @@ function AddMembers() {
                                 <div>
                                     <label htmlFor="role">Role</label>
                                     <br />
-                                    <input id="role" name="role" type="text"></input>
+                                    <input id="role" name="role" type="text" defaultValue={member.role} />
                                     <br />
                                 </div>
                             </div>
@@ -188,25 +368,25 @@ function AddMembers() {
                             {/* POSTAL CODE */}
                             <label htmlFor="uPostal">Postal Code</label>
                             <br />
-                            <input id="uPostal" name="uPostal" type="text"></input>
+                            <input id="uPostal" name="uPostal" type="text" defaultValue={member.postalCode} />
                             <br />
 
                             {/* HOME TELEPHONE NUMBER */}
                             <label htmlFor="uHomeNo">Home Telephone Number</label>
                             <br />
-                            <input id="uHomeNo" name="uHomeNo" type="text"></input>
+                            <input id="uHomeNo" name="uHomeNo" type="text" defaultValue={member.homeNo} />
                             <br />
 
                             {/* MOBILE NUMBER */}
                             <label htmlFor="uMobileNo">Mobile Number</label>
                             <br />
-                            <input id="uMobileNo" name="uMobileNo" type="text"></input>
+                            <input id="uMobileNo" name="uMobileNo" type="text" defaultValue={member.mobileNo} />
                             <br />
 
                             {/* EMAIL ADDRESS */}
                             <label htmlFor="uEmailAddr">Email Address</label>
                             <br />
-                            <input id="uEmailAddr" name="uEmailAddr" type="text"></input>
+                            <input id="uEmailAddr" name="uEmailAddr" type="text" defaultValue={member.email} />
                             <br />
                         </div>
                     </div>
@@ -219,15 +399,15 @@ function AddMembers() {
                             {/* ---------- DISABILITY/MEDICAL CONDITION ---------- */}
                             <label htmlFor="condition">Disability/Medical Condition</label>
                             <br />
-                            <input id="condition" name="condition" type="text"></input>
+                            <input id="condition" name="condition" type="text" defaultValue={member.disability} />
                             <br />
 
                             {/* ---------- NATURE OF DISABILITY ---------- */}
-                            <label htmlFor="natureOfDis">Nature of Disability</label>
+                            <label htmlFor="natureOfDisability">Nature of Disability</label>
                             <br />
-                            <select id="natureOfDis" name="natureOfDis">
-                                <option value="congenital">Congenital</option>
-                                <option value="others">Others</option>
+                            <select id="natureOfDisability" name="natureOfDisability" defaultValue={member.natureOfDisability}>
+                                <option value="Congenital">Congenital</option>
+                                <option value="Others">Others</option>
                             </select>
                             <br />
                         </div>
@@ -239,31 +419,31 @@ function AddMembers() {
                             {/* DALIY AID DETAILS */}
                             <label htmlFor="dailyAids">Daily Aids (If Applicable)</label>
                             <br />
-                            <input id="dailyAids" name="dailyAids" type="text"></input>
+                            <input id="dailyAids" name="dailyAids" type="text" defaultValue={member.dailyAids} />
                             <br />
 
                             {/* ESIMATED WEIGHT OF WHEELCHAIR*/}
                             <label htmlFor="wheelchairWeight">Estimated weight of Wheelchair (kg)</label>
                             <br />
-                            <input id="wheelchairWeight" name="wheelchairWeight" type="text"></input>
+                            <input id="wheelchairWeight" name="wheelchairWeight" type="text" defaultValue={member.estimatedWeight} />
                             <br />
 
                             {/* DIMENSTIONS OF WHEELCHAIR */}
                             <label htmlFor="dimenstions">Dimensions of Wheelchair</label>
                             <br />
-                            <input id="dimenstions" name="dimenstions" type="text"></input>
+                            <input id="dimenstions" name="dimenstions" type="text" defaultValue={member.wheelchairDimension} />
                             <br />
 
                             {/* TYPE OF WHEELCHAIR */}
                             <label htmlFor="wheelchairType">Type of Wheelchair</label>
                             <br />
-                            <input id="wheelchairType" name="wheelchairType" type="text"></input>
+                            <input id="wheelchairType" name="wheelchairType" type="text" defaultValue={member.wheelchairType} />
                             <br />
 
                             {/* WHEEL DIAMETER */}
                             <label htmlFor="wheelDiam">Wheel Diameter</label>
                             <br />
-                            <input id="wheelDiam" name="wheelDiam" type="text"></input>
+                            <input id="wheelDiam" name="wheelDiam" type="text" defaultValue={member.wheelDiameter} />
                             <br />
                         </div>
                     </div>
@@ -274,13 +454,13 @@ function AddMembers() {
                             {/* DIETARY REQUIREMENTS */}
                             <label htmlFor="allergy">Food/Drug Allergy</label>
                             <br />
-                            <input id="allergy" name="allergy" type="text"></input>
+                            <input id="allergy" name="allergy" type="text" defaultValue={member.foodDrugAllergy} />
                             <br />
 
                             {/* SPECIAL DIETARY REQUIREMENTS */}
                             <label htmlFor="dietaryReq">Special Dietary Requirements</label>
                             <br />
-                            <input id="dietaryReq" name="dietaryReq" type="text"></input>
+                            <input id="dietaryReq" name="dietaryReq" type="text" defaultValue={member.specialDietaryReq} />
                             <br />
                         </div>
                     </div>
@@ -293,41 +473,41 @@ function AddMembers() {
                             {/* ---------- KIN/GUARDIAN NAME ---------- */}
                             <label htmlFor="kgName">Name of Kin/Guardian</label>
                             <br />
-                            <input id="kgName" name="kgName" type="text"></input>
+                            <input id="kgName" name="kgName" type="text" defaultValue={member.kinName} />
                             <br />
 
                             {/* ---------- RELATIONSHIP ---------- */}
-                            <label htmlFor="relationship">Relationship</label>
+                            <label htmlFor="kinRelationship">Relationship</label>
                             <br />
-                            <select id="relationship" name="relationship">
-                                <option value="spouse">Spouse</option>
-                                <option value="brother">Brother</option>
-                                <option value="sister">Sister</option>
-                                <option value="father">Father</option>
-                                <option value="mother">Mother</option>
+                            <select id="kinRelationship" name="kinRelationship" defaultValue={member.kinRelationship}>
+                                <option value="Spouse">Spouse</option>
+                                <option value="Brother">Brother</option>
+                                <option value="Sister">Sister</option>
+                                <option value="Father">Father</option>
+                                <option value="Mother">Mother</option>
                             </select>
                             <br />
 
                             {/* ---------- NRIC ---------- */}
                             <label htmlFor="kgNric">NRIC</label>
                             <br />
-                            <input id="kgNric" name="kgNric" type="text"></input>
+                            <input id="kgNric" name="kgNric" type="text" defaultValue={member.kinNric} />
                             <br />
 
                             {/* ---------- BLOOD TYPE ---------- */}
                             <div className="split">
                                 <div>
-                                    <label htmlFor="kgBloodtype">Blood Type</label>
+                                    <label htmlFor="kinBloodType">Blood Type</label>
                                     <br />
-                                    <select id="kgBloodtype" name="kgBloodtype" style={{width: "40%"}}>
-                                        <option value="opos">O+</option>
-                                        <option value="oneg">O-</option>
-                                        <option value="apos">A+</option>
-                                        <option value="aneg">A-</option>
-                                        <option value="bpos">B+</option>
-                                        <option value="bneg">B-</option>
-                                        <option value="abpoos">AB+</option>
-                                        <option value="abneg">AB-</option>
+                                    <select id="kinBloodType" name="kinBloodType" style={{width: "40%"}} defaultValue={member.kinBloodType}>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
                                     </select>
                                     <br />
                                 </div>
@@ -341,25 +521,25 @@ function AddMembers() {
                             {/* POSTAL CODE */}
                             <label htmlFor="kgPostal">Postal Code</label>
                             <br />
-                            <input id="kgPostal" name="kgPostal" type="text"></input>
+                            <input id="kgPostal" name="kgPostal" type="text" defaultValue={member.kinPostalCode} />
                             <br />
 
                             {/* ADDRESS */}
                             <label htmlFor="kgAddress">Address</label>
                             <br />
-                            <input id="kgAddress" name="kgAddress" type="text"></input>
+                            <input id="kgAddress" name="kgAddress" type="text" defaultValue={member.kinAddress} />
                             <br />
 
                             {/* MOBILE NUMBER */}
                             <label htmlFor="kgContactNumber">Contact Number</label>
                             <br />
-                            <input id="kgContactNumber" name="kgContactNumber" type="text"></input>
+                            <input id="kgContactNumber" name="kgContactNumber" type="text" defaultValue={member.kinContactNumber} />
                             <br />
 
                             {/* EMAIL ADDRESS */}
                             <label htmlFor="kgEmailAddr">Email Address</label>
                             <br />
-                            <input id="kgEmailAddr" name="kgEmailAddr" type="text"></input>
+                            <input id="kgEmailAddr" name="kgEmailAddr" type="text" defaultValue={member.kinEmail} />
                             <br />
                         </div>
                     </div>
@@ -372,31 +552,31 @@ function AddMembers() {
                             {/* ---------- CURRENT OCCUPATION ---------- */}
                             <label htmlFor="currentOcc">Current Occupation</label>
                             <br />
-                            <input id="currentOcc" name="currentOcc" type="text"></input>
+                            <input id="currentOcc" name="currentOcc" type="text" defaultValue={member.currentOcc} />
                             <br />
 
                             {/* ---------- CURRENT SCHOOL/ORGNISATION NAME ---------- */}
                             <label htmlFor="currentOrgName">Current School/Organisation Name</label>
                             <br />
-                            <input id="currentOrgName" name="currentOrgName" type="text"></input>
+                            <input id="currentOrgName" name="currentOrgName" type="text" defaultValue={member.currentOrg} />
                             <br />
 
                             {/* ---------- CURRENT SCHOOL/ORGANISATION ADDRESS ---------- */}
                             <label htmlFor="currentOrgAddr">Current School/Organisation Address</label>
                             <br />
-                            <input id="currentOrgAddr" name="currentOrgAddr" type="text"></input>
+                            <input id="currentOrgAddr" name="currentOrgAddr" type="text"  defaultValue={member.currentOrgAddress}/>
                             <br />
 
                             {/* ---------- CURRENT PERSON IN-CHARGE & DESIGNATION ---------- */}
                             <label htmlFor="perInCharge">Current Person In-Charge &#38; Designation</label>
                             <br />
-                            <input id="perInCharge" name="perInCharge" type="text"></input>
+                            <input id="perInCharge" name="perInCharge" type="text" defaultValue={member.personInChargeAndDes} />
                             <br />
 
                             {/* ---------- PREVIOUS EDUCATIONAL INSTITUTION ---------- */}
                             <label htmlFor="prevEdInst">Previous Educational Institution</label>
                             <br />
-                            <input id="prevEdInst" name="prevEdInst" type="text"></input>
+                            <input id="prevEdInst" name="prevEdInst" type="text" defaultValue={member.prevEduInstitution} />
                             <br />
                         </div>
                     </div>
@@ -409,13 +589,13 @@ function AddMembers() {
                             {/* ---------- HEIGHT ---------- */}
                             <label htmlFor="height">Height</label>
                             <br />
-                            <input id="height" name="height" type="text"></input>
+                            <input id="height" name="height" type="text" defaultValue={member.height} />
                             <br />
 
                             {/* ---------- WEIGHT ---------- */}
                             <label htmlFor="weight">Weight (kg)</label>
                             <br />
-                            <input id="weight" name="weight" type="text"></input>
+                            <input id="weight" name="weight" type="text" defaultValue={member.weight} />
                             <br />
                         </div>
                     </div>
@@ -428,19 +608,19 @@ function AddMembers() {
                             {/* ---------- TOP SIZE ---------- */}
                             <label htmlFor="topsize">Top Size</label>
                             <br />
-                            <input id="topSize" name="topSize" type="text"></input>
+                            <input id="topSize" name="topSize" type="text" defaultValue={member.topSize} />
                             <br />
 
                             {/* ---------- TOP SIZE ---------- */}
                             <label htmlFor="bottomSize">Bottom Size</label>
                             <br />
-                            <input id="bottomSize" name="bottomSize" type="text"></input>
+                            <input id="bottomSize" name="bottomSize" type="text" defaultValue={member.bottomSize} />
                             <br />
 
                             {/* ---------- SHOE SIZE ---------- */}
                             <label htmlFor="shoeSize">Shoe Size (UK/US/Europe)</label>
                             <br />
-                            <input id="shoeSize" name="shoeSize" type="text"></input>
+                            <input id="shoeSize" name="shoeSize" type="text" defaultValue={member.shoeSize} />
                             <br />
                         </div>
                     </div>
@@ -454,31 +634,31 @@ function AddMembers() {
                             {/* ---------- CLASSIFICATION STATUS ---------- */}
                             <label htmlFor="classStatus">Classification Status</label>
                             <br />
-                            <input id="classStatus" name="classStatus" type="text"></input>
+                            <input id="classStatus" name="classStatus" type="text" defaultValue={member.classificationStatus} />
                             <br />
 
                             {/* ---------- DATE OF CLASSIFICATION ---------- */}
                             <label htmlFor="dateClassification">Date of Classification</label>
                             <br />
-                            <input id="dateClassification" name="dateClassification" type="date"></input>
+                            <input id="dateClassification" name="dateClassification" type="date" defaultValue={member.dateOfClassification} />
                             <br />
 
                             {/* ---------- LEVEL OF CLASSIFICATION ---------- */}
                             <label htmlFor="classLvl">Level of Classification</label>
                             <br />
-                            <input id="classLvl" name="classLvl" type="text"></input>
+                            <input id="classLvl" name="classLvl" type="text" defaultValue={member.lvlOfClassification} />
                             <br />
 
                             {/* ---------- ATHLETE LICENSE NUMBER ---------- */}
                             <label htmlFor="licsNo">Athlete License Number</label>
                             <br />
-                            <input id="licsNo" name="licsNo" type="text"></input>
+                            <input id="licsNo" name="licsNo" type="text" defaultValue={member.licenseNo} />
                             <br />
 
                             {/* ---------- SPORTS CLASSIFICATION UPLOAD ---------- */}
                             <label htmlFor="sportsDocs">Upload Documents</label>
                             <br />
-                            <input id="sportsDocs" name="sportsDocs" type="file" multiple></input>
+                            <input id="sportsDocs" name="sportsDocs" type="file" multiple />
                             <br />
                         </div>
                     </div>
@@ -491,43 +671,43 @@ function AddMembers() {
                             {/* ---------- YEAR ? MONTH ---------- */}
                             <label htmlFor="achYM">Year / Month</label>
                             <br />
-                            <input id="achYM" name="achYM" type="text" />
+                            <input id="achYM" name="achYM" type="text" defaultValue={member.sptAchYM} />
                             <br />
 
                             {/* ---------- LOCATIOn ---------- */}
                             <label htmlFor="achLocation">Location</label>
                             <br />
-                            <input id="achLocation" name="achLocation" type="text" />
+                            <input id="achLocation" name="achLocation" type="text" defaultValue={member.sptAchLoc} />
                             <br />
 
                             {/* ---------- NAME OF TOUNRAMENT ---------- */}
                             <label htmlFor="tournName">Name of Tournament</label>
                             <br />
-                            <input id="tournName" name="tournName" type="text" />
+                            <input id="tournName" name="tournName" type="text" defaultValue={member.sptAchTourName} />
                             <br />
 
                             {/* ---------- EVENT (?) ---------- */}
                             <label htmlFor="eventType">Event</label>
                             <br />
-                            <input id="eventType" name="eventType" type="text" />
+                            <input id="eventType" name="eventType" type="text" defaultValue={member.sptAchParticipationType} />
                             <br />
 
                             {/* ---------- PARTICIPATION TYPE ---------- */}
                             <label htmlFor="parType">Participation Type</label>
                             <br />
-                            <input id="parType" name="parType" type="text" />
+                            <input id="parType" name="parType" type="text" defaultValue={member.sptAchParticipationType} />
                             <br />
 
                             {/* ---------- RESULTS ---------- */}
                             <label htmlFor="results">Results</label>
                             <br />
-                            <input id="results" name="results" type="text" />
+                            <input id="results" name="results" type="text" defaultValue={member.sptAchResult} />
                             <br />
 
                             {/* ---------- NO OF COMPETITORS ---------- */}
                             <label htmlFor="compNo">No. Of Competitors</label>
                             <br />
-                            <input id="compNo" name="compNo" type="text" />
+                            <input id="compNo" name="compNo" type="text" defaultValue={member.sptAchCompetitorNo} />
                             <br />
                         </div>
                     </div>
@@ -541,31 +721,31 @@ function AddMembers() {
                             {/* ---------- SPORTS TIER ---------- */}
                             <label htmlFor="sportsTier">Sports Tier</label>
                             <br />
-                            <input id="sportsTier" name="sportsTier" type="text" />
+                            <input id="sportsTier" name="sportsTier" type="text" defaultValue={member.trainingSportsTier} />
                             <br />
 
                             {/* ---------- FREQUENCY ---------- */}
                             <label htmlFor="freq">Frequency</label>
                             <br />
-                            <input id="freq" name="freq" type="text" />
+                            <input id="freq" name="freq" type="text" defaultValue={member.trainingFrequency} />
                             <br />
 
                             {/* ---------- DURATION ---------- */}
                             <label htmlFor="duration">Duration</label>
                             <br />
-                            <input id="duration" name="duration" type="text" />
+                            <input id="duration" name="duration" type="text" defaultValue={member.trainingDuration} />
                             <br />
 
                             {/* ---------- TRAINING LOCATION ---------- */}
                             <label htmlFor="trainingLocation">Location</label>
                             <br />
-                            <input id="trainingLocation" name="trainingLocation" type="text" />
+                            <input id="trainingLocation" name="trainingLocation" type="text" defaultValue={member.trainingLoc} />
                             <br />
 
                             {/* ---------- COACHING SERVICE PROVIDER ---------- */}
                             <label htmlFor="csp">Coaching Service Provider</label>
                             <br />
-                            <input id="csp" name="csp" type="text" />
+                            <input id="csp" name="csp" type="text" defaultValue={member.trainingCsp} />
                             <br />
 
                             {/* ---------- RESUME / CV? UPLOAD DOCUMENTS?? ---------- */}
@@ -577,7 +757,7 @@ function AddMembers() {
                             {/* ---------- COACHING QUALIFICATIONS ---------- */}
                             <label htmlFor="coachingQual">Coaching Qualifications</label>
                             <br />
-                            <input id="coachingQual" name="coachingQual" type="text" />
+                            <input id="coachingQual" name="coachingQual" type="text" defaultValue={member.trainingCoachingQual} />
                             <br />
 
                             {/* ---------- CONTRACT FOR COACHING SERVICE PROVIDERS ---------- */}
