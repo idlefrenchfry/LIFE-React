@@ -72,7 +72,7 @@ function CoachDetails(props) {
             return "noselect";
     }
 
-    const editDetails = () => window.location.href = "/Coaches";
+    const editDetails = () => window.location.href = "/Coaches/Edit/" + props.match.params.id;
 
     console.log("id:", props.match.params.id);
 
