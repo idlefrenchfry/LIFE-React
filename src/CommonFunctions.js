@@ -16,4 +16,18 @@ function ISOStringToDate(isostring) {
     return date;
 }
 
-export { formatAMPM, ISOStringToDate};
+const isoRegExp = new RegExp("^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(.[0-9]+)?(Z)?$");
+const alphaReg = new RegExp("[A-Za-z]+$");
+const alphaspaceReg = new RegExp("^[A-Za-z ]+$");
+const numericReg = new RegExp("^[0-9]+$");
+const nricReg = new RegExp("^[STFGstfg][0-9]{7}[A-Za-z]$");
+
+let validationDic = {
+    isostring: isoRegExp,
+    alpha: alphaReg,
+    alphaspace: alphaspaceReg,
+    numeric: numericReg,
+    nric: nricReg
+}
+
+export { formatAMPM, ISOStringToDate, validationDic };
