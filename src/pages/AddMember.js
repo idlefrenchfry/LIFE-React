@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {ISOStringToDate} from '../CommonFunctions';
+import {ISOStringToDate, validationDic} from '../CommonFunctions';
 
 let user = {
     name: "Xiu Ying",
@@ -142,11 +142,20 @@ function AddMembers(props) {
             // fetch member
             let objKeys = Object.keys(user);
             objKeys.forEach(key => {
-                if(typeof(user[key]) === "string" && user[key].match(isoRegExp)) {
+                if(typeof(user[key]) === "string" && user[key].match(validationDic["isostring"])) {
                     let dateObj = ISOStringToDate(user[key]);
+                    let monthString = dateObj.getMonth().toString();
+                    let dateString = dateObj.getDate().toString();
+                    
+                    if (monthString.length === 1)
+                        monthString = "0" + monthString
+
+                    if (dateString.length === 1)
+                        dateString = "0" + dateString
+
                     let defaultVal = dateObj.getFullYear() + 
-                                     "-" + dateObj.getMonth() + 
-                                     "-" + dateObj.getDate();
+                                     "-" + monthString + 
+                                     "-" + dateString;
 
                     user[key] = defaultVal
                 }
@@ -200,6 +209,18 @@ function AddMembers(props) {
             return "noselect";
     }
 
+    const inputUnfocus = (e) => {
+        // onBlur
+        console.log("On blur function was called for: ", e.target.id);
+        let regEx = validationDic[e.target.getAttribute("regEx")]
+        if (e.target.value && regEx) {
+            if (!e.target.value.match(regEx))
+                e.target.setAttribute("style", "border-color:rgba(255, 63, 52, 0.5)");
+            else
+                e.target.removeAttribute("style");
+        }
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(e);
@@ -238,7 +259,7 @@ function AddMembers(props) {
                             {/* ---------- NAME ---------- */}
                             <label htmlFor="eName">Name</label>
                             <br />
-                            <input id="eName" name="eName" type="text" defaultValue={member.name} />
+                            <input id="eName" name="eName" type="text" defaultValue={member.name} onBlur={inputUnfocus} regEx="alphaspace" />
                             <br />
 
                             {/* ---------- CHINESE NAME ---------- */}
@@ -297,7 +318,7 @@ function AddMembers(props) {
                                 <div>
                                     <label htmlFor="birthplace">Place of Birth</label>
                                     <br />
-                                    <input id="birthplace" name="birthplace" type="text" defaultValue={member.birthPlace} />
+                                    <input id="birthplace" name="birthplace" type="text" defaultValue={member.birthPlace} onBlur={inputUnfocus} regEx="alphaspace" />
                                     <br />
                                 </div>
                             </div>
@@ -305,7 +326,7 @@ function AddMembers(props) {
                             {/* ---------- NATIONALITY ---------- */}
                             <label htmlFor="nationality">Nationality</label>
                             <br />
-                            <input id="nationality" name="nationality" type="text" defaultValue={member.nationality} />
+                            <input id="nationality" name="nationality" type="text" defaultValue={member.nationality} onBlur={inputUnfocus} regEx="alphaspace" />
                             <br />
 
                             <div className="split">
@@ -425,7 +446,7 @@ function AddMembers(props) {
                             {/* ESIMATED WEIGHT OF WHEELCHAIR*/}
                             <label htmlFor="wheelchairWeight">Estimated weight of Wheelchair (kg)</label>
                             <br />
-                            <input id="wheelchairWeight" name="wheelchairWeight" type="text" defaultValue={member.estimatedWeight} />
+                            <input id="wheelchairWeight" name="wheelchairWeight" type="text" defaultValue={member.estimatedWeight} onBlur={inputUnfocus} regEx="numeric" />
                             <br />
 
                             {/* DIMENSTIONS OF WHEELCHAIR */}
@@ -473,7 +494,7 @@ function AddMembers(props) {
                             {/* ---------- KIN/GUARDIAN NAME ---------- */}
                             <label htmlFor="kgName">Name of Kin/Guardian</label>
                             <br />
-                            <input id="kgName" name="kgName" type="text" defaultValue={member.kinName} />
+                            <input id="kgName" name="kgName" type="text" defaultValue={member.kinName} onBlur={inputUnfocus} regEx="alphaspace" />
                             <br />
 
                             {/* ---------- RELATIONSHIP ---------- */}
@@ -491,7 +512,7 @@ function AddMembers(props) {
                             {/* ---------- NRIC ---------- */}
                             <label htmlFor="kgNric">NRIC</label>
                             <br />
-                            <input id="kgNric" name="kgNric" type="text" defaultValue={member.kinNric} />
+                            <input id="kgNric" name="kgNric" type="text" defaultValue={member.kinNric} onBlur={inputUnfocus} regEx="nric" />
                             <br />
 
                             {/* ---------- BLOOD TYPE ---------- */}
@@ -589,13 +610,13 @@ function AddMembers(props) {
                             {/* ---------- HEIGHT ---------- */}
                             <label htmlFor="height">Height</label>
                             <br />
-                            <input id="height" name="height" type="text" defaultValue={member.height} />
+                            <input id="height" name="height" type="text" defaultValue={member.height} onBlur={inputUnfocus} regEx="numeric" />
                             <br />
 
                             {/* ---------- WEIGHT ---------- */}
                             <label htmlFor="weight">Weight (kg)</label>
                             <br />
-                            <input id="weight" name="weight" type="text" defaultValue={member.weight} />
+                            <input id="weight" name="weight" type="text" defaultValue={member.weight} onBlur={inputUnfocus} regEx="numeric" />
                             <br />
                         </div>
                     </div>
