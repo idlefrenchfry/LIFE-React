@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { ISOStringToDate, validationDic } from '../CommonFunctions';
-import { cloneDeep } from 'lodash';
 
 const user = {
     name: "Park Soo Young",
@@ -25,8 +24,6 @@ const emptyUser = {
 }
 
 function AddCoach(props) {
-
-    const today = new Date();
 
     const [formHeader, setFormHeader] = useState("Add Coach");
 
@@ -83,7 +80,7 @@ function AddCoach(props) {
             setIsProcessed(true);
             setFormHeader("Edit Coach");
         }
-    }, [])
+    }, [props.location.pathname, isProcessed])
 
     const inputUnfocus = (e) => {
         // onBlur
