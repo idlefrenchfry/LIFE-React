@@ -5,6 +5,7 @@ import { cloneDeep } from 'lodash'; // To deep clone arrays with objects
 
 let trainingsList = [
     {
+        id: 18,
         name: "Archery Training",
         sports: "Archery",
         coach: "Varun Wagstaff",
@@ -13,6 +14,7 @@ let trainingsList = [
         publishStatus: true
     },
     {
+        id: 19,
         name: "Basketball Trainings",
         sports: "Basketball",
         coach: "Lynsey Atherton",
@@ -21,6 +23,7 @@ let trainingsList = [
         publishStatus: true
     },
     {
+        id: 20,
         name: "Football Traiing",
         sports: "Football",
         coach: "Raees Chapman",
@@ -29,6 +32,7 @@ let trainingsList = [
         publishStatus: true
     },
     {
+        id: 21,
         name: "Fun Badminton!",
         sports: "Badminton",
         coach: "Sullivan Guy",
@@ -37,6 +41,7 @@ let trainingsList = [
         publishStatus: true
     },
     {
+        id: 22,
         name: "Badminton Training",
         sports: "Badminton",
         coach: "Jagoda Martins",
@@ -45,6 +50,7 @@ let trainingsList = [
         publishStatus: true
     },
     {
+        id: 23,
         name: "Archery Training",
         sports: "Archery",
         coach: "Varun Wagstaff",
@@ -53,6 +59,7 @@ let trainingsList = [
         publishStatus: true
     },
     {
+        id: 24,
         name: "Sports Festival",
         sports: "Table Tennis",
         coach: "Farrell Deleon",
@@ -61,6 +68,7 @@ let trainingsList = [
         publishStatus: false
     },
     {
+        id: 25,
         name: "Pro Badminton",
         sports: "Badminton",
         coach: "Sullivan Guy",
@@ -68,6 +76,7 @@ let trainingsList = [
         publishStatus: false
     },
     {
+        id: 26,
         name: "Football Traiing",
         sports: "Football",
         coach: "Bae Joohyun",
@@ -76,6 +85,7 @@ let trainingsList = [
         publishStatus: false
     },
     {
+        id: 27,
         name: "Football Traiing",
         sports: "Football",
         coach: "Raees Chapman",
@@ -84,6 +94,7 @@ let trainingsList = [
         publishStatus: false
     },
     {
+        id: 28,
         name: "Basketball Trainings",
         sports: "Basketball",
         coach: "Lynsey Atherton",
@@ -92,6 +103,7 @@ let trainingsList = [
         publishStatus: false
     },
     {
+        id: 29,
         name: "Pro Basketball",
         sports: "Basketball",
         coach: "Lynsey Atherton",
@@ -100,6 +112,7 @@ let trainingsList = [
         publishStatus: false
     },
     {
+        id: 30,
         name: "Sports Festival",
         sports: "Table Tennis",
         coach: "Layan Ferrell",
@@ -108,6 +121,7 @@ let trainingsList = [
         publishStatus: false
     },
     {
+        id: 31,
         name: "Fun With Archery!",
         sports: "Archery",
         coach: "Varun Wagstaff",
@@ -116,6 +130,7 @@ let trainingsList = [
         publishStatus: false
     },
     {
+        id: 32,
         name: "Sports Festival",
         sports: "Table Tennis",
         coach: "Layan Ferrell",
@@ -124,6 +139,7 @@ let trainingsList = [
         publishStatus: true
     },
     {
+        id: 33,
         name: "Badminton Training",
         sports: "Badminton",
         coach: "Kang Seulgi",
@@ -132,6 +148,7 @@ let trainingsList = [
         publishStatus: true
     },
     {
+        id: 34,
         name: "Fun with Basketball!",
         sports: "Basketball",
         sessions: 12,
@@ -262,7 +279,7 @@ function Trainings() {
                     <Table
                         data={trainings}
                         columns={Object.keys(trainings[0])}
-                        detailsPage={"Trainings/"}
+                        detailsPage={"Trainings/Edit/"}
                         thBool={true} /> :
                     <p>Loading...</p>
             }
