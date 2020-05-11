@@ -16,6 +16,72 @@ function ISOStringToDate(isostring) {
     return date;
 }
 
+function ISOStringToDateInput(isostring) {
+    let dateObj = ISOStringToDate(isostring);
+    let monthString = dateObj.getMonth().toString();
+    let dateString = dateObj.getDate().toString();
+    
+    if (monthString.length === 1)
+        monthString = "0" + monthString
+
+    if (dateString.length === 1)
+        dateString = "0" + dateString
+
+    let defaultVal = dateObj.getFullYear() + 
+                        "-" + monthString + 
+                        "-" + dateString;
+
+    return defaultVal;
+}
+
+function ISOStringToTimeInput(isostring) {
+    let dateObj = ISOStringToDate(isostring);
+    let hrString = dateObj.getHours().toString();
+    let minString = dateObj.getMinutes().toString();
+
+    
+    if (hrString.length === 1)
+        hrString = "0" + hrString
+
+    if (minString.length === 1)
+        minString = "0" + minString
+
+    return hrString + ":" + minString;
+}
+
+function getDayName(day) {
+    let weekdays = [
+        "MON",
+        "TUE",
+        "WED",
+        "THU",
+        "FRI",
+        "SAT",
+        "SUN"
+    ]
+
+    return weekdays[day];
+}
+
+function getMonthName(day) {
+    let weekdays = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+    ]
+
+    return weekdays[day];
+}
+
 const isoRegExp = new RegExp("^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(.[0-9]+)?(Z)?$");
 const alphaReg = new RegExp("[A-Za-z]+$");
 const alphaspaceReg = new RegExp("^[A-Za-z ]+$");
@@ -30,4 +96,4 @@ let validationDic = {
     nric: nricReg
 }
 
-export { formatAMPM, ISOStringToDate, validationDic };
+export { formatAMPM, ISOStringToDate, getDayName, getMonthName, ISOStringToDateInput, ISOStringToTimeInput, validationDic };
