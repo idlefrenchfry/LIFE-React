@@ -2,15 +2,23 @@ import React, { useState, useEffect, useRef } from 'react';
 import { cloneDeep } from 'lodash'; // To deep clone arrays with objects
 
 // To Do:
-// Adding and removing affect parent state
-// SYNC THE MULTI SELECT
 // Clicking outside of dropdown should close it
+// Default values
 
 function MultiSelect(props) {
     // props = Options, index of section, add/remove function from parent
-    // props = [ options:Array[obj], index:int, add:func, remove :func]
+    // props = [ options:Array[obj], index:int, add:func, remove:func, defaultOptions:Array[obj] ]
 
     const [currentlySelected, setCurrentlySelected] = useState([]);
+
+    useEffect(() => {
+        if (props.defaultOptions) {
+            let replaceSelected = cloneDeep(props.defaultOptions);
+            replaceSelected.sort(sortByLabel);
+            setCurrentlySelected(replaceSelected);
+        }
+    }, [props.defaultOptions])
+
     const [currentlyNotSelected, setCurrentlyNotSelected] = useState([]);
 
     useEffect(() => {
