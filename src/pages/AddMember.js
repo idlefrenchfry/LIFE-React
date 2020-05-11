@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {ISOStringToDate, validationDic} from '../CommonFunctions';
+import {ISOStringToDateInput, validationDic} from '../CommonFunctions';
 
 let user = {
     name: "Xiu Ying",
@@ -126,8 +126,6 @@ let emptyUser = {
     trainingCspContract: "",
 }
 
-const isoRegExp = new RegExp("^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(.[0-9]+)?(Z)?$");
-
 function AddMembers(props) {
 
     const today = new Date();
@@ -142,23 +140,8 @@ function AddMembers(props) {
             // fetch member
             let objKeys = Object.keys(user);
             objKeys.forEach(key => {
-                if(typeof(user[key]) === "string" && user[key].match(validationDic["isostring"])) {
-                    let dateObj = ISOStringToDate(user[key]);
-                    let monthString = dateObj.getMonth().toString();
-                    let dateString = dateObj.getDate().toString();
-                    
-                    if (monthString.length === 1)
-                        monthString = "0" + monthString
-
-                    if (dateString.length === 1)
-                        dateString = "0" + dateString
-
-                    let defaultVal = dateObj.getFullYear() + 
-                                     "-" + monthString + 
-                                     "-" + dateString;
-
-                    user[key] = defaultVal
-                }
+                if(typeof(user[key]) === "string" && user[key].match(validationDic["isostring"]))
+                    user[key] = ISOStringToDateInput(user[key])
             });
 
             // Since default value doesn't work for select options
