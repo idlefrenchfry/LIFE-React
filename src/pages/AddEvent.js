@@ -125,7 +125,6 @@ const emptyEvent = {
     endDate: "",
     name: "",
     publishStatus: "",
-    publishStatus: "",
     description: "",
     paxLim: "",
     restrDetails: "",

@@ -54,7 +54,7 @@ let membersList = [
     },
 ]
 
-function AddTraining() {
+function AddTraining(props) {
     // Keep track of which section to display
     const [currentSection, setCurrentSection] = useState("tab1");
     // Keep track of training sessions
@@ -191,7 +191,7 @@ function AddTraining() {
     return (
         <div className="card">
             <div className="cardTop">
-                <h1>Add Trainings</h1>
+            <h1>{props.location.pathname.includes("Edit") ? "Edit Training" : "Add Training"}</h1>
                 <div className="buttonsSet">
                     <button onClick={cancel} className="noselect">Cancel</button>
                     <button form="form" className="noselect" id="submit">Save As Draft</button>

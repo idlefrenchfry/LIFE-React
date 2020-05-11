@@ -25,8 +25,6 @@ const emptyUser = {
 
 function AddCoach(props) {
 
-    const [formHeader, setFormHeader] = useState("Add Coach");
-
     const [isProcessed, setIsProcessed] = useState(false);
 
     // Keep track of which section to display
@@ -78,7 +76,6 @@ function AddCoach(props) {
             
             setCoach(user);
             setIsProcessed(true);
-            setFormHeader("Edit Coach");
         }
     }, [props.location.pathname, isProcessed])
 
@@ -132,7 +129,7 @@ function AddCoach(props) {
     return (
         <div className="card">
             <div className="cardTop">
-                <h1>{formHeader}</h1>
+                <h1>{props.location.pathname.includes("Edit") ? "Edit Coach" : "Add Coach"}</h1>
                 <div className="buttonsSet">
                     <button onClick={cancel} className="noselect">Cancel</button>
                     <button form="form" className="noselect" id="submit">Save</button>
