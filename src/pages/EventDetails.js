@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Table from '../components/Table';
-import { formatAMPM, ISOStringToDate} from '../CommonFunctions';
+import { formatAMPM, ISOStringToDate, getDayName, getMonthName } from '../CommonFunctions';
 
 const going = [
     {
@@ -118,7 +118,7 @@ function EventDetails(props) {
 
     // Change style of tab depending on current section
     const displayTab = (id) => {
-        if (id == currentFilter)
+        if (id === currentFilter)
             return "currentTab noselect upperButton";
         else
             return "noselect upperButton";
@@ -128,7 +128,7 @@ function EventDetails(props) {
         console.log("Export list of members.")
     };
 
-    const editDetails = () => window.location.href = "/Events";
+    const editDetails = () => window.location.href = "/Events/Edit/" + props.match.params.id;
 
     let startDate = ISOStringToDate(eventD.startDate);
     let endDate = ISOStringToDate(eventD.endDate);
@@ -146,7 +146,7 @@ function EventDetails(props) {
             </div>
 
             <div className="eventDetails">
-                <img src="https://i.ytimg.com/vi/XplrxSSrja0/maxresdefault.jpg" />
+                <img alt="event thumbnail" src="https://i.ytimg.com/vi/XplrxSSrja0/maxresdefault.jpg" />
                 <div>
                     <span className="eventDate">{getDayName(startDate.getDay())}, {startDate.getDate()} {getMonthName(startDate.getMonth())} {startDate.getFullYear()} </span> {/* MON, 6 Mar 2020 */}
                     <span className="eventTime">{formatAMPM(startDate)} - {formatAMPM(endDate)}</span>
@@ -167,46 +167,13 @@ function EventDetails(props) {
 
             <div>
                 <Table
-                    data={currentFilter == "going" ? goingMem : cancelMem}
+                    data={currentFilter === "going" ? goingMem : cancelMem}
                     columns={Object.keys(goingMem[0])}
                     detailsPage={"Members/"}
                     thBool={false} />
             </div>
         </div>
     );
-}
-
-function getDayName(day) {
-    let weekdays = [
-        "MON",
-        "TUE",
-        "WED",
-        "THU",
-        "FRI",
-        "SAT",
-        "SUN"
-    ]
-
-    return weekdays[day];
-}
-
-function getMonthName(day) {
-    let weekdays = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-    ]
-
-    return weekdays[day];
 }
 
 export default EventDetails;

@@ -146,7 +146,7 @@ function AddTraining() {
     const handleAddAthlete = (option, id = "") => {
         id = parseInt(id);
 
-        if (id === NaN)
+        if (isNaN(id))
             console.error("id cannot be empty!")
         else {
             // Add option to eventInfoSections
@@ -161,13 +161,13 @@ function AddTraining() {
     const handleRmAthlete = (option, id = "") => {
         id = parseInt(id);
 
-        if (id === NaN)
+        if (isNaN(id))
             console.error("id cannot be empty!")
         else {
             // Remove option from eventInfoSections
             let replaceSessions = cloneDeep(sessionList);
             for (let i = 0; i < replaceSessions[id].athletes.length; i++) {
-                if (replaceSessions[id].athletes[i].value == option.value) {
+                if (replaceSessions[id].athletes[i].value === option.value) {
                     replaceSessions[id].athletes.splice(i, 1);
                     console.log("Option popped!")
                     break;
