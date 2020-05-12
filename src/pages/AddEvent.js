@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { cloneDeep } from 'lodash'; // To deep clone arrays with objects
 import MultiSelect from '../components/MultiSelect';
-import { formatAMPM, ISOStringToDate, getDayName, getMonthName, validationDic, ISOStringToDateInput, ISOStringToTimeInput } from '../CommonFunctions';
+import { formatAMPM, getDayName, getMonthName, ISOStringToDateInput } from '../CommonFunctions';
 import { useEffect } from 'react';
 
 const sectionInputs = [
@@ -75,6 +75,8 @@ const goingMem = [
 const eventD = {
     startDate: "2020-08-06T04:00:00.000Z",
     endDate: "2020-08-06T08:00:00.000Z",
+    startTime: "16:00",
+    endTime: "18:00",
     name: "Sports Festival",
     location: "101 Yishun Ave 1, Singapore 769130",
     sports: "archery",
@@ -123,6 +125,8 @@ const eventD = {
 const emptyEvent = {
     startDate: "",
     endDate: "",
+    startTime: "",
+    endTime: "",
     name: "",
     publishStatus: "",
     description: "",
@@ -142,8 +146,6 @@ function AddEvents(props) {
     // Keep track of which section to display
     const [currentSection, setCurrentSection] = useState("tab1");
 
-    const [formHeader, setFormHeader] = useState("Add Event");
-
     const [eventDetails, setEventDetails] = useState(emptyEvent);
 
     useEffect(() => {
@@ -152,7 +154,6 @@ function AddEvents(props) {
             
             if (isBusy) {
                 setEventDetails(eventD);
-                setFormHeader("Edit Event");
                 setIsBusy(false);
             }
 
@@ -373,7 +374,7 @@ function AddEvents(props) {
     return isBusy ? null : (
         <div className="card">
             <div className="cardTop">
-                <h1>{formHeader}</h1>
+                <h1>{props.location.pathname.includes("/Events/Edit/") ? "Edit Event" : "Add Event"}</h1>
                 <div className="buttonsSet">
                     <button onClick={cancel} className="noselect">Cancel</button>
                     <button form="form" className="noselect" id="submit">Save As Draft</button>
@@ -460,11 +461,11 @@ function AddEvents(props) {
                                 <div>
                                     <label htmlFor="startTime">Time</label>
                                     <br />
-                                    <input type="time" id="startTime" name="startTime" defaultValue={ISOStringToTimeInput(eventDetails.startDate)} />
+                                    <input type="time" id="startTime" name="startTime" defaultValue={eventDetails.startTime} />
                                 </div>
                                 <div>
                                     <label htmlFor="endTime" style={{ visibility: "hidden" }}>End Time</label>
-                                    <input type="time" id="endTime" name="endTime" defaultValue={ISOStringToTimeInput(eventDetails.endDate)} />
+                                    <input type="time" id="endTime" name="endTime" defaultValue={eventDetails.endTime} />
                                 </div>
                             </div>
                             <br />
@@ -556,6 +557,7 @@ function AddEvents(props) {
                                             add={handleAddRegistrationInput}
                                             rm={handleRmRegistrationInput}
                                             defaultOptions={sec.inputs}
+                                            sync={true}
                                         />
                                     </div>
                                 </div>
