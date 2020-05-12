@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MultiSelect from '../components/MultiSelect';
 import Recurring from '../components/Recurring';
+import { ISOStringToDateInput } from '../CommonFunctions';
 import { cloneDeep } from 'lodash'; // To deep clone arrays with objects
 
 let membersList = [
@@ -54,9 +55,123 @@ let membersList = [
     },
 ]
 
+const training = {
+    id: 18,
+    name: "Archery Training",
+    sports: "Archery",
+    trainingDesc: "Training description for this training",
+    sessions: [
+        {
+            location: "Yio Chu Kang Stadium",
+            startDate: "2020-06-22T16:00:00.000Z",
+            endDate: "2020-08-22T16:00:00.000Z",
+            startTime: "12:00",
+            endTime: "14:00",
+            coach: "Varun Wagstaff",
+            isRecurring: false,
+            athletes: [
+                {
+                    label: "Joshua Pei",
+                    value: "Joshua Pei"
+                },
+                {
+                    label: "Clefairy Lee",
+                    value: "Clefairy Lee"
+                }
+            ]
+        },
+
+        {
+            location: "Singapore Sports Hub",
+            startDate: "2020-05-22T00:00:00.000Z",
+            endDate: "2020-09-22T00:00:00.000Z",
+            startTime: "16:00",
+            endTime: "18:00",
+            coach: "Augustus Rhodes",
+            isRecurring: false,
+            athletes: [
+                {
+                    label: "Kai Wong",
+                    value: "Kai Wong"
+                }
+            ]
+        }
+    ],
+    publishStatus: true
+}
+
+const emptyTraining = {
+    name: "",
+    sports: "",
+    trainingDesc: "",
+    location: "",
+    sessions: [{
+        location: "",
+        startDate: "",
+        endDate: "",
+        startTime: "",
+        endTime: "",
+        coach: "",
+        isRecurring: false,
+        athletes: []
+    }],
+    publishStatus: ""
+}
+
 function AddTraining(props) {
+    // If edit page, wait for event to fetch before rendering
+    const [isBusy, setIsBusy] = useState(props.location.pathname.includes("/Trainings/Edit/") ? {fetch: true, sessionList: true} : {fetch: false, sessionList: false});
+
     // Keep track of which section to display
     const [currentSection, setCurrentSection] = useState("tab1");
+
+    const [trainingDetails, setTrainingDetails] = useState(emptyTraining);
+
+    useEffect(() => {
+        if(props.location.pathname.includes("Trainings/Edit/")) {
+            if (isBusy.fetch) {
+                setTrainingDetails(training);
+                setIsBusy({ fetch: false, sessionList: true });
+            }
+
+            // set select options when everything has been rendered
+            else if (!isBusy.sessionList) {
+                // Since default value doesn't work for select options
+                let selectInputs = document.getElementsByTagName("select");
+                for (let i = 0; i < selectInputs.length; i++) {
+                    let select = selectInputs[i];
+                    let selectId = select.id;
+                    if (trainingDetails[selectId]) {
+                        let options = select.childNodes;
+                        for (let index = 0; index < options.length; index++) {
+                            const option = options[index];
+                            if (option.value === trainingDetails[selectId]) {
+                                option.setAttribute("selected", "");
+                                break;
+                            }
+                        }
+                    }
+
+                    // set select options in feedback section
+                    else if (selectId.includes("coach")) {
+                        let coachIndex = parseInt(selectId.replace("coach", "")) - 1;
+                        let coach = trainingDetails.sessions[coachIndex].coach;
+                        if (coach) {
+                            let options = select.childNodes;
+                            for (let index = 0; index < options.length; index++) {
+                                const option = options[index];
+                                if (option.value === coach) {
+                                    option.setAttribute("selected", "");
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }, [props.location.pathname, isBusy.fetch, isBusy.sessionList]);
+
     // Keep track of training sessions
     const [sessionList, setSessionList] = useState([{
         location: "",
@@ -68,6 +183,14 @@ function AddTraining(props) {
         isRecurring: false,
         athletes: []
     }]);
+
+    useEffect(() => {
+        if (!isBusy.fetch && props.location.pathname.includes("/Trainings/Edit/")) {
+            let copy = cloneDeep(trainingDetails.sessions);
+            setSessionList(copy);
+            setIsBusy({ fetch: false, sessionList: false })
+        }
+    }, [isBusy.fetch, props.location.pathname]);
 
     // onClick function to execute when changing section
     const changeSection = (e) => {
@@ -95,32 +218,16 @@ function AddTraining(props) {
         let value = e.target.value;
         let id = e.target.getAttribute("data-id");
         let replace = cloneDeep(sessionList);
-        let inputName = e.target.getAttribute("name");
+        let attr = e.target.getAttribute("inputname");
 
-        let attr;
-
-        // TO DO
-        // Replace these lines by adding attribute: inputName to inputs
-        if (inputName.includes("location"))
-            attr = "location";
-
-        else if (inputName.includes("startDate"))
-            attr = "startDate";
-
-        else if (inputName.includes("endDate"))
-            attr = "endDate";
-
-        else if (inputName.includes("startTime"))
-            attr = "startTime";
-
-        else if (inputName.includes("endTime"))
-            attr = "endTime";
-
-        else if (inputName.includes("recurring")) {
+        if (attr === "recurring") {
             replace[id]["isRecurring"] = e.target.checked;
             setSessionList(replace);
             return;
         }
+
+        else if (attr.includes("Date") && value)
+            value = new Date(value).toISOString();
 
         replace[id][attr] = value;
         setSessionList(replace);
@@ -169,7 +276,6 @@ function AddTraining(props) {
             for (let i = 0; i < replaceSessions[id].athletes.length; i++) {
                 if (replaceSessions[id].athletes[i].value === option.value) {
                     replaceSessions[id].athletes.splice(i, 1);
-                    console.log("Option popped!")
                     break;
                 }
             }
@@ -188,7 +294,7 @@ function AddTraining(props) {
 
     const cancel = () => window.location.href = "/Trainings";
 
-    return (
+    return isBusy.sessionList ? null : (
         <div className="card">
             <div className="cardTop">
             <h1>{props.location.pathname.includes("Edit") ? "Edit Training" : "Add Training"}</h1>
@@ -213,19 +319,19 @@ function AddTraining(props) {
                             {/* ---------- TRAINING TITLE ---------- */}
                             <label htmlFor="trainingTitle">Training Title</label>
                             <br />
-                            <input id="trainingTitle" name="trainingTitle" type="text"></input>
+                            <input id="trainingTitle" name="trainingTitle" type="text" defaultValue={trainingDetails.name} />
                             <br />
 
                             {/* ---------- TRAINING TITLE ---------- */}
-                            <label htmlFor="sportsCategory">Training Title</label>
+                            <label htmlFor="sports">Sports</label>
                             <br/>
-                            <select id="sportsCategory" name="sportsCategory">
+                            <select id="sports" name="sports">
                                 <option value="">Sports</option>
-                                <option value="archery">Archery</option>
-                                <option value="badminton">Badminton</option>
-                                <option value="basketball">Basketball</option>
-                                <option value="football">Football</option>
-                                <option value="table tennis">Table Tennis</option>
+                                <option value="Archery">Archery</option>
+                                <option value="Badminton">Badminton</option>
+                                <option value="Basketball">Basketball</option>
+                                <option value="Football">Football</option>
+                                <option value="Table Tennis">Table Tennis</option>
                             </select>
                             <br />
 
@@ -238,13 +344,14 @@ function AddTraining(props) {
                                 type="text"
                                 rows="5"
                                 placeholder="Type in training description"
+                                defaultValue={trainingDetails.trainingDesc}
                             />
                             <br />
 
                             {/* ---------- DOCUMENTS ---------- */}
                             <label htmlFor="trainingImg">Training Image</label>
                             <br />
-                            <input id="trainingImg" name="trainingImg" type="file"></input>
+                            <input id="trainingImg" name="trainingImg" type="file" />
                             <br />
                         </div>
                     </div>
@@ -265,7 +372,9 @@ function AddTraining(props) {
                                             name={"location" + index}
                                             type="text"
                                             data-id={index}
+                                            inputname="location"
                                             onChange={handleSessionInputChange}
+                                            value={session.location}
                                         />
                                         <br />
 
@@ -279,7 +388,9 @@ function AddTraining(props) {
                                                     id={"startDate" + index}
                                                     name={"startDate" + index}
                                                     data-id={index}
+                                                    inputname="startDate"
                                                     onChange={handleSessionInputChange}
+                                                    value={session.startDate ? ISOStringToDateInput(session.startDate) : ""}
                                                 />
                                                 <br />
                                             </div>
@@ -292,7 +403,9 @@ function AddTraining(props) {
                                                     id={"endDate" + index}
                                                     name={"endDate" + index}
                                                     data-id={index}
+                                                    inputname="endDate"
                                                     onChange={handleSessionInputChange}
+                                                    value={session.endDate ? ISOStringToDateInput(session.endDate) : ""}
                                                 />
                                                 <br />
                                             </div>
@@ -309,7 +422,9 @@ function AddTraining(props) {
                                                     id={"startTime" + index}
                                                     name={"startTime" + index}
                                                     data-id={index}
+                                                    inputname="startTime"
                                                     onChange={handleSessionInputChange}
+                                                    value={session.startTime}
                                                 />
                                             </div>
                                             <div>
@@ -319,7 +434,9 @@ function AddTraining(props) {
                                                     id={"endTime" + index}
                                                     name={"endTime" + index}
                                                     data-id={index}
+                                                    inputname="endTime"
                                                     onChange={handleSessionInputChange}
+                                                    value={session.endTime}
                                                 />
                                             </div>
                                         </div>
@@ -333,6 +450,7 @@ function AddTraining(props) {
                                             name={"recurring" + index}
                                             value="isRecurring"
                                             data-id={index}
+                                            inputname="recurring"
                                             onChange={handleSessionInputChange}
                                         />
                                         <br />
@@ -394,6 +512,7 @@ function AddTraining(props) {
                                             dataId={index}
                                             add={handleAddAthlete}
                                             rm={handleRmAthlete}
+                                            defaultOptions={session.athletes}
                                         />
                                     </div>
                                 </div>
