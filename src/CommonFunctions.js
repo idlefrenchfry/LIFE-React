@@ -18,7 +18,7 @@ function ISOStringToDate(isostring) {
 
 function ISOStringToDateInput(isostring) {
     let dateObj = ISOStringToDate(isostring);
-    let monthString = dateObj.getMonth().toString();
+    let monthString = (dateObj.getMonth() + 1).toString();
     let dateString = dateObj.getDate().toString();
     
     if (monthString.length === 1)
