@@ -83,6 +83,11 @@ nav a, nav a:hover {
     bottom: 0;
 }
 
+nav i {
+    margin-right: 10px;
+    width: 30px;
+}
+
 /*---------LOGIN----------*/
 .loginPage {
     display: flex;
