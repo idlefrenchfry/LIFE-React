@@ -6,8 +6,8 @@ import { cloneDeep } from 'lodash'; // To deep clone arrays with objects
 // Default values
 
 function MultiSelect(props) {
-    // props = Options, index of section, add/remove function from parent
-    // props = [ options:Array[obj], index:int, add:func, remove:func, defaultOptions:Array[obj] ]
+    // props = Options, index of section, add/remove function from parent, default (preselected) values, in sync with other MultiSelect Components?
+    // props = [ options:Array[obj], index:int, add:func, remove:func, defaultOptions:Array[obj], sync:bool ]
 
     const [currentlySelected, setCurrentlySelected] = useState([]);
 
@@ -23,9 +23,25 @@ function MultiSelect(props) {
 
     useEffect(() => {
         let replace = cloneDeep(props.options);
+        // if props.sync, let parent component handle props.options instead
+        if (props.defaultOptions && !props.sync) {
+            // loop through each section to check for selected inputs
+            if (props.defaultOptions.length > 0) {
+                for (let i = 0; i < props.defaultOptions.length; i++) {
+                    const selected = props.defaultOptions[i];
+                    // loop through list of unselected inputs and compare
+                    for (let x = replace.length; x > 0; x--) {
+                        const input = replace.pop();
+                        // if not the selected input, add back to unselected
+                        if (input.label !== selected.label)
+                            replace.unshift(input);
+                    }
+                }
+            }
+        }
         replace.sort(sortByLabel);
         setCurrentlyNotSelected(replace);
-    }, [props.options])
+    }, [props.options, props.defaultOptions])
 
     const [hasDropdown, setHasDropdown] = useState(false);
     const [searchInput, setSearchInput] = useState("");
