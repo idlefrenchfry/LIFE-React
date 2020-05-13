@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import Table from '../components/Table';
 import ButtonsSet from '../components/ButtonsSet';
 import { cloneDeep } from 'lodash';
@@ -121,7 +121,7 @@ function Members() {
     // Set members to display
     const [members, setMembers] = useState([]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         let data = cloneDeep(originalMembers);
         if (data.length) {
             if (searchInput) {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import Table from '../components/Table';
 import ButtonsSet from '../components/ButtonsSet';
 import { cloneDeep } from 'lodash'; // To deep clone arrays with objects
@@ -183,7 +183,7 @@ function Trainings() {
     const [trainings, setTrainings] = useState([]);
 
     // Display trainings based on current section and filters
-    useEffect(() => {
+    useLayoutEffect(() => {
         let copyData = cloneDeep(originalTrainings);
 
         // if no data in array, don't run remaining lines in effect

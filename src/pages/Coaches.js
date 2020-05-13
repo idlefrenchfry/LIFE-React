@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import Table from '../components/Table';
 import ButtonsSet from '../components/ButtonsSet';
 import { cloneDeep } from 'lodash';
@@ -104,7 +104,7 @@ function Coaches() {
     // set coaches to display
     const [coaches, setCoaches] = useState([]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         let data = cloneDeep(originalCoaches);
         if (data.length) {
 

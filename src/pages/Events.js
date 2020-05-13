@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import Table from '../components/Table';
 import ButtonsSet from '../components/ButtonsSet';
 import { ISOStringToDate } from '../CommonFunctions';
@@ -135,7 +135,7 @@ function Events() {
     const [events, setEvents] = useState([]);
 
     // Display events based on current section and filters
-    useEffect(() => {
+    useLayoutEffect(() => {
         let copyData = cloneDeep(originalEvents);
 
         // if no data in array, don't run remainined lines in effect
