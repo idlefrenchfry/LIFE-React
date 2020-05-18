@@ -8,9 +8,9 @@ function Table({ data, columns, detailsPage, thBool }) {
 
     // Create new column object format to fit reactttable library
     let prepColumns = [];
-    columns.forEach(element => {
+    Object.keys(columns).forEach(element => {
         prepColumns.push({
-            Header: element,
+            Header: columns[element],
             accessor: element,
             disableSortBy: (element === "contact" || element === "date" ? true : false)
         });
@@ -36,7 +36,7 @@ function Table({ data, columns, detailsPage, thBool }) {
         {
             columns: memoColumns,
             data: memoData,
-            initialState: { pageIndex: 0, pageSize: 7, hiddenColumns: ["id"] }
+            initialState: { pageIndex: 0, pageSize: 7 }
         },
         useSortBy,
         usePagination
