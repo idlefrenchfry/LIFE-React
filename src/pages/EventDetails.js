@@ -115,7 +115,9 @@ function EventDetails(props) {
     else if (eventsFetchState === "fetching") {
         return (
             <div className="card">
-                Loading...
+                <div className="loadingDiv">
+                    <i className="fas fa-circle-notch fa-spin"></i>
+                </div>
             </div>
         );
     }

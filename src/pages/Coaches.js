@@ -12,15 +12,18 @@ function Coaches() {
     // Keep track of current search input
     const [searchInput, setSearchInput] = useState("");
     /*========================================================*/
-        
+
+    const [isBusy, setIsBusy] = useState(true);
+
     // set coaches
     const [originalCoaches, setOriginalCoaches] = useState([]);
 
     // async function to fetch coaches and set them
     function fetchCoaches() {
         // let data = cloneDeep(coachesList);
-        let data = users;
+        let data = cloneDeep(users);
         setOriginalCoaches(data);
+        setIsBusy(false);
     }
 
     // useEffect to call async function
@@ -80,13 +83,18 @@ function Coaches() {
                 <span><input onChange={handleSearchInput} placeholder="Search" type="text" /></span>
             </div>
             {
-                coaches.length !== 0 ?
-                    <Table
-                        data={coaches}
-                        columns={{"name": "Name", "sports": "Sports", "mobileNo": "Contact"}}
-                        detailsPage={"Coaches/"}
-                        thBool={true} /> :
-                    <p>Loading...</p>
+                isBusy ? 
+                    <div className="loadingDiv">
+                        <i className="fas fa-circle-notch fa-spin"></i>
+                    </div> : (
+                         coaches.length !== 0 ?
+                         <Table
+                            data={coaches}
+                            columns={{"name": "Name", "sports": "Sports", "mobileNo": "Contact"}}
+                            detailsPage={"Coaches/"}
+                            thBool={true} /> :
+                         <p>No coaches to display</p>
+                    )
             }
         </div>
     );

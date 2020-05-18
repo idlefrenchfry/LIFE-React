@@ -17,6 +17,7 @@ function Members() {
     const [searchInput, setSearchInput] = useState("");
     /*========================================================*/
 
+    const [isBusy, setIsBusy] = useState(true);
 
     // set original members
     const [originalMembers, setOriginalMembers] = useState([]);
@@ -26,6 +27,7 @@ function Members() {
         // let data = membersList
         let data = users;
         setOriginalMembers(data);
+        setIsBusy(false);
     }
 
     // useEffect to call async function, called once at the start
@@ -95,13 +97,18 @@ function Members() {
                 <span><input onChange={handleSearchInput} placeholder="Search" type="text" /></span>
             </div>
             {
-                members.length !== 0 ?
-                    <Table
-                        data={members}
-                        columns={{"name":"Name", "sports":"Sports", "mobileNo":"Contact", "role": "Status"}}
-                        detailsPage={"Members/"}
-                        thBool={true} /> :
-                    <p>Loading...</p>
+                isBusy ? 
+                    <div className="loadingDiv">
+                        <i className="fas fa-circle-notch fa-spin"></i>
+                    </div> : (
+                         members.length !== 0 ?
+                         <Table
+                            data={members}
+                            columns={{"name":"Name", "sports":"Sports", "mobileNo":"Contact", "role": "Status"}}
+                            detailsPage={"Members/"}
+                            thBool={true} /> :
+                         <p>No members to display</p>
+                    )
             }
         </div>
     );

@@ -45,6 +45,13 @@ i.downArrow {
     color: red;
 }
 
+.loadingDiv {
+    margin: 10px;
+    color: var(--main-color);
+    font-size: 45px; 
+    text-align: center;
+}
+
 /* ------NAVIGATION------ */
 nav {
     background-color: var(--main-color);

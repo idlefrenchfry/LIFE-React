@@ -17,7 +17,9 @@ function Events() {
     // Keep track of current search input
     const [searchInput, setSearchInput] = useState("");
     /*========================================================*/
-        
+
+    const [isBusy, setIsBusy] = useState(true);
+    
     // set original events
     const [originalEvents, setOriginalEvents] = useState([]);
 
@@ -25,6 +27,7 @@ function Events() {
     useEffect(() => {
         let data = cloneDeep(eventsList);
         setOriginalEvents(data);
+        setIsBusy(false)
     }, []);
 
     // set events to be used for display
@@ -127,13 +130,18 @@ function Events() {
                 <span onClick={changeTab} style={{ width: "30%" }} className={displayTab("unpublished")} id="unpublished">Unpublished</span>
             </div>
             {
-                events.length !== 0 ?
-                    <Table
-                        data={events}
-                        columns={{"name": "Name", "sports": "Sports", "startDate": "Date", "startTime": "Time"}}
-                        detailsPage={"Events/"}
-                        thBool={true} /> :
-                    <p>Loading...</p>
+                isBusy ? 
+                    <div className="loadingDiv">
+                        <i className="fas fa-circle-notch fa-spin"></i>
+                    </div> : (
+                         events.length !== 0 ?
+                         <Table
+                            data={events}
+                            columns={{"name": "Name", "sports": "Sports", "startDate": "Date", "startTime": "Time"}}
+                            detailsPage={"Events/"}
+                            thBool={true} /> :
+                         <p>No {currentTab} events to display</p>
+                    )
             }
         </div>
     );

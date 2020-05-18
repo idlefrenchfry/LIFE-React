@@ -177,14 +177,13 @@ function Trainings() {
     // set original trainings
     const [originalTrainings, setOriginalTrainings] = useState([]);
 
-    // useEffect to call     function that fetches and sets trainings
+    // useEffect to call function that fetches and sets trainings
     useEffect(() => {
-        // Name, sports, coach, no. of sessions
-        let data = trainingsList;
+        let data = cloneDeep(trainingsList);
         for (let i = 0; i < data.length; i++)
             data[i].sessions = data[i].sessions.length;
         setOriginalTrainings(data);
-        setIsBusy(false);
+        setIsBusy(false)
     }, []);
 
     // set trainings to be used for display
@@ -257,7 +256,7 @@ function Trainings() {
     // Handle change for search input
     const handleSearchInput = (e) => setSearchInput(e.target.value);
 
-    return isBusy ? "Loading..." : (
+    return (
         <div className="card">
             <div className="cardTop">
                 <h1>Trainings</h1>
@@ -283,13 +282,18 @@ function Trainings() {
                 <span onClick={changeTab} style={{ width: "30%" }} className={displayTab("unpublished")} id="unpublished">Unpublished</span>
             </div>
             {
-                trainings.length !== 0 ?
-                    <Table
-                        data={trainings}
-                        columns={{"name": "Name", "sports": "Sports", "sessions": "Sessions"}}
-                        detailsPage={"Trainings/Edit/"}
-                        thBool={true} /> :
-                    <p>No {currentTab} events to display</p>
+                isBusy ? 
+                    <div className="loadingDiv">
+                        <i className="fas fa-circle-notch fa-spin"></i>
+                    </div> : (
+                         trainings.length !== 0 ?
+                         <Table
+                            data={trainings}
+                            columns={{"name": "Name", "sports": "Sports", "sessions": "Sessions"}}
+                            detailsPage={"Trainings/Edit/"}
+                            thBool={true} /> :
+                         <p>No {currentTab} trainings to display</p>
+                    )
             }
         </div>
     );
