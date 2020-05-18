@@ -1,0 +1,217 @@
+[
+    {
+        "id": 18,
+        "name": "Archery Training",
+        "sports": "Archery",
+        "trainingDesc": "Training description for this training",
+        "sessions": [
+            {
+                "location": "Yio Chu Kang Stadium",
+                "startDate": "2020-06-22T16:00:00.000Z",
+                "endDate": "2020-08-22T16:00:00.000Z",
+                "startTime": "12:00",
+                "endTime": "14:00",
+                "coach": 40,
+                "isRecurring": false,
+                "athletes": [
+                    {
+                        "label": "Kim So Won",
+                        "value": 19
+                    },
+                    {
+                        "label": "Xiu Ying",
+                        "value": 18
+                    }
+                ]
+            },
+    
+            {
+                "location": "Singapore Sports Hub",
+                "startDate": "2020-05-22T00:00:00.000Z",
+                "endDate": "2020-09-22T00:00:00.000Z",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "coach": 43,
+                "isRecurring": false,
+                "athletes": [
+                    {
+                        "label": "Xiu Ying",
+                        "value": 18
+                    }
+                ]
+            }
+        ],
+        "publishStatus": true
+    },
+
+    {
+        "id": 19,
+        "name": "Football Training",
+        "sports": "Football",
+        "trainingDesc": "Training description for this training",
+        "sessions": [
+            {
+                "location": "Yio Chu Kang Stadium",
+                "startDate": "2021-03-10T16:00:00.000Z",
+                "endDate": "2022-03-10T16:00:00.000Z",
+                "startTime": "12:00",
+                "endTime": "15:00",
+                "coach": 42,
+                "isRecurring": false,
+                "athletes": [
+                    {
+                        "label": "Zamrud binti Bulat",
+                        "value": 22
+                    },
+                    {
+                        "label": "Eleanor Davis",
+                        "value": 23
+                    }
+                ]
+            },
+    
+            {
+                "location": "Singapore Sports Hub",
+                "startDate": "2020-05-22T00:00:00.000Z",
+                "endDate": "2020-09-22T00:00:00.000Z",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "coach": 42,
+                "isRecurring": false,
+                "athletes": []
+            }
+        ],
+        "publishStatus": true
+    },
+
+    {
+        "id": 20,
+        "name": "Basketball Training",
+        "sports": "Basketball",
+        "trainingDesc": "Training description for this training",
+        "sessions": [
+            {
+                "location": "Yio Chu Kang Stadium",
+                "startDate": "2021-03-10T16:00:00.000Z",
+                "endDate": "2022-03-10T16:00:00.000Z",
+                "startTime": "12:00",
+                "endTime": "15:00",
+                "coach": 49,
+                "isRecurring": false,
+                "athletes": [
+                    {
+                        "label": "Matthew Teo",
+                        "value": 20
+                    },
+                    {
+                        "label": "He You Ran",
+                        "value": 21
+                    }
+                ]
+            },
+    
+            {
+                "location": "Singapore Sports Hub",
+                "startDate": "2020-05-22T00:00:00.000Z",
+                "endDate": "2020-09-22T00:00:00.000Z",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "coach": 49,
+                "isRecurring": false,
+                "athletes": [
+                    {
+                        "label": "Matthew Teo",
+                        "value": 20
+                    },
+                    {
+                        "label": "He You Ran",
+                        "value": 21
+                    }
+                ]
+            }
+        ],
+        "publishStatus": true
+    },
+
+    {
+        "id": 21,
+        "name": "Badminton Training",
+        "sports": "Badminton",
+        "trainingDesc": "Training description for this training",
+        "sessions": [
+            {
+                "location": "Yishun Stadium",
+                "startDate": "2021-01-01T00:00:00.000Z",
+                "endDate": "2021-01-01T00:00:00.000Z",
+                "startTime": "12:00",
+                "endTime": "15:00",
+                "coach": 41,
+                "isRecurring": false,
+                "athletes": [
+                    {
+                        "label": "Toh Jia Ern",
+                        "value": 24
+                    }
+                ]
+            },
+    
+            {
+                "location": "Singapore Sports Hub",
+                "startDate": "2020-05-22T00:00:00.000Z",
+                "endDate": "2020-05-22T00:00:00.000Z",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "coach": 44,
+                "isRecurring": false,
+                "athletes": [
+                    {
+                        "label": "Toh Jia Ern",
+                        "value": 24
+                    }
+                ]
+            }
+        ],
+        "publishStatus": true
+    },
+
+    {
+        "id": 22,
+        "name": "Table Tennis",
+        "sports": "Badminton",
+        "trainingDesc": "Training description for this training",
+        "sessions": [
+            {
+                "location": "Yishun Stadium",
+                "startDate": "2021-01-01T00:00:00.000Z",
+                "endDate": "2021-01-01T00:00:00.000Z",
+                "startTime": "12:00",
+                "endTime": "15:00",
+                "coach": 47,
+                "isRecurring": false,
+                "athletes": [
+                    {
+                        "label": "Maggie Li",
+                        "value": 25
+                    }
+                ]
+            },
+    
+            {
+                "location": "Singapore Sports Hub",
+                "startDate": "2020-05-22T00:00:00.000Z",
+                "endDate": "2020-05-22T00:00:00.000Z",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "coach": 50,
+                "isRecurring": false,
+                "athletes": [
+                    {
+                        "label": "Maggie Li",
+                        "value": 25
+                    }
+                ]
+            }
+        ],
+        "publishStatus": false
+    }
+]

@@ -1,0 +1,373 @@
+[
+    {
+        "id": 1,
+        "startDate": "2020-08-06T04:00:00.000Z",
+        "endDate": "2020-08-06T00:00:00.000Z",
+        "startTime": "16:00",
+        "endTime": "18:00",
+        "name": "Sports Festival",
+        "location": "101 Yishun Ave 1, Singapore 769130",
+        "sports": "Archery",
+        "publishStatus": true,
+        "description": "This is the event description.",
+        "paxLim": 3,
+        "restrDetails": "Event restriction details here. Lorem Ipsum",
+        "formTitle": "Sports Festival Form",
+        "messageDesc": "Please fill in relevant details to sign up for the event",
+        "registrationSections": [
+            {
+                "sectionTitle": "Section 1 Title",
+                "inputs": [
+                    {
+                        "label": "Address",
+                        "value": "address"
+                    }
+                ]
+            },
+    
+            {
+                "sectionTitle": "Section 2 Title",
+                "inputs": [
+                    {
+                        "label": "Contact Number",
+                        "value": "contactNo"
+                    }
+                ]
+            }
+        ],
+        "feedbackTitle": "Feedback Form",
+        "feedbackFormDesc": "Please fill in this form and let us know what you liked and what we could improve on!",
+        "feedbackSections": [
+            {
+                "question": "What's the least number of chairs you would need around a table to sit four fathers, two grandfathers, and four sons?",
+                "qnType": "single"
+            },
+    
+            {
+                "question": "Two hours ago it was as long after one o'clock in the afternoon as it was before one o'clock in the morning. What time is it now?",
+                "qnType": "multiChoice"
+            }
+        ],
+        "memGoing": [18, 19, 20],
+        "memCancelled": [21]
+    },
+
+    {
+        "id": 2,
+        "startDate": "2019-11-12T00:00:00.000Z",
+        "endDate": "2020-01-24T00:00:00.000Z",
+        "startTime": "09:00",
+        "endTime": "12:00",
+        "name": "Archery Festival",
+        "location": "101 Yishun Ave 1, Singapore 769130",
+        "sports": "Archery",
+        "publishStatus": false,
+        "description": "This is the event description for the Archery Festival.",
+        "paxLim": 30,
+        "restrDetails": "Event restriction details here.",
+        "formTitle": "Archery Festival Form",
+        "messageDesc": "Please fill in relevant details to sign up for the this festival",
+        "registrationSections": [
+            {
+                "sectionTitle": "Section 1 Title",
+                "inputs": [
+                    {
+                        "label": "Contact Number",
+                        "value": "contactNo"
+                    }
+                ]
+            }
+        ],
+        "feedbackTitle": "Feedback Form",
+        "feedbackFormDesc": "Please fill in this form.",
+        "feedbackSections": [
+            {
+                "question": "What's the least number of chairs you would need around a table to sit four fathers, two grandfathers, and four sons?",
+                "qnType": "single"
+            },
+    
+            {
+                "question": "Two hours ago it was as long after one o'clock in the afternoon as it was before one o'clock in the morning. What time is it now?",
+                "qnType": "multiChoice"
+            }
+        ],
+        "memGoing": [19, 20],
+        "memCancelled": [18]
+    },
+
+    {
+        "id": 3,
+        "startDate": "2021-02-12T04:00:00.000Z",
+        "endDate": "2021-02-24T00:00:00.000Z",
+        "startTime": "10:00",
+        "endTime": "15:00",
+        "name": "Badminton Festival",
+        "location": "101 Yishun Ave 1, Singapore 769130",
+        "sports": "Badminton",
+        "publishStatus": false,
+        "description": "This is the event description for the Badminton Festival.",
+        "paxLim": 30,
+        "restrDetails": "Event restriction details here.",
+        "formTitle": "Badminton Festival Form",
+        "messageDesc": "Please fill in relevant details to sign up for the this festival",
+        "registrationSections": [
+            {
+                "sectionTitle": "Section 1 Title",
+                "inputs": [
+                    {
+                        "label": "Contact Number",
+                        "value": "contactNo"
+                    },
+
+                    {
+                        "label": "Diagnosis",
+                        "value": "diagnosis"
+                    }
+                ]
+            }
+        ],
+        "feedbackTitle": "Feedback Form",
+        "feedbackFormDesc": "Please fill in this form.",
+        "feedbackSections": [
+            {
+                "question": "Question 1",
+                "qnType": "checkbox"
+            },
+    
+            {
+                "question": "Question 2",
+                "qnType": "likert"
+            }
+        ],
+        "memGoing": [19, 20, 21],
+        "memCancelled": [18]
+    },
+
+    {
+        "id": 4,
+        "startDate": "2019-11-12T04:00:00.000Z",
+        "endDate": "2020-01-24T00:00:00.000Z",
+        "startTime": "09:00",
+        "endTime": "12:00",
+        "name": "Basketball Festival",
+        "location": "101 Yishun Ave 1, Singapore 769130",
+        "sports": "Basketball",
+        "publishStatus": false,
+        "description": "This is the event description for the Basketball Festival.",
+        "paxLim": 30,
+        "restrDetails": "Event restriction details here.",
+        "formTitle": "Basketball Festival Form",
+        "messageDesc": "Please fill in relevant details to sign up for the this festival",
+        "registrationSections": [
+            {
+                "sectionTitle": "Section 1 Title",
+                "inputs": [
+                    {
+                        "label": "Contact Number",
+                        "value": "contactNo"
+                    }
+                ]
+            }
+        ],
+        "feedbackTitle": "Feedback Form",
+        "feedbackFormDesc": "Please fill in this form.",
+        "feedbackSections": [
+            {
+                "question": "What's the least number of chairs you would need around a table to sit four fathers, two grandfathers, and four sons?",
+                "qnType": "single"
+            },
+    
+            {
+                "question": "Two hours ago it was as long after one o'clock in the afternoon as it was before one o'clock in the morning. What time is it now?",
+                "qnType": "multiChoice"
+            }
+        ],
+        "memGoing": [18, 20, 25],
+        "memCancelled": [19, 21]
+    },
+
+    {
+        "id": 5,
+        "startDate": "2021-02-12T00:00:00.000Z",
+        "endDate": "2021-02-24T00:00:00.000Z",
+        "startTime": "10:00",
+        "endTime": "15:00",
+        "name": "Table Tennis Festival",
+        "location": "101 Yishun Ave 1, Singapore 769130",
+        "sports": "Table Tennis",
+        "publishStatus": false,
+        "description": "This is the event description for the Table Tennis Festival.",
+        "paxLim": 30,
+        "restrDetails": "Event restriction details here.",
+        "formTitle": "Table Tennis Festival Form",
+        "messageDesc": "Please fill in relevant details to sign up for the this festival",
+        "registrationSections": [
+            {
+                "sectionTitle": "Section 1 Title",
+                "inputs": [
+                    {
+                        "label": "Contact Number",
+                        "value": "contactNo"
+                    },
+
+                    {
+                        "label": "Diagnosis",
+                        "value": "diagnosis"
+                    }
+                ]
+            }
+        ],
+        "feedbackTitle": "Feedback Form",
+        "feedbackFormDesc": "Please fill in this form.",
+        "feedbackSections": [
+            {
+                "question": "Question 1",
+                "qnType": "checkbox"
+            },
+    
+            {
+                "question": "Question 2",
+                "qnType": "likert"
+            }
+        ],
+        "memGoing": [19, 20, 21, 23, 24],
+        "memCancelled": [18]
+    },
+
+    {
+        "id": 6,
+        "startDate": "2018-04-14T00:00:00.000Z",
+        "endDate": "2018-06-24T00:00:00.000Z",
+        "startTime": "10:00",
+        "endTime": "15:00",
+        "name": "Table Tennis Competition",
+        "location": "101 Yishun Ave 1, Singapore 769130",
+        "sports": "Table Tennis",
+        "publishStatus": true,
+        "description": "This is the event description for the Table Tennis Competition.",
+        "paxLim": 30,
+        "restrDetails": "Event restriction details are listed here.",
+        "formTitle": "Table Tennis Competition Form",
+        "messageDesc": "Please fill in any relevant details to sign up for the this competition!",
+        "registrationSections": [
+            {
+                "sectionTitle": "Section 1 Title",
+                "inputs": [
+                    {
+                        "label": "Age",
+                        "value": "age"
+                    }
+                ]
+            }
+        ],
+        "feedbackTitle": "Feedback Form",
+        "feedbackFormDesc": "Please fill in this form.",
+        "feedbackSections": [
+            {
+                "question": "Question 1",
+                "qnType": "single"
+            },
+    
+            {
+                "question": "Question 2",
+                "qnType": "likert"
+            }
+        ],
+        "memGoing": [25, 23, 19, 18],
+        "memCancelled": [20]
+    },
+
+    {
+        "id": 7,
+        "startDate": "2020-08-03T00:00:00.000Z",
+        "endDate": "2020-08-10T00:00:00.000Z",
+        "startTime": "08:00",
+        "endTime": "12:00",
+        "name": "General Festival",
+        "location": "101 Yishun Ave 1, Singapore 769130",
+        "sports": "",
+        "publishStatus": false,
+        "description": "This is the event description for the General Festival.",
+        "paxLim": 100,
+        "restrDetails": "This is a list of restrictions for this event.",
+        "formTitle": "General Festival Form",
+        "messageDesc": "Please fill in any relevant details to sign up for the this event",
+        "registrationSections": [],
+        "feedbackTitle": "A Feedback Form",
+        "feedbackFormDesc": "Please fill in this form.",
+        "feedbackSections": [
+            {
+                "question": "Question 1",
+                "qnType": "multiChoice"
+            }
+        ],
+        "memGoing": [19, 20, 21],
+        "memCancelled": [18]
+    },
+
+    {
+        "id": 8,
+        "startDate": "2020-07-28T00:00:00.000Z",
+        "endDate": "2020-08-04T00:00:00.000Z",
+        "startTime": "13:00",
+        "endTime": "18:00",
+        "name": "A Festival",
+        "location": "101 Yishun Ave 1, Singapore 769130",
+        "sports": "",
+        "publishStatus": true,
+        "description": "This is the event description for A Festival.",
+        "paxLim": 100,
+        "restrDetails": "This is a list of restrictions for this event.",
+        "formTitle": "A Festival Form",
+        "messageDesc": "Please fill in any relevant details to sign up for the this event",
+        "registrationSections": [],
+        "feedbackTitle": "Feedback Form",
+        "feedbackFormDesc": "Please fill in this form.",
+        "feedbackSections": [
+            {
+                "question": "Question 1",
+                "qnType": "single"
+            },
+
+            {
+                "question": "Question 2",
+                "qnType": "multiChoice"
+            },
+
+            {
+                "question": "Question 3",
+                "qnType": "likert"
+            }
+        ],
+        "memGoing": [],
+        "memCancelled": []
+    },
+
+    {
+        "id": 9,
+        "startDate": "2021-01-10T00:00:00.000Z",
+        "endDate": "2021-01-20T00:00:00.000Z",
+        "startTime": "13:00",
+        "endTime": "18:00",
+        "name": "Another Archery Festival",
+        "location": "101 Yishun Ave 1, Singapore 769130",
+        "sports": "Archery",
+        "publishStatus": false,
+        "description": "This is the event description for An Archery Festival.",
+        "paxLim": 100,
+        "restrDetails": "This is a list of restrictions for this event.",
+        "formTitle": "Event Form",
+        "messageDesc": "Please fill in any relevant details to sign up for the this event",
+        "registrationSections": [],
+        "feedbackTitle": "Feedback Form",
+        "feedbackFormDesc": "Please fill in this form.",
+        "feedbackSections": [
+            {
+                "question": "Question 1",
+                "qnType": "single"
+            }
+        ],
+        "memGoing": [],
+        "memCancelled": []
+    }
+]
