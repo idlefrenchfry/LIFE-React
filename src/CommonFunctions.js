@@ -1,10 +1,23 @@
-function formatAMPM(date) {
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
+function formatAMPM(format) {
+    var a = format
+    let hours, minutes;
+    if (format.constructor.name === "Date") {
+        hours = format.getHours();
+        minutes = format.getMinutes();
+    }
+
+    else if (format.constructor.name === "String" && format.match("^[0-9]{2}:[0-9]{2}$")) {
+        let splitTime = format.split(":");
+        hours = splitTime[0]
+        minutes = splitTime[1]
+    }
+
+    else
+        throw "Unexpected parameter 'format' must be a valid date object or time string [HH:MM]!"
     let ampm = hours >= 12 ? 'pm' : 'am';
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0' + minutes : minutes;
+    minutes = minutes.toString().length == 1 ? '0' + minutes : minutes;
     let strTime = hours + ':' + minutes + ampm;
     return strTime;
 }
@@ -12,7 +25,11 @@ function formatAMPM(date) {
 function ISOStringToDate(isostring) {
     let dateInMili = Date.parse(isostring); // Parse ISO string to get miliseconds since Jan 1st 1970 00:00:00 GMT
     let date = new Date(0);
+    date.setHours(0);
+    date.setMinutes(0);
     date.setMilliseconds(dateInMili);
+    if (isNaN(date.getTime()))
+        throw "Invalid ISO String: " + isostring;
     return date;
 }
 
