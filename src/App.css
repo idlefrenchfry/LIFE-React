@@ -4,6 +4,9 @@
     --highlight: #8ac640
 }
 
+body {
+    background-color: #f7f7fc;
+}
 
 .App {
   box-sizing: border-box;
@@ -71,6 +74,10 @@ nav a, nav a:hover {
 
 .navlinks a:hover, .navlinks a:focus, .activelink {
     background-color: var(--main-color-dark);
+}
+
+.navlinks a:hover i, .navlinks a:focus i, .activelink i {
+    color: var(--highlight);
 }
 
 .navlinks a:hover::after, .navlinks a:focus::after, .activelink::after {
@@ -158,6 +165,7 @@ nav + div {
 }
 
 .card {
+    background-color: #fff;
     box-sizing: border-box;
     margin: 3em 1em 3em 25%; /*take into account the navbar*/
     padding: 1em;
