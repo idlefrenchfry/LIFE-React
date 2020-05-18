@@ -1,16 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ISOStringToDate, validationDic } from '../CommonFunctions';
-
-const user = {
-    name: "Park Soo Young",
-    nationality: "Korean",
-    dob: "1996-10-23T07:35:13.451Z",
-    sports: "Archery",
-    address: "13-09 ngee ann city tower b 391b orchard road, 238874, Singapore",
-    mobileNo: "+65 8273 0192",
-    emailAddr: "parksooyoung@email.com",
-    cspName: "Aspire Badminton Centre"
-}
+import users from './data/Coaches.json';
 
 const emptyUser = {
     name: "",
@@ -34,11 +24,22 @@ function AddCoach(props) {
 
     useEffect(() => {
         if (props.location.pathname.includes("/Coaches/Edit/") && !isProcessed) {
-            // fetch member
-            let objKeys = Object.keys(user);
+            // fetch coach
+            let coachesList = users;
+            let aCoach;
+            let id = parseInt(props.match.params.id);
+            for (let i = 0; i < coachesList.length; i++) {
+                const user = coachesList[i];
+                if (user.id === id) {
+                    aCoach = user;
+                    break;
+                }
+            }
+            let objKeys = Object.keys(aCoach);
+
             objKeys.forEach(key => {
-                if(typeof(user[key]) === "string" && user[key].match(validationDic["isostring"])) {
-                    let dateObj = ISOStringToDate(user[key]);
+                if(typeof(aCoach[key]) === "string" && aCoach[key].match(validationDic["isostring"])) {
+                    let dateObj = ISOStringToDate(aCoach[key]);
                     let monthString = dateObj.getMonth().toString();
                     let dateString = dateObj.getDate().toString();
 
@@ -52,7 +53,7 @@ function AddCoach(props) {
                                      "-" + monthString + 
                                      "-" + dateString;
 
-                    user[key] = defaultVal
+                    aCoach[key] = defaultVal
                 }
             });
 
@@ -62,11 +63,11 @@ function AddCoach(props) {
                 let select = selectInputs[i];
                 let selectId = select.id;
                 
-                if (user[selectId]) {
+                if (aCoach[selectId]) {
                     let options = select.childNodes;
                     for (let index = 0; index < options.length; index++) {
                         const option = options[index];
-                        if (option.value === user[selectId]) {
+                        if (option.value === aCoach[selectId]) {
                             option.setAttribute("selected", "");
                             break;
                         }
@@ -74,7 +75,7 @@ function AddCoach(props) {
                 }
             }
             
-            setCoach(user);
+            setCoach(aCoach);
             setIsProcessed(true);
         }
     }, [props.location.pathname, isProcessed])

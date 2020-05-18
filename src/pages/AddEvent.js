@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { cloneDeep } from 'lodash'; // To deep clone arrays with objects
+import React, { useState, useEffect } from 'react';
 import MultiSelect from '../components/MultiSelect';
 import { formatAMPM, getDayName, getMonthName, ISOStringToDateInput } from '../CommonFunctions';
-import { useEffect } from 'react';
+import eventsList from './data/Events.json';
+import { cloneDeep } from 'lodash'; // To deep clone arrays with objects
 
 const sectionInputs = [
     {
@@ -26,101 +26,6 @@ const sectionInputs = [
         value: "input"
     }
 ]
-
-const goingMem = [
-    {
-        id: 20,
-        name: "Kim Yerim",
-        sports: "Archery",
-        contact: "+65 9016 2738",
-        status: "Casual"
-    },
-    {
-        id: 21,
-        name: "Kai Wong",
-        sports: "Basketball",
-        contact: "+65 8720 5116",
-        status: "Casual"
-    },
-    {
-        id: 22,
-        name: "Hit Monlee",
-        sports: "Football",
-        contact: "+65 8732 2716",
-        status: "Casual"
-    },
-    {
-        id: 22,
-        name: "Yi Tien",
-        sports: "Archery",
-        contact: "+65 9345 8491",
-        status: "Casual"
-    },
-    {
-        id: 23,
-        name: "Prianka Letchmanan",
-        sports: "Badminton",
-        contact: "+65 8382 3490",
-        status: "Athlete"
-    },
-    {
-        id: 24,
-        name: "Michael Henderson",
-        sports: "Badminton",
-        contact: "+65 9103 8204",
-        status: "Athlete"
-    }
-]
-
-const eventD = {
-    startDate: "2020-08-06T04:00:00.000Z",
-    endDate: "2020-08-06T08:00:00.000Z",
-    startTime: "16:00",
-    endTime: "18:00",
-    name: "Sports Festival",
-    location: "101 Yishun Ave 1, Singapore 769130",
-    sports: "archery",
-    publishStatus: true,
-    description: "This is the event description.",
-    paxLim: 3,
-    restrDetails: "Event restriction details here. Lorem Ipsum",
-    formTitle: "Sports Festival Form",
-    messageDesc: "Please fill in relevant details to sign up for the event",
-    registrationSections: [
-        {
-            sectionTitle: "Section 1 Title",
-            inputs: [
-                {
-                    label: "Address",
-                    value: "address"
-                }
-            ]
-        },
-
-        {
-            sectionTitle: "Section 2 Title",
-            inputs: [
-                {
-                    label: "Contact Number",
-                    value: "contactNo"
-                }
-            ]
-        }
-    ],
-    feedbackTitle: "Feedback Form",
-    feedbackFormDesc: "Please fill in this form and let us know what you liked and what we could improve on!",
-    feedbackSections: [
-        {
-            question: "What's the least number of chairs you would need around a table to sit four fathers, two grandfathers, and four sons?",
-            qnType: "single"
-        },
-
-        {
-            question: "Two hours ago it was as long after one o'clock in the afternoon as it was before one o'clock in the morning. What time is it now?",
-            qnType: "multiChoice"
-        }
-    ]
-}
 
 const emptyEvent = {
     startDate: "",
@@ -153,8 +58,16 @@ function AddEvents(props) {
         if (props.location.pathname.includes("/Events/Edit/")) {
             
             if (isBusy) {
-                setEventDetails(eventD);
-                setIsBusy(false);
+                let events = eventsList;
+                let filterEvent = events.filter((event) => event.id === parseInt(props.match.params.id));
+                if (filterEvent.length === 1) {
+                    setEventDetails(filterEvent[0])
+                    // setEventsFetchState("fetched");
+                    setIsBusy(false);
+                }
+
+                // else
+                    // setEventsFetchState("failed");
             }
 
             else {
@@ -196,7 +109,7 @@ function AddEvents(props) {
 
     // Dynamic event info inputs
     const [eventInfoSections, setEventInfoSections] = useState([{
-        title: "",
+        sectionTitle: "",
         inputs: []
     }])
 
@@ -388,13 +301,13 @@ function AddEvents(props) {
                         <img alt="event thumbnail" src="https://i.ytimg.com/vi/XplrxSSrja0/maxresdefault.jpg" />
                         <div>
                             <span className="eventDate">{getDayName(startDate.getDay())}, {startDate.getDate()} {getMonthName(startDate.getMonth())} {startDate.getFullYear()} </span> {/* MON, 6 Mar 2020 */}
-                            <span className="eventTime">{formatAMPM(startDate)} - {formatAMPM(endDate)}</span>
+                            <span className="eventTime">{formatAMPM(eventDetails.startTime)} - {formatAMPM(eventDetails.endTime)}</span>
                             <br />
-                            <span className="eventLocation">{eventD.name}</span>
+                            <span className="eventLocation">{eventDetails.name}</span>
                             <br />
-                            <span className="eventMemb">{goingMem.length} Members Going</span>
+                            <span className="eventMemb">{eventDetails.memGoing.length} Members Going</span>
                             <br />
-                            <span className="eventStatus">{eventD.publishStatus ? "Published" : "Unpublished"}</span>
+                            <span className="eventStatus">{eventDetails.publishStatus ? "Published" : "Unpublished"}</span>
                         </div>
                     </div> :
                     null
@@ -430,11 +343,11 @@ function AddEvents(props) {
                             <br />
                             <select id="sports" name="sports">
                                 <option value="">Select Sports</option>
-                                <option value="archery">Archery</option>
-                                <option value="badminton">Badminton</option>
-                                <option value="basketball">Basketball</option>
-                                <option value="football">Football</option>
-                                <option value="table tennis">Table Tennis</option>
+                                <option value="Archery">Archery</option>
+                                <option value="Badminton">Badminton</option>
+                                <option value="Basketball">Basketball</option>
+                                <option value="Football">Football</option>
+                                <option value="Table Tennis">Table Tennis</option>
                             </select>
                             <br />
 
@@ -443,7 +356,7 @@ function AddEvents(props) {
                                     {/* ---------- STARTS ---------- */}
                                     <label htmlFor="startDate">Starts</label>
                                     <br />
-                                    <input type="date" id="startDate" name="startDate" defaultValue={ISOStringToDateInput(eventDetails.startDate)} />
+                                    <input type="date" id="startDate" name="startDate" defaultValue={eventDetails.startDate ? ISOStringToDateInput(eventDetails.startDate) : ""} />
                                     <br />
                                 </div>
 
@@ -451,7 +364,7 @@ function AddEvents(props) {
                                     {/* ---------- END ---------- */}
                                     <label htmlFor="endDate">Ends</label>
                                     <br />
-                                    <input type="date" id="endDate" name="endDate" defaultValue={ISOStringToDateInput(eventDetails.endDate)} />
+                                    <input type="date" id="endDate" name="endDate" defaultValue={eventDetails.endDate ? ISOStringToDateInput(eventDetails.endDate) : ""} />
                                 </div>
                             </div>
                             <br />

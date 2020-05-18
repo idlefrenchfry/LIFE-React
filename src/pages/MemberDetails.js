@@ -1,93 +1,43 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { ISOStringToDate } from '../CommonFunctions';
 import { Details } from '../components/ViewDetails';
+import users from './data/Members.json';
 import { cloneDeep } from 'lodash';
-
-let user = {
-    name: "Xiu Ying",
-    cName: "秀英",
-    bloodType: "AB-",
-    gender: "Female",
-    dob: "1988-12-12T00:00:00.000Z",
-    birthPlace: "Singapore",
-    nationality: "Singapore",
-    race: "Chinese",
-    religion: "Atheist",
-    maritalStatus: "Single",
-    sports: "Archery",
-    role: "Athlete",
-    postalCode: "728383",
-    homeNo: "+65 6273 9172",
-    mobileNo: "+65 9817 7712",
-    email: "xiuying@email.com",
-    disability: "Paraplegia",
-    natureOfDisability: "Others",
-    dailyAids: "Wheelchair",
-    estimatedWeight: 7,
-    wheelchairDimension: "1.1m by 0.6m by 1.1m",
-    wheelchairType: "All-Terrain Wheelchair",
-    wheelDiameter: 45.7,
-    foodDrugAllergy: "",
-    specialDietaryReq: "Lactose Intolerant",
-    kinName: "Tu Shen",
-    kinRelationship: "Sister",
-    kinNric: "T0182792C",
-    kinBloodType: "B-",
-    kinPostalCode: "628364",
-    kinAddress: "290 Orchard Road #08-03 Paragon Medical Suites, 238859, Singapore",
-    kinContactNumber: "87203323",
-    kinEmail: "tushen@email.com",
-    currentOcc: "Accountant",
-    currentOrg: "DBS",
-    currentOrgAddress: "2 Bayfront Ave, #01-30 The Shoppes at, Marina Bay Sands, Singapore 018972",
-    personInChargeAndDes: "",
-    prevEduInstitution: "Nanyang Technological University",
-    height: 168,
-    weight: 65,
-    topSize: "",
-    bottomSize: "",
-    shoeSize: "US 9",
-    classificationStatus: "",
-    dateOfClassification: "2012-12-12T00:00:00.000Z",
-    lvlOfClassification: "",
-    licenseNo: "A9AODUAK",
-    sptAchYM: "2018 / Feb",
-    sptAchLoc: "Tokyo",
-    sptAchTourName: "Paralympics",
-    sptAchParticipationType: "",
-    sptAchResult: "Silver",
-    sptAchCompetitorNo: 23,
-    trainingFrequency: "3 days / week",
-    trainingSportsTier: "",
-    trainingDuration: "2h",
-    trainingCsp: "",
-    trainingCoachingQual: "",
-    trainingCspContract: "",
-}
 
 const isoRegExp = new RegExp("^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(.[0-9]+)?(Z)?$");
 
 function MemberDetails(props) {
     // User
-    const [member, setMember] = useState(user);
+    const [member, setMember] = useState({});
 
     useEffect(() => {
-        let keys = Object.keys(member);
-        let cloneMember = cloneDeep(member);
+        // fetch member
+        let membersList = users;
+        let aMember;
+        let id = parseInt(props.match.params.id);
+        for (let i = 0; i < membersList.length; i++) {
+            const aMem = membersList[i];
+            if (aMem.id === id) {
+                aMember = aMem;
+                break;
+            }
+        }
+
+        let keys = Object.keys(aMember);
         let changed = false;
 
         for (let i = 0; i < keys.length; i++) {
             const property = keys[i];
-            if (!cloneMember[property]) {
-                cloneMember[property] = "-";
+            if (!aMember[property]) {
+                aMember[property] = "-";
                 changed = true;
-            } else if (cloneMember[property].constructor.name === "String") {
+            } else if (aMember[property].constructor.name === "String") {
                 // If ISO String, convert to dd/mm/yyyy
-                let match = cloneMember[property].match(isoRegExp);
+                let match = aMember[property].match(isoRegExp);
                 if (match) {
                     let dateObj = ISOStringToDate(match[0]);
                     console.log("dateObj: ", dateObj);
-                    cloneMember[property] = dateObj.getDate() + "/" + 
+                    aMember[property] = dateObj.getDate() + "/" + 
                                             dateObj.getMonth() + "/" + 
                                             dateObj.getFullYear();
                     changed = true;
@@ -96,7 +46,7 @@ function MemberDetails(props) {
         }
 
         if (changed)
-            setMember(cloneMember);
+            setMember(aMember);
     }, [member])
 
     // Keep track of which section to display
@@ -183,7 +133,7 @@ function MemberDetails(props) {
                         <Details label="Estimated weight of Wheelchair (kg)" value={member.estimatedWeight} />
                         <Details label="Dimensions of Wheelchair" value={member.wheelchairDimension} />
                         <Details label="Type of Wheelchair" value={member.wheelchairType} />
-                        <Details label="Wheel Diameter" value={member.wheelDiameter + "cm"} />
+                        <Details label="Wheel Diameter" value={member.wheelDiameter} />
                     </div>
                     <div>
                         <h3>Dietary Requirements</h3>

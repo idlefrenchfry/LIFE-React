@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ISOStringToDate } from '../CommonFunctions';
 import { Details, DetailsFile } from '../components/ViewDetails';
+import users from './data/Coaches.json';
 import { cloneDeep } from 'lodash';
 
 const user = {
@@ -20,25 +21,36 @@ function CoachDetails(props) {
 
     // Keep track of which section to display
     const [currentSection, setCurrentSection] = useState("tab1");
-    const [coach, setCoach] = useState(user);
+    const [coach, setCoach] = useState({});
 
     useEffect(() => {
-        let keys = Object.keys(coach);
-        let cloneCoach = cloneDeep(coach);
+        // Fetch coaches
+        let coachesList = users;
+        let aCoach;
+        let id = parseInt(props.match.params.id);
+        for (let i = 0; i < coachesList.length; i++) {
+            const user = coachesList[i];
+            if (user.id === id) {
+                aCoach = user;
+                break;
+            }
+        }
+
+        let keys = Object.keys(aCoach);
         let changed = false;
 
         for (let i = 0; i < keys.length; i++) {
             const property = keys[i];
-            if (!cloneCoach[property]) {
-                cloneCoach[property] = "-";
+            if (!aCoach[property]) {
+                aCoach[property] = "-";
                 changed = true;
-            } else if (cloneCoach[property].constructor.name === "String") {
+            } else if (aCoach[property].constructor.name === "String") {
                 // If ISO String, convert to dd/mm/yyyy
-                let match = cloneCoach[property].match(isoRegExp);
+                let match = aCoach[property].match(isoRegExp);
                 if (match) {
                     let dateObj = ISOStringToDate(match[0]);
                     console.log("dateObj: ", dateObj);
-                    cloneCoach[property] = dateObj.getDate() + "/" + 
+                    aCoach[property] = dateObj.getDate() + "/" + 
                                             dateObj.getMonth() + "/" + 
                                             dateObj.getFullYear();
                     changed = true;
@@ -47,7 +59,7 @@ function CoachDetails(props) {
         }
 
         if (changed)
-            setCoach(cloneCoach);
+            setCoach(aCoach);
     }, [coach])
 
     // onClick function to execute when changing section

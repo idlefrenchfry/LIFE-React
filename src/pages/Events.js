@@ -2,113 +2,9 @@ import React, { useEffect, useState, useLayoutEffect } from 'react';
 import Table from '../components/Table';
 import ButtonsSet from '../components/ButtonsSet';
 import { ISOStringToDate } from '../CommonFunctions';
-import { cloneDeep } from 'lodash'; // To deep clone arrays with objects
 import { formatAMPM } from '../CommonFunctions.js';
-
-var eventsList = [
-    {
-        name: "Sports Festival",
-        sports: "Archery",
-        date: "2020-01-22T16:00:00.000Z",
-        publishStatus: true
-    },
-    {
-        name: "Sports Festival",
-        sports: "Basketball",
-        date: "2020-04-22T16:00:00.000Z",
-        publishStatus: true
-    },
-    {
-        name: "Sports Festival",
-        sports: "Football",
-        date: "2020-01-22T16:00:00.000Z",
-        publishStatus: true
-    },
-    {
-        name: "Sports Festival",
-        sports: "Badminton",
-        date: "2020-01-22T16:00:00.000Z",
-        publishStatus: true
-    },
-    {
-        name: "A Sports Festival",
-        sports: "Badminton",
-        date: "2020-01-24T16:00:00.000Z",
-        publishStatus: true
-    },
-    {
-        name: "Sports Festival",
-        sports: "Archery",
-        date: "2020-01-31T16:00:00.000Z",
-        publishStatus: true
-    },
-    {
-        name: "Sports Festival",
-        sports: "Table Tennis",
-        date: "2020-04-22T16:00:00.000Z",
-        publishStatus: false
-    },
-    {
-        name: "Sports Festival",
-        sports: "Badminton",
-        date: "2020-04-22T16:00:00.000Z",
-        publishStatus: false
-    },
-    {
-        name: "Sports Festival",
-        sports: "Football",
-        date: "2020-01-31T16:00:00.000Z",
-        publishStatus: false
-    },
-    {
-        name: "Sports Festival",
-        sports: "Football",
-        date: "2020-04-22T16:00:00.000Z",
-        publishStatus: false
-    },
-    {
-        name: "Sports Festival",
-        sports: "Basketball",
-        date: "2020-01-24T16:00:00.000Z",
-        publishStatus: false
-    },
-    {
-        name: "Sports Festival",
-        sports: "Basketball",
-        date: "2020-01-24T16:00:00.000Z",
-        publishStatus: false
-    },
-    {
-        name: "Sports Festival",
-        sports: "Table Tennis",
-        date: "2020-04-22T16:00:00.000Z",
-        publishStatus: false
-    },
-    {
-        name: "Sports Festival",
-        sports: "Archery",
-        date: "2020-04-22T16:00:00.000Z",
-        publishStatus: false
-    },
-    {
-        name: "Sports Festival",
-        sports: "Table Tennis",
-        date: "2020-04-22T16:00:00.000Z",
-        publishStatus: true
-    },
-    {
-        name: "Sports Festival",
-        sports: "Badminton",
-        date: "2020-04-22T16:00:00.000Z",
-        publishStatus: true
-    },
-    {
-        name: "Sports Festival",
-        sports: "Basketball",
-        date: "2020-04-22T16:00:00.000Z",
-        publishStatus: true
-    },
-]
+import eventsList from './data/Events.json'
+import { cloneDeep } from 'lodash'; // To deep clone arrays with objects
 
 function Events() {
     /*==================== Filter states ====================*/
@@ -125,7 +21,7 @@ function Events() {
     // set original events
     const [originalEvents, setOriginalEvents] = useState([]);
 
-    // useEffect to call async function that fetches and sets events
+    // fetches and sets events
     useEffect(() => {
         let data = cloneDeep(eventsList);
         setOriginalEvents(data);
@@ -151,15 +47,15 @@ function Events() {
             else {
                 let today = new Date().getTime();
                 copyData = copyData.filter(event => {
-                    let dateInMili = Date.parse(event.date);
+                    let dateInMili = Date.parse(event.endDate);
                     return dateInMili < today;
                 })
             }
 
             // Loop through to get date and time properties through ISO string
             for (let i = 0; i < copyData.length; i++) {
-                let date = ISOStringToDate(copyData[i].date);
-                copyData[i].date = date.toDateString();
+                let date = ISOStringToDate(copyData[i].startDate);
+                copyData[i].startDate = date.toDateString();
                 copyData[i].time = formatAMPM(date);
 
                 delete copyData[i].publishStatus; // Don't need to display published status
@@ -234,7 +130,7 @@ function Events() {
                 events.length !== 0 ?
                     <Table
                         data={events}
-                        columns={Object.keys(events[0])}
+                        columns={{"name": "Name", "sports": "Sports", "startDate": "Date", "startTime": "Time"}}
                         detailsPage={"Events/"}
                         thBool={true} /> :
                     <p>Loading...</p>
