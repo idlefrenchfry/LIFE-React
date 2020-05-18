@@ -184,7 +184,7 @@ function AddTraining(props) {
                 }
             }
         }
-    }, [props.location.pathname, isBusy.fetch, isBusy.sessionList]);
+    }, [props.location.pathname, props.match.params.id, isBusy.fetch, isBusy.sessionList]);
 
     // Keep track of training sessions
     const [sessionList, setSessionList] = useState([{

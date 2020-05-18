@@ -111,7 +111,7 @@ function AddMembers(props) {
             
             setMember(user);
         }
-    }, [props.location.pathname])
+    }, [props.location.pathname, props.match.params.id])
 
     // Keep track of which section to display
     const [currentSection, setCurrentSection] = useState("tab1");

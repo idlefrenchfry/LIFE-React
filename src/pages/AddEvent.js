@@ -105,7 +105,7 @@ function AddEvents(props) {
                 }
             }
         }
-    }, [props.location.pathname, isBusy])
+    }, [props.location.pathname, props.match.params.id, isBusy])
 
     // Dynamic event info inputs
     const [eventInfoSections, setEventInfoSections] = useState([{
@@ -152,10 +152,10 @@ function AddEvents(props) {
     }])
 
     useEffect(() => {
-        if(props.location.pathname.includes("/Events/Edit/") && eventDetails.registrationSections.length > 0) {
+        if(props.location.pathname.includes("/Events/Edit/") && eventDetails.feedbackSections.length > 0) {
             setFeedbackInfoSections(eventDetails.feedbackSections);
         }
-    })
+    }, [props.location.pathname, eventDetails.feedbackSections.length])
 
 
     // onClick function to execute when changing section
@@ -278,11 +278,9 @@ function AddEvents(props) {
 
     const cancel = () => window.location.href = "/Events";
 
-    let startDate, endDate;
-    if (props.location.pathname.includes("/Events/Edit/")) {
+    let startDate;
+    if (props.location.pathname.includes("/Events/Edit/"))
         startDate = new Date(eventDetails.startDate);
-        endDate = new Date(eventDetails.endDate);
-    }
     
     return isBusy ? null : (
         <div className="card">
