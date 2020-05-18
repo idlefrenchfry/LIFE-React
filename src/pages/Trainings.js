@@ -2,162 +2,7 @@ import React, { useEffect, useState, useLayoutEffect } from 'react';
 import Table from '../components/Table';
 import ButtonsSet from '../components/ButtonsSet';
 import trainingsList from './data/Trainings.json';
-import coachesList from './data/Coaches.json';
 import { cloneDeep } from 'lodash'; // To deep clone arrays with objects
-
-// let trainingsList = [
-//     {
-//         id: 18,
-//         name: "Archery Training",
-//         sports: "Archery",
-//         coach: "Varun Wagstaff",
-//         date: "2020-01-22T16:00:00.000Z",
-//         sessions: 10,
-//         publishStatus: true
-//     },
-//     {
-//         id: 19,
-//         name: "Basketball Trainings",
-//         sports: "Basketball",
-//         coach: "Lynsey Atherton",
-//         sessions: 12,
-//         date: "2020-04-22T16:00:00.000Z",
-//         publishStatus: true
-//     },
-//     {
-//         id: 20,
-//         name: "Football Traiing",
-//         sports: "Football",
-//         coach: "Raees Chapman",
-//         sessions: 5,
-//         date: "2020-01-22T16:00:00.000Z",
-//         publishStatus: true
-//     },
-//     {
-//         id: 21,
-//         name: "Fun Badminton!",
-//         sports: "Badminton",
-//         coach: "Sullivan Guy",
-//         sessions: 4,
-//         date: "2020-01-22T16:00:00.000Z",
-//         publishStatus: true
-//     },
-//     {
-//         id: 22,
-//         name: "Badminton Training",
-//         sports: "Badminton",
-//         coach: "Jagoda Martins",
-//         sessions: 13,
-//         date: "2020-01-24T16:00:00.000Z",
-//         publishStatus: true
-//     },
-//     {
-//         id: 23,
-//         name: "Archery Training",
-//         sports: "Archery",
-//         coach: "Varun Wagstaff",
-//         sessions: 19,
-//         date: "2020-01-31T16:00:00.000Z",
-//         publishStatus: true
-//     },
-//     {
-//         id: 24,
-//         name: "Sports Festival",
-//         sports: "Table Tennis",
-//         coach: "Farrell Deleon",
-//         sessions: 2,
-//         date: "2020-04-22T16:00:00.000Z",
-//         publishStatus: false
-//     },
-//     {
-//         id: 25,
-//         name: "Pro Badminton",
-//         sports: "Badminton",
-//         coach: "Sullivan Guy",
-//         date: "2020-04-22T16:00:00.000Z",
-//         publishStatus: false
-//     },
-//     {
-//         id: 26,
-//         name: "Football Traiing",
-//         sports: "Football",
-//         coach: "Bae Joohyun",
-//         sessions: 8,
-//         date: "2020-01-31T16:00:00.000Z",
-//         publishStatus: false
-//     },
-//     {
-//         id: 27,
-//         name: "Football Traiing",
-//         sports: "Football",
-//         coach: "Raees Chapman",
-//         sessions: 9,
-//         date: "2020-04-22T16:00:00.000Z",
-//         publishStatus: false
-//     },
-//     {
-//         id: 28,
-//         name: "Basketball Trainings",
-//         sports: "Basketball",
-//         coach: "Lynsey Atherton",
-//         sessions: 12,
-//         date: "2020-01-24T16:00:00.000Z",
-//         publishStatus: false
-//     },
-//     {
-//         id: 29,
-//         name: "Pro Basketball",
-//         sports: "Basketball",
-//         coach: "Lynsey Atherton",
-//         sessions: 15,
-//         date: "2020-01-24T16:00:00.000Z",
-//         publishStatus: false
-//     },
-//     {
-//         id: 30,
-//         name: "Sports Festival",
-//         sports: "Table Tennis",
-//         coach: "Layan Ferrell",
-//         sessions: 6,
-//         date: "2020-04-22T16:00:00.000Z",
-//         publishStatus: false
-//     },
-//     {
-//         id: 31,
-//         name: "Fun With Archery!",
-//         sports: "Archery",
-//         coach: "Varun Wagstaff",
-//         sessions: 7,
-//         date: "2020-04-22T16:00:00.000Z",
-//         publishStatus: false
-//     },
-//     {
-//         id: 32,
-//         name: "Sports Festival",
-//         sports: "Table Tennis",
-//         coach: "Layan Ferrell",
-//         sessions: 1,
-//         date: "2020-04-22T16:00:00.000Z",
-//         publishStatus: true
-//     },
-//     {
-//         id: 33,
-//         name: "Badminton Training",
-//         sports: "Badminton",
-//         coach: "Kang Seulgi",
-//         sessions: 12,
-//         date: "2020-04-22T16:00:00.000Z",
-//         publishStatus: true
-//     },
-//     {
-//         id: 34,
-//         name: "Fun with Basketball!",
-//         sports: "Basketball",
-//         sessions: 12,
-//         date: "2020-04-22T16:00:00.000Z",
-//         publishStatus: true
-//     },
-// ]
 
 function Trainings() {
         
@@ -180,8 +25,12 @@ function Trainings() {
     // useEffect to call function that fetches and sets trainings
     useEffect(() => {
         let data = cloneDeep(trainingsList);
-        for (let i = 0; i < data.length; i++)
+        for (let i = 0; i < data.length; i++) {
+            if(data[i].sessions.length > 0) {
+                data[i].date = data[i].sessions[0].endDate;
+            }
             data[i].sessions = data[i].sessions.length;
+        }
         setOriginalTrainings(data);
         setIsBusy(false)
     }, []);

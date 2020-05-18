@@ -2,103 +2,105 @@ import React, { useState, useEffect } from 'react';
 import MultiSelect from '../components/MultiSelect';
 import Recurring from '../components/Recurring';
 import { ISOStringToDateInput } from '../CommonFunctions';
+import trainingsList from '../pages/data/Trainings.json'
+import membersList from '../pages/data/Members.json'
 import { cloneDeep } from 'lodash'; // To deep clone arrays with objects
 
-let membersList = [
-    {
-        label: "Kim Yerim",
-        value: "Kim Yerim"
-    },
-    {
-        label: "Kai Wong",
-        value: "Kai Wong"
-    },
-    {
-        label: "Hit Monlee",
-        value: "Hit Monlee"
-    },
-    {
-        label: "Yi Tien",
-        value: "Yi Tien"
-    },
-    {
-        label: "Prianka Letchmanan",
-        value: "Prianka Letchmanan"
-    },
-    {
-        label: "Michael Henderson",
-        value: "Michael Henderson"
-    },
-    {
-        label: "Hae Chan",
-        value: "Hae Chan"
-    },
-    {
-        label: "Joshua Pei",
-        value: "Joshua Pei"
-    },
-    {
-        label: "Clefairy Lee",
-        value: "Clefairy Lee"
-    },
-    {
-        label: "Xue Ting",
-        value: "Xue Ting"
-    },
-    {
-        label: "Amane Ichigo",
-        value: "Amane Ichigo"
-    },
-    {
-        label: "Seung Wan",
-        value: "Seung Wan"
-    },
-]
+// let membersList = [
+//     {
+//         label: "Kim Yerim",
+//         value: "Kim Yerim"
+//     },
+//     {
+//         label: "Kai Wong",
+//         value: "Kai Wong"
+//     },
+//     {
+//         label: "Hit Monlee",
+//         value: "Hit Monlee"
+//     },
+//     {
+//         label: "Yi Tien",
+//         value: "Yi Tien"
+//     },
+//     {
+//         label: "Prianka Letchmanan",
+//         value: "Prianka Letchmanan"
+//     },
+//     {
+//         label: "Michael Henderson",
+//         value: "Michael Henderson"
+//     },
+//     {
+//         label: "Hae Chan",
+//         value: "Hae Chan"
+//     },
+//     {
+//         label: "Joshua Pei",
+//         value: "Joshua Pei"
+//     },
+//     {
+//         label: "Clefairy Lee",
+//         value: "Clefairy Lee"
+//     },
+//     {
+//         label: "Xue Ting",
+//         value: "Xue Ting"
+//     },
+//     {
+//         label: "Amane Ichigo",
+//         value: "Amane Ichigo"
+//     },
+//     {
+//         label: "Seung Wan",
+//         value: "Seung Wan"
+//     },
+// ]
 
-const training = {
-    id: 18,
-    name: "Archery Training",
-    sports: "Archery",
-    trainingDesc: "Training description for this training",
-    sessions: [
-        {
-            location: "Yio Chu Kang Stadium",
-            startDate: "2020-06-22T16:00:00.000Z",
-            endDate: "2020-08-22T16:00:00.000Z",
-            startTime: "12:00",
-            endTime: "14:00",
-            coach: "Varun Wagstaff",
-            isRecurring: false,
-            athletes: [
-                {
-                    label: "Joshua Pei",
-                    value: "Joshua Pei"
-                },
-                {
-                    label: "Clefairy Lee",
-                    value: "Clefairy Lee"
-                }
-            ]
-        },
+// const training = {
+//     id: 18,
+//     name: "Archery Training",
+//     sports: "Archery",
+//     trainingDesc: "Training description for this training",
+//     sessions: [
+//         {
+//             location: "Yio Chu Kang Stadium",
+//             startDate: "2020-06-22T16:00:00.000Z",
+//             endDate: "2020-08-22T16:00:00.000Z",
+//             startTime: "12:00",
+//             endTime: "14:00",
+//             coach: "Varun Wagstaff",
+//             isRecurring: false,
+//             athletes: [
+//                 {
+//                     label: "Joshua Pei",
+//                     value: "Joshua Pei"
+//                 },
+//                 {
+//                     label: "Clefairy Lee",
+//                     value: "Clefairy Lee"
+//                 }
+//             ]
+//         },
 
-        {
-            location: "Singapore Sports Hub",
-            startDate: "2020-05-22T00:00:00.000Z",
-            endDate: "2020-09-22T00:00:00.000Z",
-            startTime: "16:00",
-            endTime: "18:00",
-            coach: "Augustus Rhodes",
-            isRecurring: false,
-            athletes: [
-                {
-                    label: "Kai Wong",
-                    value: "Kai Wong"
-                }
-            ]
-        }
-    ],
-    publishStatus: true
-}
+//         {
+//             location: "Singapore Sports Hub",
+//             startDate: "2020-05-22T00:00:00.000Z",
+//             endDate: "2020-09-22T00:00:00.000Z",
+//             startTime: "16:00",
+//             endTime: "18:00",
+//             coach: "Augustus Rhodes",
+//             isRecurring: false,
+//             athletes: [
+//                 {
+//                     label: "Kai Wong",
+//                     value: "Kai Wong"
+//                 }
+//             ]
+//         }
+//     ],
+//     publishStatus: true
+// }
 
 const emptyTraining = {
     name: "",
@@ -130,8 +132,20 @@ function AddTraining(props) {
     useEffect(() => {
         if(props.location.pathname.includes("Trainings/Edit/")) {
             if (isBusy.fetch) {
-                setTrainingDetails(training);
-                setIsBusy({ fetch: false, sessionList: true });
+                let data;
+                for (let i = 0; i < trainingsList.length; i++) {
+                    const training = trainingsList[i];
+                    if (training.id === parseInt(props.match.params.id)) {
+                        data = training;
+                        break;
+                    }
+                }
+                if (data) {
+                    setTrainingDetails(data);
+                    setIsBusy({ fetch: false, sessionList: true });
+                }
+                else
+                    setIsBusy({...isBusy, failed: true})
             }
 
             // set select options when everything has been rendered
@@ -191,6 +205,20 @@ function AddTraining(props) {
             setIsBusy({ fetch: false, sessionList: false })
         }
     }, [isBusy.fetch, props.location.pathname]);
+
+    const [members, setMembers] = useState([]);
+
+    useEffect(() => {
+        let replaceMems = [];
+        membersList.forEach((mem) => {
+            replaceMems.push({
+                label: mem.name,
+                value: mem.id
+            })
+        })
+
+        setMembers(replaceMems);
+    }, []);
 
     // onClick function to execute when changing section
     const changeSection = (e) => {
@@ -359,7 +387,7 @@ function AddTraining(props) {
 
                 <div style={displaySection("2")}>
                     {
-                        sessionList.map((session, index) => {
+                        isBusy.sessionList ? "Loading" : sessionList.map((session, index) => {
                             return (
                                 <div key={index} id={"session" + index}>
                                     <h3>Session {index + 1}</h3>
@@ -465,7 +493,7 @@ function AddTraining(props) {
 
                 <div style={displaySection("3")}>
                     {
-                        sessionList.map((session, index) => {
+                        isBusy.sessionList ? "Loading..." : sessionList.map((session, index) => {
                             let venueDateTimeError = "";
                             if (!session.startDate)
                                 venueDateTimeError += "Date";
@@ -508,7 +536,7 @@ function AddTraining(props) {
                                         <label>Athletes</label>
                                         <br />
                                         <MultiSelect
-                                            options={membersList}
+                                            options={members}
                                             dataId={index}
                                             add={handleAddAthlete}
                                             rm={handleRmAthlete}

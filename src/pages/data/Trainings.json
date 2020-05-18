@@ -1,5 +1,34 @@
 [
     {
+        "id": 17,
+        "name": "General Training",
+        "sports": "",
+        "trainingDesc": "Training description for this training",
+        "sessions": [
+            {
+                "location": "Delta Stadium",
+                "startDate": "2018-06-22T16:00:00.000Z",
+                "endDate": "2019-08-22T16:00:00.000Z",
+                "startTime": "13:30",
+                "endTime": "16:30",
+                "coach": 40,
+                "isRecurring": false,
+                "athletes": [
+                    {
+                        "label": "Kim So Won",
+                        "value": 19
+                    },
+                    {
+                        "label": "Xiu Ying",
+                        "value": 18
+                    }
+                ]
+            }
+        ],
+        "publishStatus": false
+    },
+
+    {
         "id": 18,
         "name": "Archery Training",
         "sports": "Archery",
@@ -176,8 +205,8 @@
 
     {
         "id": 22,
-        "name": "Table Tennis",
-        "sports": "Badminton",
+        "name": "Table Tennis Training",
+        "sports": "Table Tennis",
         "trainingDesc": "Training description for this training",
         "sessions": [
             {
