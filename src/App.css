@@ -550,7 +550,7 @@ form div > h3 {
 
 .eventDetails img {
     object-fit: contain;
-    max-height: 150px;
+    max-height: 200px;
 }
 
 .eventDetails div {
@@ -817,4 +817,95 @@ form div > h3 {
     .loginForm div {
         width: 80%;
     }
-  }
+}
+
+
+/* mobile landscape */
+@media only screen and (max-width: 768px) {
+    .App {
+        display: block;
+    }
+
+    /* Horizontal navbar */
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        width: unset;
+        height: unset;
+    }
+
+    nav > a {
+        width: 100vw;
+        text-align: center;
+    }
+
+    .navlinks {
+        display: flex;
+        width: 100vw;
+    }
+    
+    .navlinks a {
+        text-align: center;
+        flex-grow: 1;
+    }
+
+    .navlinks i {
+        margin-right: unset;
+    }
+    
+    .navlinks span {
+        display: none;
+    }
+
+    .navlinks a:hover::after, .navlinks a:focus::after, .activelink::after {
+        width: unset;
+        height: 5px;
+        left: 0;
+        right: 0;
+        top: unset;
+        bottom: 0;
+    }
+
+    /* Remove margin-left on content */
+    nav + div {
+        margin-left: unset;
+    }
+
+    .card {
+        margin: 1em auto;
+        width: 90%;
+    }
+}
+
+/* mobile portrait */
+@media only screen and (max-width: 640px) {
+    form > div > div {
+        flex-direction: column;
+    }
+
+    form .inputs {
+        width: 100%;
+    }
+
+    form div > h3 {
+        width: unset;
+    }
+
+    .eventDetails {
+        display: block;
+    }
+
+    .eventDetails img {
+        max-height: unset;
+        max-width: 100%;
+    }
+
+    .sections {
+        overflow-x: scroll;
+    }
+
+    .sections span {
+        min-width: 120px;
+    }
+}

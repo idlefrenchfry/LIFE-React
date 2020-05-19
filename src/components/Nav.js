@@ -6,11 +6,11 @@ function NavBar() {
         <nav>
             <NavLink to="/Dashboard"><img src="/logo.png" alt="Life" /></NavLink>
             <div className="navlinks">
-                <NavLink exact={true} activeClassName='activelink' to="/Dashboard"><i className="fas fa-chart-bar" />Dashboard</NavLink>
-                <NavLink activeClassName='activelink' to="/Members"><i className="fas fa-user" />Members</NavLink>
-                <NavLink activeClassName='activelink' to="/Coaches"><i className="fas fa-user-tie" />Coaches</NavLink>
-                <NavLink activeClassName='activelink' to="/Events"><i className="fas fa-bookmark" />Events</NavLink>
-                <NavLink activeClassName='activelink' to="/Trainings"><i className="fas fa-dumbbell" />Trainings</NavLink>
+                <NavLink exact={true} activeClassName='activelink' to="/Dashboard"><i className="fas fa-chart-bar" /><span>Dashboard</span></NavLink>
+                <NavLink activeClassName='activelink' to="/Members"><i className="fas fa-user" /><span>Members</span></NavLink>
+                <NavLink activeClassName='activelink' to="/Coaches"><i className="fas fa-user-tie" /><span>Coaches</span></NavLink>
+                <NavLink activeClassName='activelink' to="/Events"><i className="fas fa-bookmark" /><span>Events</span></NavLink>
+                <NavLink activeClassName='activelink' to="/Trainings"><i className="fas fa-dumbbell" /><span>Trainings</span></NavLink>
             </div>
         </nav>
     );

@@ -275,6 +275,7 @@ function AddMembers(props) {
                                     <br />
                                 </div>
                             </div>
+                            <br />
 
                             {/* ---------- MARITAL STATUS ---------- */}
                             <label htmlFor="marital">Marital Status</label>
