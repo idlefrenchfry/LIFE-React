@@ -1,21 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { ISOStringToDate } from '../CommonFunctions';
+import { ISOStringToDate, validationDic } from '../CommonFunctions';
 import { Details, DetailsFile } from '../components/ViewDetails';
 import users from './data/Coaches.json';
-import { cloneDeep } from 'lodash';
-
-const user = {
-    name: "Park Soo Young",
-    nationality: "Korean",
-    dob: "1996-10-23T07:35:13.451Z",
-    sports: "Archery",
-    address: "13-09 ngee ann city tower b 391b orchard road, 238874, Singapore",
-    mobileNo: "+65 8273 0192",
-    emailAddr: "parksooyoung@email.com",
-    cspName: "Aspire Badminton Centre"
-}
-
-const isoRegExp = new RegExp("^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(.[0-9]+)?(Z)?$");
 
 function CoachDetails(props) {
 
@@ -46,7 +32,7 @@ function CoachDetails(props) {
                 changed = true;
             } else if (aCoach[property].constructor.name === "String") {
                 // If ISO String, convert to dd/mm/yyyy
-                let match = aCoach[property].match(isoRegExp);
+                let match = aCoach[property].match(validationDic.isostring);
                 if (match) {
                     let dateObj = ISOStringToDate(match[0]);
                     console.log("dateObj: ", dateObj);
@@ -60,7 +46,7 @@ function CoachDetails(props) {
 
         if (changed)
             setCoach(aCoach);
-    }, [coach])
+    }, [coach, props.match.params.id])
 
     // onClick function to execute when changing section
     const changeSection = (e) => {

@@ -180,16 +180,16 @@ function AddEvents(props) {
             return "noselect";
     };
 
-    // only needed if can remove sections
-    const handleEventInfoChange = (e) => {
-        let inputType = e.target.id;
-        if (inputType.substr("sectionTitle") !== -1) {
-            let index = parseInt(e.target.id.replace("sectionTitle", "")) - 1;
-            let replace = cloneDeep(eventInfoSections);
-            replace[index].title = e.target.value;
-            setEventInfoSections(replace);
-        }
-    }
+    // TO DO:
+    // const handleEventInfoChange = (e) => {
+    //     let inputType = e.target.id;
+    //     if (inputType.substr("sectionTitle") !== -1) {
+    //         let index = parseInt(e.target.id.replace("sectionTitle", "")) - 1;
+    //         let replace = cloneDeep(eventInfoSections);
+    //         replace[index].title = e.target.value;
+    //         setEventInfoSections(replace);
+    //     }
+    // }
 
     const handleAddRegistrationInput = (option, id="") => {
         id = parseInt(id);
@@ -253,10 +253,9 @@ function AddEvents(props) {
         setEventInfoSections(replace);
     }
 
-    const handleRemoveSection = () => {
-        // To Do
-        // Remove Sections.
-    }
+    // TO DO
+    // const handleRemoveSection = () => {
+    // }
 
 
     const handleAddQnSections = () => {

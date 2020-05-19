@@ -41,7 +41,7 @@ function EventDetails(props) {
             setGoingMem(going);
             setCancelMem(cancel);
         }
-    }, [eventsFetchState])
+    }, [eventsFetchState, eventDetails.memCancelled, eventDetails.memGoing])
 
     // onClick function to execute when changing section
     const changeFilter = (e) => {
@@ -63,11 +63,9 @@ function EventDetails(props) {
 
     const editDetails = () => window.location.href = "/Events/Edit/" + props.match.params.id;
 
-    let startDate, endDate = "";
-    if (eventsFetchState === "fetched") {
+    let startDate = "";
+    if (eventsFetchState === "fetched")
         startDate = ISOStringToDate(eventDetails.startDate);
-        endDate = ISOStringToDate(eventDetails.endDate);
-    }
 
     console.log("id:", props.match.params.id);
 

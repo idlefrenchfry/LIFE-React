@@ -41,7 +41,7 @@ function MultiSelect(props) {
         }
         replace.sort(sortByLabel);
         setCurrentlyNotSelected(replace);
-    }, [props.options, props.defaultOptions])
+    }, [props.options, props.defaultOptions, props.sync])
 
     const [hasDropdown, setHasDropdown] = useState(false);
     const [searchInput, setSearchInput] = useState("");

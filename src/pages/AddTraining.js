@@ -145,7 +145,7 @@ function AddTraining(props) {
                     setIsBusy({ fetch: false, sessionList: true });
                 }
                 else
-                    setIsBusy({...isBusy, failed: true})
+                    setIsBusy({ fetch: false, sessionList: false, failed: true})
             }
 
             // set select options when everything has been rendered

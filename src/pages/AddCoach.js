@@ -78,7 +78,7 @@ function AddCoach(props) {
             setCoach(aCoach);
             setIsProcessed(true);
         }
-    }, [props.location.pathname, isProcessed])
+    }, [props.location.pathname, isProcessed, props.match.params.id])
 
     const inputUnfocus = (e) => {
         // onBlur

@@ -1,5 +1,4 @@
 function formatAMPM(format) {
-    var a = format
     let hours, minutes;
     if (format.constructor.name === "Date") {
         hours = format.getHours();
@@ -13,11 +12,11 @@ function formatAMPM(format) {
     }
 
     else
-        throw "Unexpected parameter 'format' must be a valid date object or time string [HH:MM]!"
+        throw Error("Unexpected parameter 'format' must be a valid date object or time string [HH:MM]!")
     let ampm = hours >= 12 ? 'pm' : 'am';
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes.toString().length == 1 ? '0' + minutes : minutes;
+    minutes = minutes.toString().length === 1 ? '0' + minutes : minutes;
     let strTime = hours + ':' + minutes + ampm;
     return strTime;
 }
@@ -29,7 +28,7 @@ function ISOStringToDate(isostring) {
     date.setMinutes(0);
     date.setMilliseconds(dateInMili);
     if (isNaN(date.getTime()))
-        throw "Invalid ISO String: " + isostring;
+        throw Error("Invalid ISO String: " + isostring);
     return date;
 }
 
