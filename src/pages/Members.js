@@ -57,7 +57,7 @@ function Members() {
                 data = data.filter(member => member.sports.toUpperCase() === sportsFilter.toUpperCase());
 
             if (statusFilter)
-                data = data.filter(member => member.status.toUpperCase() === statusFilter.toUpperCase());
+                data = data.filter(member => member.role.toUpperCase() === statusFilter.toUpperCase());
         }
 
         setMembers(data);
